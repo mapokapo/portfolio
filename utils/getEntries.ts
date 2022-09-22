@@ -16,12 +16,7 @@ export const ENTRIES_FILE_PATH = path.join(
 
 export default async function getEntries() {
   const file = await fs.readFile(ENTRIES_FILE_PATH, "utf-8");
-  const entries = (JSON.parse(file) as Record<string, unknown>[]).map<PageView>(
-    e => ({
-      recordStartTimestamp: e["recordStartTimestamp"] as number,
-      totalViews: e["totalViews"] as number,
-    })
-  );
+  const entries = JSON.parse(file) as PageView[];
 
   // Sort by ascending time
   entries.sort((a, b) => a.recordStartTimestamp - b.recordStartTimestamp);

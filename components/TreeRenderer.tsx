@@ -11,8 +11,9 @@ interface Item {
 
 type Props = {
   item: Item;
+  root?: boolean;
 };
-const TreeRenderer: React.FC<Props> = ({ item }) => {
+const TreeRenderer: React.FC<Props> = ({ item, root = false }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [ref, bounds] = useMeasure();
   const itemsStyles = useSpring({
@@ -25,19 +26,23 @@ const TreeRenderer: React.FC<Props> = ({ item }) => {
   const arrowStyles = useSpring({
     transform: isExpanded ? "rotate(90deg)" : "rotate(0deg)",
   });
+  // An end node (item without children) shouldn't be a button for a11y purposes
+  const LabelContainer = item.items === undefined ? "div" : "button";
 
   return (
     <li
-      tabIndex={0}
+      role={root ? "tree" : undefined}
+      aria-expanded={isExpanded}
       className={
         "flex flex-col overflow-hidden " +
         (item.items !== undefined ? "" : "ml-8")
-      }
-      onClick={e => {
-        e.stopPropagation();
-        setIsExpanded(!isExpanded);
-      }}>
-      <div className="flex flex-col md:flex-row gap-x-4 gap-y-2 px-3 py-2 pb-3 md:items-center hover:backdrop-brightness-200 cursor-pointer">
+      }>
+      <LabelContainer
+        onClick={e => {
+          e.stopPropagation();
+          setIsExpanded(!isExpanded);
+        }}
+        className="flex flex-col md:flex-row gap-x-4 gap-y-2 px-3 mb-1 py-2 pb-3 md:items-center hover:backdrop-brightness-200 cursor-pointer overflow-visible">
         <div className="flex items-end">
           {item.items !== undefined && (
             <animated.div style={arrowStyles}>
@@ -51,13 +56,19 @@ const TreeRenderer: React.FC<Props> = ({ item }) => {
             {item.name}
           </h5>
         </div>
-        <span className="sm:text-xl text-lg break-words text-white text-opacity-50">
+        <span
+          className={
+            "sm:text-xl text-lg break-words text-start text-white text-opacity-50 " +
+            (item.items !== undefined ? "sm:ml-2 ml-4" : "")
+          }>
           {item.description}
         </span>
-      </div>
+      </LabelContainer>
       {item.items !== undefined && (
         <animated.div style={itemsStyles}>
           <ul
+            role="treeitem"
+            style={{ display: isExpanded ? "flex" : "none" }}
             ref={ref}
             className={"flex flex-col md:ml-12 sm:ml-6 ml-3"}>
             {item.items.map((e, i) => (

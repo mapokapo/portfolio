@@ -39,10 +39,12 @@ import TreeRenderer from "../components/TreeRenderer";
 import data from "../public/assets/data.json";
 import getEntries, { PageView } from "../utils/getEntries";
 import LinkCircle from "../components/LinkCircle";
+import getPosts, { Post } from "../utils/getPosts";
 
-const Home: NextPage<{ entries: PageView[] }> = ({
-  entries,
-}: InferGetStaticPropsType<typeof getStaticProps>) => {
+const Home: NextPage<{
+  entries: PageView[];
+  posts: (Post & { snippet: string })[];
+}> = ({ entries, posts }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const iconMap: Record<string, ReactNode> = {
     // Sections
     Home: <MdHome color="#d35400" />,
@@ -122,14 +124,15 @@ const Home: NextPage<{ entries: PageView[] }> = ({
         <span className="text-white text-opacity-75 px-3 text-xl text-center">
           Finally, the part you&apos;ve been waiting for
         </span>
-        <ul className="flex flex-col">
+        <div className="flex flex-col">
           {data.techStack.map((e, i) => (
             <TreeRenderer
+              root={true}
               key={i}
               item={e}
             />
           ))}
-        </ul>
+        </div>
       </section>
       <section className="bg-slate-900 md:mx-8 flex flex-col justify-center items-center mt-24 gap-4">
         <h2 className="text-white text-5xl sm:text-7xl">Website info</h2>
@@ -157,21 +160,30 @@ const Home: NextPage<{ entries: PageView[] }> = ({
               </div>
               <hr className="mt-4 mb-2 h-px w-full opacity-50" />
               <div className="flex justify-between">
-                <span className="font-bold text-4xl">Total</span>
-                <span className="font-bold text-4xl">3.69MB</span>
+                <span className="font-bold text-3xl sm:text-4xl">Total</span>
+                <span className="font-bold text-3xl sm:text-4xl">3.69MB</span>
               </div>
             </div>
           </article>
           <article className="websiteinfo-article col-span-1 row-span-3">
             <h5 className="text-4xl sm:text-5xl">Latest devblog posts</h5>
-            <ul className="flex flex-col gap-12">
-              <DevblogPost
-                imageUrl="/assets/images/lucky_six_logo.png"
-                publishedDate={new Date(Date.now() - 24 * 60 * 60 * 1000)}
-                title="Website in development"
-                content={`Lorem ipsum dolor sit, amet consectetur adipisicing elit. Vero cupiditate debitis sit iusto voluptatem illo assumenda rem libero eum, animi accusamus fugit nemo suscipit voluptatibus molestiae aspernatur natus expedita rerum magni corporis distinctio earum? Quam quidem deserunt error, voluptas magnam repellat impedit nisi corrupti. Pariatur voluptatem quod maiores perspiciatis aliquam!`}
-              />
-            </ul>
+            {posts.length === 0 ? (
+              <span className="text-xl font-semibold ml-2">
+                Nothing here yet.
+              </span>
+            ) : (
+              <ul className="flex flex-col gap-12">
+                {posts.map((p, i) => (
+                  <DevblogPost
+                    key={i}
+                    imageUrl={p.imageUrl}
+                    publishedDate={p.published}
+                    title={p.title}
+                    content={p.snippet}
+                  />
+                ))}
+              </ul>
+            )}
           </article>
           <article className="flex flex-col gap-4 bg-slate-800 rounded-lg text-white px-6 md:px-8 lg:px-12 py-6 lg:py-8 col-span-1 row-span-2">
             <h5 className="text-4xl sm:text-5xl">Statistics</h5>
@@ -206,8 +218,8 @@ const Home: NextPage<{ entries: PageView[] }> = ({
               }}
             />
           </article>
-          <article className="flex sm:flex-row flex-col flex-wrap gap-x-4 gap-y-4 bg-slate-800 rounded-lg px-6 md:px-8 lg:px-12 py-6 lg:py-8 text-slate-700 col-span-1 md:col-span-2 h-min">
-            <h5 className="text-4xl sm:text-5xl flex text-white">
+          <article className="flex sm:flex-row flex-col sm:flex-wrap gap-x-4 gap-y-4 bg-slate-800 rounded-lg px-6 md:px-8 lg:px-12 py-6 lg:py-8 text-slate-700 col-span-1 md:col-span-2 h-min">
+            <h5 className="text-4xl sm:text-5xl sm:text-start text-center text-white">
               Built with:
             </h5>
             <div className="flex gap-2 items-center bg-slate-200 px-4 py-2 rounded-full">
@@ -286,13 +298,17 @@ const Home: NextPage<{ entries: PageView[] }> = ({
 
 export const getStaticProps: GetStaticProps<{
   entries: PageView[];
+  posts: (Post & { snippet: string })[];
 }> = async () => {
   // Only get entries for current day
   const entries = (await getEntries()).slice(-(new Date().getHours() + 1));
+  // Get most recent 5 posts
+  const posts = (await getPosts()).slice(-5);
 
   return {
     props: {
       entries,
+      posts,
     },
     revalidate: 60,
   };

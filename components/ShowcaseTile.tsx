@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { animated, useSpring } from "@react-spring/web";
 import Image from "next/image";
 import { MdExpandMore } from "react-icons/md";
@@ -22,14 +22,23 @@ const ShowcaseTile: React.FC<Props> = ({
   const styles = useSpring({
     height: isExpanded ? bounds.height : 0,
   });
+  // Apparently expanding a box with aspect-ratio=1 doesnt work in firefox
+  const [isFirefox, setIsFirefox] = useState(false);
+  useEffect(() => {
+    setIsFirefox(navigator.userAgent.toLowerCase().indexOf("firefox") > -1);
+  }, []);
 
   return (
     <button
+      aria-expanded={isExpanded}
       onClick={() => setIsExpanded(!isExpanded)}
       className={
-        "bg-slate-800 cursor-pointer hover:brightness-125 transition-all py-8 px-4 pb-2 relative w-full sm:w-[300px] h-full flex shadow-md shadow-slate-800 flex-col sm:aspect-square"
+        isFirefox
+          ? "bg-slate-800 cursor-pointer hover:brightness-125 transition-all py-8 px-4 pb-2 relative w-full sm:w-[300px] h-full flex shadow-md shadow-slate-800 flex-col " +
+            (isExpanded ? "" : "sm:aspect-square")
+          : "bg-slate-800 cursor-pointer hover:brightness-125 transition-all py-8 px-4 pb-2 relative w-full sm:w-[300px] h-full flex shadow-md shadow-slate-800 flex-col sm:aspect-square"
       }>
-      <div className="select-none">
+      <div className="select-none w-full">
         {imageUrl !== undefined && (
           <div className="flex justify-center flex-1 items-center mb-auto">
             <Image
