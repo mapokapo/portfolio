@@ -1,0 +1,246 @@
+{
+  "sections": [
+    {
+      "title": "Started from the bottom",
+      "content": "My first encounter with software development was at 13 years old. In 2016, I signed up for a youth robotics tournament, in which my team and I won first place (3 years in a row :D). After my success, I got really interested in programming. In fact, I started going to a prestigious coding academy for young people in my town at the same time, although I was by far the youngest person to ever attend that course. I learned what programming is, and how to make my first website. It was truly the starting point of my career.",
+      "icon": "Home"
+    },
+    {
+      "title": "Hard work pays off",
+      "content": "Spending a few years learning is nothing to ignore, and as I found out, practicing programming at home in your free time really pays off. During this time, I had to decide which area to specialize in: frontend, backend, mobile... I said 'screw that' and just went with everything at once. Nowadays I consider myself a full stack developer, capable of making web, desktop, and mobile applications, as well as backend servers, CLI tools, and games in multiple languages. It wasn't easy, mind you. I was going to high school at the same time and I was also competing in multiple tournaments organized by my school (in which our team, of course, won 2 times in a row).",
+      "icon": "Code"
+    },
+    {
+      "title": "The snowball effect",
+      "content": "It was 2022. School was ending, and I really had to get serious about my future career. I was still very cautious when looking for jobs or education opportunities, because I was unsure what I was even getting myself into. Thankfully, I didn't have to fret too much about that. I got offered a summer internship at a company I really like! To me, this was practically a godsend, and I learned a lot. In fact, I even got a job offer at the same company, which was quite a new experience to me. I was still looking to improve my knowledge and to get formally educated, so unfortunately I had to decline the job offer in favor of going to university. What follows after, I am yet to find out.",
+      "icon": "TrendingUp"
+    }
+  ],
+  "showcaseTiles": [
+    {
+      "title": "Bitdraw",
+      "description": "A simple HTML5 Canvas wrapper library",
+      "meta": {
+        "link": "https://github.com/mapokapo/bitdraw",
+        "imageUrl": "/assets/images/bitdraw_logo.png",
+        "madeWith": ["Typescript", "Webpack"]
+      }
+    },
+    {
+      "title": "Diaspora",
+      "description": "A match-making social media app",
+      "meta": {
+        "link": "https://github.com/mapokapo/diaspora-app",
+        "imageUrl": "https://raw.githubusercontent.com/mapokapo/diaspora-app/master/assets/images/logo.svg",
+        "madeWith": ["Flutter", "Firebase"]
+      }
+    },
+    {
+      "title": "Riskfactor",
+      "description": "A COVID-19 risk assesment app",
+      "meta": {
+        "link": "https://github.com/mapokapo/riskfactor",
+        "imageUrl": "https://raw.githubusercontent.com/mapokapo/riskfactor/master/assets/images/app_icon.svg",
+        "madeWith": ["Flutter", "Firebase"]
+      }
+    },
+    {
+      "title": "Sportsmart",
+      "description": "A modern fitness tracking app",
+      "meta": {
+        "link": "https://github.com/mapokapo/sportsmart-app",
+        "imageUrl": "https://github.com/mapokapo/sportsmart-app/raw/master/src/media/sportsmart_icons/logo.png",
+        "madeWith": ["React Native", "Algolia", "Firebase"]
+      }
+    },
+    {
+      "title": "MC Plugins",
+      "description": "Various server-side addons for Spigot",
+      "meta": {
+        "imageUrl": "/assets/images/minecraft_logo.svg",
+        "madeWith": ["Java 17"]
+      }
+    },
+    {
+      "title": "JS Canvas apps",
+      "description": "A variety of games and simulations made in HTML5 Canvas",
+      "meta": {
+        "imageUrl": "/assets/images/html5_canvas_logo.png",
+        "madeWith": ["Typescript", "Webpack", "Bitdraw"]
+      }
+    },
+    {
+      "title": "Lucky Six",
+      "description": "A realtime betting platform made during my internship",
+      "meta": {
+        "imageUrl": "/assets/images/lucky_six_logo.png",
+        "madeWith": [
+          "Spring Boot",
+          "Postgres",
+          "Socket.IO",
+          "Vue 3",
+          "Docker",
+          "Redis"
+        ]
+      }
+    }
+  ],
+  "techStack": [
+    {
+      "name": "Web",
+      "description": "Stuff I use to make websites.",
+      "items": [
+        {
+          "name": "Frontend",
+          "description": "Clientside UI-building tools that I used, currently use, or otherwise enjoy.",
+          "items": [
+            {
+              "name": "Javascript",
+              "description": "You know it, you love it, and you've probably used it at least once.",
+              "items": [
+                {
+                  "name": "Typescript",
+                  "description": "This is what I use most of the time."
+                },
+                {
+                  "name": "React",
+                  "description": "My go-to library for building websites."
+                },
+                {
+                  "name": "Vue",
+                  "description": "What I use at work."
+                },
+                {
+                  "name": "Angular",
+                  "description": "Perfect for making large scale SPAs. I enjoy using it."
+                }
+              ]
+            },
+            {
+              "name": "CSS",
+              "description": "I rarely use CSS frameworks, but these come in handy.",
+              "items": [
+                {
+                  "name": "Tailwind",
+                  "description": "My favorite way to write CSS."
+                },
+                {
+                  "name": "Material Design",
+                  "description": "This technically has nothing to do with CSS, but it's my favorite design spec."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Backend",
+          "description": "Programming languages, frameworks, and services I use to develop APIs.",
+          "items": [
+            {
+              "name": "NodeJS",
+              "description": "What I'll use 80% of the time when making a robust backend.",
+              "items": [
+                {
+                  "name": "NestJS",
+                  "description": "My favorite way to write modular backends in NodeJS."
+                },
+                {
+                  "name": "ExpressJS",
+                  "description": "Nowadays I only use it for very small projects."
+                }
+              ]
+            },
+            {
+              "name": "Python",
+              "description": "When I'm feeling sick of Javascript.",
+              "items": [
+                {
+                  "name": "Django",
+                  "description": "I'm still experimenting with it, but I love me a good batteries-included framework."
+                },
+                {
+                  "name": "Flask",
+                  "description": "Python analogue of ExpressJS, though FastAPI is seeming better every day."
+                }
+              ]
+            },
+            {
+              "name": "Java",
+              "description": "For very big projects. I mostly use it at work.",
+              "items": [
+                {
+                  "name": "Spring Boot",
+                  "description": "Simpler than I thought. Leaves no room for error, which I like."
+                }
+              ]
+            },
+            {
+              "name": "SQL",
+              "description": "Good ol' SQL. Although I rarely ever write it directly.",
+              "items": [
+                {
+                  "name": "MySQL/MariaDB",
+                  "description": "My default database of choice."
+                },
+                {
+                  "name": "Postgres",
+                  "description": "Like MySQL but with extra features that make sense to implement."
+                },
+                {
+                  "name": "MongoDB",
+                  "description": "I love JSON. I love Mongo. Not really surprising. But I don't prefer it over RDBMSs."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Mobile",
+      "description": "What I use to make mobile applications (most of the time).",
+      "items": [
+        {
+          "name": "Flutter",
+          "description": "One of my favorite frameworks ever - it's the main way I make mobile and desktop apps."
+        },
+        {
+          "name": "Firebase",
+          "description": "My favorite BaaS. Comes in handy when I need a backend for my app (mostly for auth)."
+        }
+      ]
+    },
+    {
+      "name": "System Development",
+      "description": "Random languages I occasionally use. Still mostly experimenting in this field.",
+      "items": [
+        {
+          "name": "Rust",
+          "description": "I really like Rust, but I don't think I'm anyhwere near capable of using it."
+        },
+        {
+          "name": "Python",
+          "description": "I use it for CLI tools, services, automation, and web scraping. Pretty handy."
+        },
+        {
+          "name": "Java",
+          "description": "I actually kinda love Java. I use it to make Minecraft addons for Spigot."
+        }
+      ]
+    },
+    {
+      "name": "Game Development",
+      "description": "Mostly for fun, although it would be cool to make a full game...",
+      "items": [
+        {
+          "name": "Unity",
+          "description": "My introduction to gamedev. It's actually pretty fun, but the age shows at times."
+        },
+        {
+          "name": "Godot",
+          "description": "The most fun I've had developing software in ages. It's very easy to use."
+        }
+      ]
+    }
+  ]
+}
