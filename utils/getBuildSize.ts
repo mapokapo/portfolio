@@ -3,13 +3,20 @@ import path from "path";
 
 export const BUILD_PATH = path.join(process.cwd(), ".next", "static");
 export const CACHE_PATH = path.join(process.cwd(), ".next", "cache");
+export const BUILD_SIZE_FILE = path.join(
+  process.cwd(),
+  "data",
+  "buildSize.json"
+);
 
 export default async function getBuildSize(): Promise<{
   javascript: number;
   css: number;
   images: number;
 } | null> {
-  const sizesBytes = {
+  // Apparently Vercel doesn't use the same folder structure as local projects do, so this won't work for now
+
+  /*const sizesBytes = {
     javascript: 0,
     css: 0,
     images: 0,
@@ -59,7 +66,10 @@ export default async function getBuildSize(): Promise<{
       const file = await fs.stat(path.join(dirPath, imagePath));
       sizesBytes.images += file.size;
     }
-  }
+  }*/
+
+  const sizesBytes: { javascript: number; css: number; images: number } =
+    JSON.parse(await fs.readFile(BUILD_SIZE_FILE, "utf-8"));
 
   return sizesBytes;
 }
