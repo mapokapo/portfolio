@@ -1,30 +1,49 @@
-import fs from "fs/promises";
-import path from "path";
+import admin from "./firebase";
 
 export interface Post {
   title: string;
   content: string;
   imageUrl: string;
-  published: number;
+  published: Date;
 }
 
-export const POSTS_FILE_PATH = path.join(process.cwd(), "data", "posts.json");
-
 export default async function getPosts() {
-  const file = await fs.readFile(POSTS_FILE_PATH, "utf-8");
-  const posts = (JSON.parse(file) as Record<string, unknown>[]).map<
-    Post & { snippet: string }
-  >(e => ({
-    title: e["title"] as string,
-    content: e["content"] as string,
-    // Get the first 5 sentences
-    snippet: (e["content"] as string).slice(0, 200),
-    imageUrl: e["imageUrl"] as string,
-    published: e["published"] as number,
-  }));
+  const docs = (await admin.firestore().collection("posts").get()).docs;
+
+  const posts: Post[] = await Promise.all(
+    docs
+      .map(doc => {
+        const docData = doc.data();
+        docData["published"] = (
+          docData["published"] as admin.firestore.Timestamp
+        ).toDate();
+        return docData as {
+          title: string;
+          content: string;
+          published: Date;
+          image: string;
+        };
+      })
+      .map<Promise<Post>>(async post => {
+        let url: string;
+        if (admin.storage().app.options.credential !== undefined)
+          url = `https://storage.googleapis.com/${
+            (admin.storage().app.options.credential as never)["projectId"]
+          }.appspot.com/posts/${post.image}`;
+        else url = "/assets/images/logo.png";
+
+        return {
+          title: post.title,
+          content: post.content,
+          published: post.published,
+          imageUrl: url,
+        };
+      })
+  );
 
   // Sort by ascending time
-  if (posts.length > 1) posts.sort((a, b) => a.published - b.published);
+  if (posts.length > 1)
+    posts.sort((a, b) => a.published.getTime() - b.published.getTime());
 
   return posts;
 }

@@ -1,10 +1,15 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
+  reactStrictMode: false,
   productionBrowserSourceMaps: true,
   swcMinify: false,
   images: {
-    domains: ["github.com", "raw.githubusercontent.com", "localhost"],
+    domains: [
+      "github.com",
+      "raw.githubusercontent.com",
+      "storage.googleapis.com",
+      "localhost",
+    ],
   },
 };
 

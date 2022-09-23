@@ -28,14 +28,19 @@ import TreeRenderer from "../components/TreeRenderer";
 import data from "../public/assets/data.json";
 import getEntries, { PageView } from "../utils/getEntries";
 import LinkCircle from "../components/LinkCircle";
-import getPosts, { Post } from "../utils/getPosts";
-import getBuildSize from "../utils/getBuildSize";
+import getPosts from "../utils/getPosts";
+import getBuildSize, { SizeBytes } from "../utils/getBuildSize";
 import dynamic from "next/dynamic";
 
 const Home: NextPage<{
-  entries: PageView[];
-  posts: (Post & { snippet: string })[];
-  sizeBytes: { javascript: number; css: number; images: number } | null;
+  entries: { recordStartTimestamp: number; totalViews: number }[];
+  posts: {
+    title: string;
+    imageUrl: string;
+    published: number;
+    snippet: string;
+  }[];
+  sizeBytes: SizeBytes;
 }> = ({
   entries,
   posts,
@@ -215,7 +220,12 @@ const Home: NextPage<{
               Hourly website visits
             </span>
             <Suspense fallback={<span>Loading...</span>}>
-              <LineGraph entries={entries} />
+              <LineGraph
+                entries={entries.map<PageView>(e => ({
+                  ...e,
+                  recordStartTimestamp: new Date(e.recordStartTimestamp),
+                }))}
+              />
             </Suspense>
           </article>
           <article className="flex sm:flex-row flex-col sm:flex-wrap gap-x-4 gap-y-4 bg-slate-800 rounded-lg px-6 md:px-8 lg:px-12 py-6 lg:py-8 text-slate-700 col-span-1 md:col-span-2 h-min">
@@ -313,14 +323,35 @@ const Home: NextPage<{
 };
 
 export const getStaticProps: GetStaticProps<{
-  entries: PageView[];
-  posts: (Post & { snippet: string })[];
-  sizeBytes: { javascript: number; css: number; images: number } | null;
+  entries: { recordStartTimestamp: number; totalViews: number }[];
+  posts: {
+    title: string;
+    imageUrl: string;
+    published: number;
+    snippet: string;
+  }[];
+  sizeBytes: SizeBytes;
 }> = async () => {
   // Only get entries for current day
-  const entries = (await getEntries()).slice(-(new Date().getHours() + 1));
-  // Get most recent 5 posts
-  const posts = (await getPosts()).slice(-5);
+  const entries = (await getEntries()).slice(-(new Date().getHours() + 1)).map<{
+    recordStartTimestamp: number;
+    totalViews: number;
+  }>(e => ({
+    recordStartTimestamp: e.recordStartTimestamp.getTime(),
+    totalViews: e.totalViews,
+  }));
+  // Get newest 5 posts, calculate snippet, and make serializable
+  const posts = (await getPosts()).slice(-5).map<{
+    title: string;
+    imageUrl: string;
+    published: number;
+    snippet: string;
+  }>(p => ({
+    title: p.title,
+    imageUrl: p.imageUrl,
+    published: p.published.getTime(),
+    snippet: p.content.slice(0, 200),
+  }));
   // Get size of bundled files
   const sizeBytes = await getBuildSize();
 
