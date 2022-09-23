@@ -68,7 +68,7 @@ export async function updatePageViews() {
   }
 
   // Sort entries if normalized
-  if (normalized) {
+  if (normalized && entries.length > 1) {
     entries.sort((a, b) => a.recordStartTimestamp - b.recordStartTimestamp);
   }
 

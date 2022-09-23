@@ -19,7 +19,8 @@ export default async function getEntries() {
   const entries = JSON.parse(file) as PageView[];
 
   // Sort by ascending time
-  entries.sort((a, b) => a.recordStartTimestamp - b.recordStartTimestamp);
+  if (entries.length > 1)
+    entries.sort((a, b) => a.recordStartTimestamp - b.recordStartTimestamp);
 
   return entries;
 }

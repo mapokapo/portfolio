@@ -5,7 +5,7 @@ export interface Post {
   title: string;
   content: string;
   imageUrl: string;
-  published: Date;
+  published: number;
 }
 
 export const POSTS_FILE_PATH = path.join(process.cwd(), "data", "posts.json");
@@ -18,13 +18,13 @@ export default async function getPosts() {
     title: e["title"] as string,
     content: e["content"] as string,
     // Get the first 5 sentences
-    snippet: (e["content"] as string).split(". ").slice(0, 5).join(". ") + ".",
+    snippet: (e["content"] as string).slice(0, 200),
     imageUrl: e["imageUrl"] as string,
-    published: new Date(e["published"] as string),
+    published: e["published"] as number,
   }));
 
   // Sort by ascending time
-  posts.sort((a, b) => a.published.getTime() - b.published.getTime());
+  if (posts.length > 1) posts.sort((a, b) => a.published - b.published);
 
   return posts;
 }

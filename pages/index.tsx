@@ -1,16 +1,5 @@
 import type { GetStaticProps, InferGetStaticPropsType, NextPage } from "next";
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-} from "chart.js";
-import { Line } from "react-chartjs-2";
-ChartJS.defaults.font.size = 16;
-ChartJS.defaults.color = "#ddd";
-ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement);
-import React, { ReactNode } from "react";
+import React, { ReactNode, Suspense } from "react";
 import { MdExpandMore, MdHome, MdCode, MdTrendingUp } from "react-icons/md";
 import {
   SiAlgolia,
@@ -40,11 +29,26 @@ import data from "../public/assets/data.json";
 import getEntries, { PageView } from "../utils/getEntries";
 import LinkCircle from "../components/LinkCircle";
 import getPosts, { Post } from "../utils/getPosts";
+import getBuildSize from "../utils/getBuildSize";
+import dynamic from "next/dynamic";
 
 const Home: NextPage<{
   entries: PageView[];
   posts: (Post & { snippet: string })[];
-}> = ({ entries, posts }: InferGetStaticPropsType<typeof getStaticProps>) => {
+  sizeBytes: { javascript: number; css: number; images: number } | null;
+}> = ({
+  entries,
+  posts,
+  sizeBytes,
+}: InferGetStaticPropsType<typeof getStaticProps>) => {
+  const humanFileSize = (bytes: number) => {
+    const i = bytes === 0 ? 0 : Math.floor(Math.log(bytes) / Math.log(1024));
+    return (
+      parseFloat((bytes / Math.pow(1024, i)).toFixed(2)) +
+      " " +
+      ["B", "kB", "MB", "GB", "TB"][i]
+    );
+  };
   const iconMap: Record<string, ReactNode> = {
     // Sections
     Home: <MdHome color="#d35400" />,
@@ -66,6 +70,10 @@ const Home: NextPage<{
     Docker: <SiDocker color="#2496ED" />,
     Redis: <SiRedis color="#DC382D" />,
   };
+
+  const LineGraph = dynamic(() => import("../components/LineGraph"), {
+    suspense: true,
+  });
 
   return (
     <main className="w-full h-full flex flex-col bg-slate-900">
@@ -144,40 +152,56 @@ const Home: NextPage<{
           <article className="websiteinfo-article col-span-1 row-span-1">
             <h5 className="text-4xl sm:text-5xl">Build size</h5>
             <div className="flex flex-col text-2xl gap-3 justify-center">
-              <div className="flex items-center justify-between gap-4">
-                <span className="font-semibold">Javascript</span>
-                <span>186.56KB</span>
-              </div>
-              <hr className="mt-4 mb-2 h-px w-full opacity-50" />
-              <div className="flex justify-between">
-                <span className="font-semibold">CSS</span>
-                <span>15.23KB</span>
-              </div>
-              <hr className="mt-4 mb-2 h-px w-full opacity-50" />
-              <div className="flex justify-between">
-                <span className="font-semibold">Images</span>
-                <span>3.43MB</span>
-              </div>
-              <hr className="mt-4 mb-2 h-px w-full opacity-50" />
-              <div className="flex justify-between">
-                <span className="font-bold text-3xl sm:text-4xl">Total</span>
-                <span className="font-bold text-3xl sm:text-4xl">3.69MB</span>
-              </div>
+              {sizeBytes === null ? (
+                <span>Unavailable.</span>
+              ) : (
+                <>
+                  <div className="flex items-center justify-between gap-4">
+                    <span className="font-semibold">Javascript</span>
+                    <span>{humanFileSize(sizeBytes.javascript)}</span>
+                  </div>
+                  <hr className="mt-4 mb-2 h-px w-full opacity-50" />
+                  <div className="flex justify-between">
+                    <span className="font-semibold">CSS</span>
+                    <span>{humanFileSize(sizeBytes.css)}</span>
+                  </div>
+                  <hr className="mt-4 mb-2 h-px w-full opacity-50" />
+                  <div className="flex justify-between">
+                    <span className="font-semibold">Images</span>
+                    <span>{humanFileSize(sizeBytes.images)}</span>
+                  </div>
+                  <hr className="mt-4 mb-2 h-px w-full opacity-50" />
+                  <div className="flex justify-between">
+                    <span className="font-bold text-3xl sm:text-4xl">
+                      Total
+                    </span>
+                    <span className="font-bold text-3xl sm:text-4xl">
+                      {humanFileSize(
+                        sizeBytes.javascript + sizeBytes.css + sizeBytes.images
+                      )}
+                    </span>
+                  </div>
+                </>
+              )}
             </div>
           </article>
           <article className="websiteinfo-article col-span-1 row-span-3">
-            <h5 className="text-4xl sm:text-5xl">Latest devblog posts</h5>
+            <h5 className="text-4xl sm:text-5xl md:mb-2">
+              Latest devblog posts
+            </h5>
             {posts.length === 0 ? (
               <span className="text-xl font-semibold ml-2">
                 Nothing here yet.
               </span>
             ) : (
-              <ul className="flex flex-col gap-12">
+              <ul className="flex flex-col gap-12 md:max-h-[500px] overflow-hidden md:overflow-y-auto">
                 {posts.map((p, i) => (
                   <DevblogPost
                     key={i}
+                    // Only show 3 posts when screen is small
+                    hideSmall={i >= 3}
                     imageUrl={p.imageUrl}
-                    publishedDate={p.published}
+                    publishedDate={new Date(p.published)}
                     title={p.title}
                     content={p.snippet}
                   />
@@ -190,39 +214,19 @@ const Home: NextPage<{
             <span className="text-xl text-white text-opacity-70 mb-4">
               Hourly website visits
             </span>
-            <Line
-              options={{
-                responsive: true,
-                borderColor: "#ddd",
-                elements: {
-                  point: {
-                    radius: 0,
-                  },
-                },
-                font: {
-                  size: 32,
-                  family: "Segoe UI",
-                },
-              }}
-              data={{
-                datasets: [
-                  {
-                    data: entries.map(e => e.totalViews),
-                    tension: 0.3,
-                  },
-                ],
-                labels: entries.map(
-                  entry =>
-                    new Date(entry.recordStartTimestamp).getHours() + ":00"
-                ),
-              }}
-            />
+            <Suspense fallback={<span>Loading...</span>}>
+              <LineGraph entries={entries} />
+            </Suspense>
           </article>
           <article className="flex sm:flex-row flex-col sm:flex-wrap gap-x-4 gap-y-4 bg-slate-800 rounded-lg px-6 md:px-8 lg:px-12 py-6 lg:py-8 text-slate-700 col-span-1 md:col-span-2 h-min">
             <h5 className="text-4xl sm:text-5xl sm:text-start text-center text-white">
               Built with:
             </h5>
-            <div className="flex gap-2 items-center bg-slate-200 px-4 py-2 rounded-full">
+            <a
+              target={"_blank"}
+              href="https://nextjs.org/"
+              className="flex gap-2 items-center bg-slate-200 px-4 py-2 rounded-full"
+              rel="noreferrer">
               <SiNextdotjs
                 color="#000000"
                 size={36}
@@ -230,8 +234,12 @@ const Home: NextPage<{
               <span className="text-3xl sm:w-auto w-full text-center">
                 Next.JS
               </span>
-            </div>
-            <div className="flex gap-2 items-center bg-slate-200 px-5 py-2 rounded-full">
+            </a>
+            <a
+              target={"_blank"}
+              href="https://www.typescriptlang.org/"
+              className="flex gap-2 items-center bg-slate-200 px-5 py-2 rounded-full"
+              rel="noreferrer">
               <SiTypescript
                 color="#3178C6"
                 size={32}
@@ -239,8 +247,12 @@ const Home: NextPage<{
               <span className="text-3xl sm:w-auto w-full text-center">
                 Typescript
               </span>
-            </div>
-            <div className="flex gap-2 items-center bg-slate-200 px-5 py-2 rounded-full">
+            </a>
+            <a
+              target={"_blank"}
+              href="https://reactjs.org/"
+              className="flex gap-2 items-center bg-slate-200 px-5 py-2 rounded-full"
+              rel="noreferrer">
               <SiReact
                 color="#61DAFB"
                 size={34}
@@ -248,8 +260,12 @@ const Home: NextPage<{
               <span className="text-3xl sm:w-auto w-full text-center">
                 React
               </span>
-            </div>
-            <div className="flex gap-2 items-center bg-slate-200 px-5 py-2 rounded-full">
+            </a>
+            <a
+              target={"_blank"}
+              href="https://tailwindcss.com/"
+              className="flex gap-2 items-center bg-slate-200 px-5 py-2 rounded-full"
+              rel="noreferrer">
               <SiTailwindcss
                 color="#06B6D4"
                 size={36}
@@ -257,7 +273,7 @@ const Home: NextPage<{
               <span className="text-3xl sm:w-auto w-full text-center">
                 Tailwind
               </span>
-            </div>
+            </a>
           </article>
         </div>
       </section>
@@ -299,16 +315,20 @@ const Home: NextPage<{
 export const getStaticProps: GetStaticProps<{
   entries: PageView[];
   posts: (Post & { snippet: string })[];
+  sizeBytes: { javascript: number; css: number; images: number } | null;
 }> = async () => {
   // Only get entries for current day
   const entries = (await getEntries()).slice(-(new Date().getHours() + 1));
   // Get most recent 5 posts
   const posts = (await getPosts()).slice(-5);
+  // Get size of bundled files
+  const sizeBytes = await getBuildSize();
 
   return {
     props: {
       entries,
       posts,
+      sizeBytes,
     },
     revalidate: 60,
   };
