@@ -1,6 +1,7 @@
 import admin from "./firebase";
 
 export interface Post {
+  id: string;
   title: string;
   content: string;
   imageUrl: string;
@@ -17,7 +18,9 @@ export default async function getPosts() {
         docData["published"] = (
           docData["published"] as admin.firestore.Timestamp
         ).toDate();
+        docData["id"] = doc.id;
         return docData as {
+          id: string;
           title: string;
           content: string;
           published: Date;
@@ -33,6 +36,7 @@ export default async function getPosts() {
         else url = "/assets/images/logo.png";
 
         return {
+          id: post.id,
           title: post.title,
           content: post.content,
           published: post.published,

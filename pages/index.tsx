@@ -35,6 +35,7 @@ import dynamic from "next/dynamic";
 const Home: NextPage<{
   entries: { recordStartTimestamp: number; totalViews: number }[];
   posts: {
+    id: string;
     title: string;
     imageUrl: string;
     published: number;
@@ -202,7 +203,8 @@ const Home: NextPage<{
               <ul className="flex flex-col gap-12 md:max-h-[500px] overflow-hidden md:overflow-y-auto">
                 {posts.map((p, i) => (
                   <DevblogPost
-                    key={i}
+                    key={p.id}
+                    id={p.id}
                     // Only show 3 posts when screen is small
                     hideSmall={i >= 3}
                     imageUrl={p.imageUrl}
@@ -325,6 +327,7 @@ const Home: NextPage<{
 export const getStaticProps: GetStaticProps<{
   entries: { recordStartTimestamp: number; totalViews: number }[];
   posts: {
+    id: string;
     title: string;
     imageUrl: string;
     published: number;
@@ -342,11 +345,13 @@ export const getStaticProps: GetStaticProps<{
   }));
   // Get newest 5 posts, calculate snippet, and make serializable
   const posts = (await getPosts()).slice(-5).map<{
+    id: string;
     title: string;
     imageUrl: string;
     published: number;
     snippet: string;
   }>(p => ({
+    id: p.id,
     title: p.title,
     imageUrl: p.imageUrl,
     published: p.published.getTime(),
