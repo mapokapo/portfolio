@@ -124,6 +124,7 @@ const Home: NextPage<{
               description={s.description}
               meta={{
                 imageUrl: s.meta.imageUrl,
+                linkUrl: s.meta.linkUrl,
                 madeWith: s.meta.madeWith.map(e => ({
                   icon: iconMap[e],
                   label: e,

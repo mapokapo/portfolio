@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { animated, useSpring } from "@react-spring/web";
 import Image from "next/image";
-import { MdExpandMore } from "react-icons/md";
+import { MdExpandMore, MdLaunch } from "react-icons/md";
 import useMeasure from "react-use-measure";
 
 type Props = {
@@ -9,13 +9,14 @@ type Props = {
   description: string;
   meta: {
     imageUrl?: string;
+    linkUrl?: string;
     madeWith: { icon: React.ReactNode; label: string }[];
   };
 };
 const ShowcaseTile: React.FC<Props> = ({
   title,
   description,
-  meta: { imageUrl, madeWith },
+  meta: { imageUrl, madeWith, linkUrl },
 }: Props) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [ref, bounds] = useMeasure();
@@ -34,8 +35,7 @@ const ShowcaseTile: React.FC<Props> = ({
       onClick={() => setIsExpanded(!isExpanded)}
       className={
         isFirefox
-          ? "bg-slate-800 cursor-pointer hover:brightness-125 transition-all py-8 px-4 pb-2 relative w-full sm:w-[300px] h-full flex shadow-md shadow-slate-800 flex-col " +
-            (isExpanded ? "" : "sm:aspect-square")
+          ? "bg-slate-800 cursor-pointer hover:brightness-125 transition-all py-8 px-4 pb-2 relative w-full sm:w-[300px] flex shadow-md shadow-slate-800 flex-col h-full"
           : "bg-slate-800 cursor-pointer hover:brightness-125 transition-all py-8 px-4 pb-2 relative w-full sm:w-[300px] h-full flex shadow-md shadow-slate-800 flex-col sm:aspect-square"
       }>
       <div className="select-none w-full">
@@ -62,11 +62,11 @@ const ShowcaseTile: React.FC<Props> = ({
       </div>
       <animated.div
         style={styles}
-        className="bg-slate-800 overflow-hidden">
+        className="bg-slate-800 overflow-hidden w-full">
         <div
           ref={ref}
           className="p-2 flex flex-col text-white gap-1">
-          <h5 className="text-2xl">Made with:</h5>
+          <h5 className="text-2xl text-start">Made with:</h5>
           <ul className="list-inside">
             {madeWith.map((t, i) => (
               <li
@@ -77,6 +77,19 @@ const ShowcaseTile: React.FC<Props> = ({
               </li>
             ))}
           </ul>
+          {isExpanded && linkUrl !== undefined && (
+            <a
+              onClick={e => {
+                e.stopPropagation();
+              }}
+              href={linkUrl}
+              target="_blank"
+              className="flex gap-2 justify-center items-center mx-auto mt-4 hover:bg-slate-700 px-4 py-2 rounded-lg"
+              rel="noreferrer">
+              <MdLaunch />
+              <span>Visit project</span>
+            </a>
+          )}
         </div>
       </animated.div>
     </button>

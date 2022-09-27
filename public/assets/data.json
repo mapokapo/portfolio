@@ -21,7 +21,7 @@
       "title": "Bitdraw",
       "description": "A simple HTML5 Canvas wrapper library",
       "meta": {
-        "link": "https://github.com/mapokapo/bitdraw",
+        "linkUrl": "https://github.com/mapokapo/bitdraw",
         "imageUrl": "/assets/images/bitdraw_logo.png",
         "madeWith": ["Typescript", "Webpack"]
       }
@@ -30,7 +30,7 @@
       "title": "Diaspora",
       "description": "A match-making social media app",
       "meta": {
-        "link": "https://github.com/mapokapo/diaspora-app",
+        "linkUrl": "https://github.com/mapokapo/diaspora-app",
         "imageUrl": "https://raw.githubusercontent.com/mapokapo/diaspora-app/master/assets/images/logo.svg",
         "madeWith": ["Flutter", "Firebase"]
       }
@@ -39,7 +39,7 @@
       "title": "Riskfactor",
       "description": "A COVID-19 risk assesment app",
       "meta": {
-        "link": "https://github.com/mapokapo/riskfactor",
+        "linkUrl": "https://github.com/mapokapo/riskfactor",
         "imageUrl": "https://raw.githubusercontent.com/mapokapo/riskfactor/master/assets/images/app_icon.svg",
         "madeWith": ["Flutter", "Firebase"]
       }
@@ -48,7 +48,7 @@
       "title": "Sportsmart",
       "description": "A modern fitness tracking app",
       "meta": {
-        "link": "https://github.com/mapokapo/sportsmart-app",
+        "linkUrl": "https://github.com/mapokapo/sportsmart-app",
         "imageUrl": "https://github.com/mapokapo/sportsmart-app/raw/master/src/media/sportsmart_icons/logo.png",
         "madeWith": ["React Native", "Algolia", "Firebase"]
       }
