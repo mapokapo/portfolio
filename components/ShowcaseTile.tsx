@@ -35,10 +35,10 @@ const ShowcaseTile: React.FC<Props> = ({
       onClick={() => setIsExpanded(!isExpanded)}
       className={
         isFirefox
-          ? "bg-slate-800 cursor-pointer hover:brightness-125 transition-all py-8 px-4 pb-2 relative w-full sm:w-[300px] flex shadow-md shadow-slate-800 flex-col h-full"
-          : "bg-slate-800 cursor-pointer hover:brightness-125 transition-all py-8 px-4 pb-2 relative w-full sm:w-[300px] h-full flex shadow-md shadow-slate-800 flex-col sm:aspect-square"
+          ? "bg-slate-800 cursor-pointer hover:brightness-125 transition-all py-8 px-4 pb-2 relative sm:w-[300px] sm:h-full h-min min-w-[250px] flex shadow-md shadow-slate-800 flex-col"
+          : "bg-slate-800 cursor-pointer hover:brightness-125 transition-all py-8 px-4 pb-2 relative sm:w-[300px] sm:h-full h-min min-w-[250px] flex shadow-md shadow-slate-800 flex-col aspect-square"
       }>
-      <div className="select-none w-full">
+      <div className="select-none w-full my-auto">
         {imageUrl !== undefined && (
           <div className="flex justify-center flex-1 items-center mb-auto">
             <Image
@@ -53,7 +53,9 @@ const ShowcaseTile: React.FC<Props> = ({
         )}
         <div className="flex flex-col gap-4 flex-1 mt-4">
           <h4 className="text-white mb-auto text-4xl text-center">{title}</h4>
-          <p className="text-white text-center text-xl">{description}</p>
+          <p className="text-white sm:flex hidden text-center text-xl">
+            {description}
+          </p>
         </div>
         <MdExpandMore
           className="text-white mx-auto mt-4"

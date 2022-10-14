@@ -1,6 +1,12 @@
 import type { GetStaticProps, InferGetStaticPropsType, NextPage } from "next";
 import React, { ReactNode, Suspense } from "react";
-import { MdExpandMore, MdHome, MdCode, MdTrendingUp } from "react-icons/md";
+import {
+  MdExpandMore,
+  MdHome,
+  MdCode,
+  MdTrendingUp,
+  MdEast,
+} from "react-icons/md";
 import {
   SiAlgolia,
   SiDocker,
@@ -100,8 +106,8 @@ const Home: NextPage<{
           Learn more about me...
         </span>
       </section>
-      <section className="flex flex-col gap-4 sm:gap-8 py-4 sm:py-8 relative bg-gradient-to-b from-blue-600 to-slate-900">
-        <div className="absolute blur-md bg-gradient-to-b from-blue-600 to-blue-500 w-full -mt-8 sm:-mt-12 sm:h-8 h-8"></div>
+      <section className="flex flex-col gap-3 sm:gap-8 py-4 sm:py-8 relative bg-gradient-to-b from-blue-600 to-slate-900">
+        <div className="absolute blur-md bg-gradient-to-b from-blue-600 to-blue-500 w-full -mt-8 sm:-mt-12 sm:h-8 h-8 z-0"></div>
         {data.sections.map((s, i) => (
           <SectionPanel
             key={i}
@@ -116,7 +122,8 @@ const Home: NextPage<{
         <span className="text-white text-opacity-75 px-3 text-xl text-center">
           Here&apos;s a short list of projects I made so far...
         </span>
-        <div className="gap-4 flex flex-wrap mx-[10%] md:mx-16 sm:mx-8 my-8 justify-center">
+        <MdEast className="text-gray-400 text-4xl sm:hidden" />
+        <div className="gap-4 px-4 items-stretch overflow-x-auto w-full flex sm:flex-wrap sm:px-[5%] md:mx-16 my-2 sm:my-8 sm:justify-center">
           {data.showcaseTiles.map((s, i) => (
             <ShowcaseTile
               key={i}
@@ -136,7 +143,7 @@ const Home: NextPage<{
       </section>
       <section className="bg-slate-900 flex flex-col justify-center items-center mt-20 gap-4">
         <h2 className="text-white text-5xl sm:text-7xl">Tech stack</h2>
-        <span className="text-white text-opacity-75 px-3 text-xl text-center">
+        <span className="text-white text-opacity-75 px-3 text-xl text-center sm:mb-6">
           Finally, the part you&apos;ve been waiting for
         </span>
         <div className="flex flex-col">
