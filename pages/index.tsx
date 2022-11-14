@@ -200,7 +200,7 @@ const Home: NextPage<{
             </div>
           </article>
           <article className="websiteinfo-article col-span-1 row-span-3">
-            <h5 className="text-4xl sm:text-5xl md:mb-2">
+            <h5 className="text-4xl sm:text-5xl md:mb-4 lg:mb-8">
               Latest devblog posts
             </h5>
             {posts.length === 0 ? (
@@ -208,13 +208,11 @@ const Home: NextPage<{
                 Nothing here yet.
               </span>
             ) : (
-              <ul className="flex flex-col gap-12 md:max-h-[500px] overflow-hidden md:overflow-y-auto">
-                {posts.map((p, i) => (
+              <ul className="flex flex-col gap-8 md:gap-12 xl:gap-16 h-full overflow-y-auto">
+                {posts.map(p => (
                   <DevblogPost
                     key={p.id}
                     id={p.id}
-                    // Only show 3 posts when screen is small
-                    hideSmall={i >= 3}
                     imageUrl={p.imageUrl}
                     publishedDate={new Date(p.published)}
                     title={p.title}
@@ -224,9 +222,9 @@ const Home: NextPage<{
               </ul>
             )}
           </article>
-          <article className="flex flex-col gap-4 bg-slate-800 rounded-lg text-white px-6 md:px-8 lg:px-12 py-6 lg:py-8 col-span-1 row-span-2">
+          <article className="flex flex-col gap-4 bg-slate-800 rounded-lg justify-evenly text-white px-6 md:px-8 lg:px-12 py-6 lg:py-8 col-span-1 row-span-2">
             <h5 className="text-4xl sm:text-5xl">Statistics</h5>
-            <span className="text-xl text-white text-opacity-70 mb-4">
+            <span className="text-xl text-white text-opacity-70 mb-auto">
               Hourly website visits
             </span>
             <Suspense fallback={<span>Loading...</span>}>
@@ -351,8 +349,8 @@ export const getStaticProps: GetStaticProps<{
     recordStartTimestamp: e.recordStartTimestamp.getTime(),
     totalViews: e.totalViews,
   }));
-  // Get newest 5 posts, calculate snippet, and make serializable
-  const posts = (await getPosts()).slice(-5).map<{
+  // Get newest 3 posts, calculate snippet, and make serializable
+  const posts = (await getPosts()).slice(-3).map<{
     id: string;
     title: string;
     imageUrl: string;
@@ -363,7 +361,7 @@ export const getStaticProps: GetStaticProps<{
     title: p.title,
     imageUrl: p.imageUrl,
     published: p.published.getTime(),
-    snippet: p.content.slice(0, 200),
+    snippet: p.content.slice(0, 300),
   }));
   // Get size of bundled files
   const sizeBytes = await getBuildSize();

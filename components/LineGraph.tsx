@@ -18,6 +18,7 @@ type Props = {
 const LineGraph: React.FC<Props> = ({ entries }) => {
   return (
     <Line
+      className="mb-auto"
       options={{
         responsive: true,
         borderColor: "#ddd",

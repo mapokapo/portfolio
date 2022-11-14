@@ -9,7 +9,6 @@ type Props = {
   publishedDate: Date;
   imageUrl: string;
   content: string;
-  hideSmall?: boolean;
 };
 const DevblogPost: React.FC<Props> = ({
   id,
@@ -17,7 +16,6 @@ const DevblogPost: React.FC<Props> = ({
   publishedDate,
   imageUrl,
   content,
-  hideSmall = false,
 }) => {
   const [relativeTime, setRelativeTime] = useState<null | string>(null);
   useEffect(() => {
@@ -30,11 +28,7 @@ const DevblogPost: React.FC<Props> = ({
 
   return (
     <Link href={`/blog/${id}`}>
-      <li
-        className={
-          "flex gap-2 cursor-pointer flex-col items-center justify-center " +
-          (hideSmall ? "hidden md:flex" : "")
-        }>
+      <li className="flex gap-2 cursor-pointer flex-col items-center justify-center ">
         <div className="gap-4 flex w-full">
           <div className="relative w-full hidden flex-1 overflow-hidden lg:flex">
             <Image
@@ -57,7 +51,9 @@ const DevblogPost: React.FC<Props> = ({
           </div>
         </div>
         <div className="flex flex-col gap-2">
-          <p className="line-clamp-3 text-xl ml-px">{content}</p>
+          <p className="line-clamp-3 xl:line-clamp-4 text-xl ml-px">
+            {content}
+          </p>
         </div>
       </li>
     </Link>
