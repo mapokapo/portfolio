@@ -107,6 +107,20 @@ const Home: NextPage<{
         </span>
       </section>
       <section className="flex flex-col gap-3 sm:gap-8 py-4 sm:py-8 relative bg-gradient-to-b from-blue-600 to-slate-900">
+        <section className="flex flex-col sm:mx-16 p-4 py-8 gap-6">
+          <h1 className="text-5xl font-bold text-white text-center">
+            Queue intro...
+          </h1>
+          <p className="text-center text-xl text-white">
+            My name is Leo Petrović. I am a{" "}
+            {Math.floor(
+              (Date.now() - new Date(2003, 6, 22).getTime()) /
+                (1000 * 60 * 60 * 24 * 365)
+            )}{" "}
+            year old Computer Science student from Bosnia & Herzegovina, and an
+            experienced programmer and full-stack web developer.
+          </p>
+        </section>
         <div className="absolute blur-md bg-gradient-to-b from-blue-600 to-blue-500 w-full -mt-8 sm:-mt-12 sm:h-8 h-8 z-0"></div>
         {data.sections.map((s, i) => (
           <SectionPanel
@@ -349,8 +363,8 @@ export const getStaticProps: GetStaticProps<{
     recordStartTimestamp: e.recordStartTimestamp.getTime(),
     totalViews: e.totalViews,
   }));
-  // Get newest 3 posts, calculate snippet, and make serializable
-  const posts = (await getPosts()).slice(-3).map<{
+  // Calculate snippet and make serializable
+  const posts = (await getPosts()).map<{
     id: string;
     title: string;
     imageUrl: string;

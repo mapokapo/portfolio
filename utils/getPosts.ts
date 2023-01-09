@@ -9,7 +9,15 @@ export interface Post {
 }
 
 export default async function getPosts() {
-  const docs = (await admin.firestore().collection("posts").get()).docs;
+  // Get newest 3 posts
+  const docs = (
+    await admin
+      .firestore()
+      .collection("posts")
+      .orderBy("published", "desc")
+      .limit(3)
+      .get()
+  ).docs;
 
   const posts: Post[] = await Promise.all(
     docs
@@ -44,10 +52,6 @@ export default async function getPosts() {
         };
       })
   );
-
-  // Sort by ascending time
-  if (posts.length > 1)
-    posts.sort((a, b) => a.published.getTime() - b.published.getTime());
 
   return posts;
 }
