@@ -2,24 +2,24 @@
   "sections": [
     {
       "title": "Started from the bottom",
-      "content": "My first encounter with software development was at 13 years old. In 2016, I signed up for a youth robotics tournament, in which my team and I won first place (3 years in a row :D). After my success, I got really interested in programming. In fact, I started going to a prestigious coding academy for young people in my town at the same time, although I was by far the youngest person to ever attend that course. I learned what programming is, and how to make my first website. It was truly the starting point of my career.",
+      "content": "My first encounter with software development was at 13 years old. In 2016, I signed up for a youth robotics tournament, in which my team and I won first place (...for 3 years in a row). After my success, I got really interested in programming. I enrolled in a prestigious coding academy for young people in my town soon after, although I was by far the youngest person to ever attend that course. I learned what programming is, and how to make my first website. It was the starting point of my career.",
       "icon": "Home"
     },
     {
       "title": "Hard work pays off",
-      "content": "Spending a few years learning is nothing to ignore, and as I found out, practicing programming at home in your free time really pays off. During this time, I had to decide which area to specialize in: frontend, backend, mobile... It was hard to decide, so I naturally tried everything. Nowadays I consider myself a full stack developer, capable of making web, desktop, and mobile applications, as well as backend servers, CLI tools, and games in multiple languages. It wasn't easy, mind you. I was going to high school at the same time and I was also competing in multiple tournaments organized by my school (in which our team, of course, won 2 times in a row).",
+      "content": "Spending a few years learning is nothing to ignore, and as I found out, practicing programming at home in your free time really pays off. During this time, I had to decide which area to specialize in: frontend, backend, mobile... It was hard to decide, so I naturally tried everything. Nowadays I consider myself a full stack developer, capable of making web, desktop, and mobile applications, as well as backend servers, CLI tools, and games in multiple languages. It wasn't easy, mind you. I was going to high school at the same time and I was also competing in multiple tournaments organized by my school (in which our team, of course, won multiple times in a row again).",
       "icon": "Code"
     },
     {
       "title": "The snowball effect",
-      "content": "It was 2022. School was ending, and I really had to get serious about my future career. I was still very cautious when looking for jobs or education opportunities, because I was unsure what I was even getting myself into. Thankfully, I didn't have to fret too much about that, because I got offered a summer internship! This was a great opportunity for me, and I learned a lot. In fact, I even got a job offer at the same company, which was quite a new experience to me. I was still looking to improve my knowledge and to get formally educated, so unfortunately I had to decline the job offer in favor of going to university. What follows after, I am yet to find out.",
+      "content": "It was 2022. School was ending, and I really had to get serious about my future career. I was still very cautious when looking for jobs or education opportunities, because I was unsure what I was getting myself into. Thankfully, I didn't have to fret too much about that, because I got offered a summer internship! This was a great opportunity for me, and I learned a lot. In fact, I even got a job offer at the same company, which was quite a new experience to me. I was still looking to improve my knowledge and to get formally educated, so unfortunately I had to decline the job offer in favor of going to university. What follows after, I am yet to find out.",
       "icon": "TrendingUp"
     }
   ],
   "showcaseTiles": [
     {
       "title": "Bitdraw",
-      "description": "A simple HTML5 Canvas wrapper library",
+      "description": "A simple HTML5 Canvas wrapper library for my personal projects",
       "meta": {
         "linkUrl": "https://github.com/mapokapo/bitdraw",
         "imageUrl": "/assets/images/bitdraw_logo.png",
@@ -63,7 +63,7 @@
     },
     {
       "title": "JS Canvas apps",
-      "description": "A variety of games and simulations made in HTML5 Canvas",
+      "description": "A variety of games and simulations made using the HTML5 Canvas API",
       "meta": {
         "imageUrl": "/assets/images/html5_canvas_logo.png",
         "madeWith": ["Typescript", "Webpack", "Bitdraw"]
@@ -96,19 +96,19 @@
           "items": [
             {
               "name": "Javascript",
-              "description": "You know it, you love it, and you've probably used it at least once.",
+              "description": "What I started with, and what I still use and love.",
               "items": [
                 {
                   "name": "Typescript",
-                  "description": "This is what I use most of the time."
+                  "description": "This is the flavor of JS I use most of the time."
                 },
                 {
                   "name": "React",
                   "description": "My go-to library for building websites."
                 },
                 {
-                  "name": "Vue",
-                  "description": "What I use at work."
+                  "name": "Svelte",
+                  "description": "It's a joy to use and gives a vanilla-JS type feel to making web apps again."
                 },
                 {
                   "name": "Angular",
@@ -122,7 +122,7 @@
               "items": [
                 {
                   "name": "Tailwind",
-                  "description": "My favorite way to write CSS."
+                  "description": "A library of utility-classes to use instead of writing your own. This is my favorite way to write CSS."
                 },
                 {
                   "name": "Material Design",
@@ -145,14 +145,14 @@
                   "description": "My favorite way to write modular backends in NodeJS."
                 },
                 {
-                  "name": "ExpressJS",
-                  "description": "Nowadays I only use it for very small projects."
+                  "name": "KoaJS",
+                  "description": "Quite a bit better than ExpressJS. Very enjoyable and easy to use."
                 }
               ]
             },
             {
               "name": "Python",
-              "description": "When I'm feeling sick of Javascript.",
+              "description": "I rarely use Python for web development, but when I do, I use these.",
               "items": [
                 {
                   "name": "Django",
@@ -166,11 +166,11 @@
             },
             {
               "name": "Java",
-              "description": "For very big projects. I mostly use it at work.",
+              "description": "For very big backends.",
               "items": [
                 {
                   "name": "Spring Boot",
-                  "description": "Simpler than I thought. Leaves no room for error, which I like."
+                  "description": "Being the inspiration for NestJS, I like it a lot. Leaves no room for error and allows for a lot of customization."
                 }
               ]
             },
@@ -188,7 +188,7 @@
                 },
                 {
                   "name": "MongoDB",
-                  "description": "I love JSON. I love Mongo. Not really surprising. But I don't prefer it over RDBMSs."
+                  "description": "I love JSON = I love Mongo. Not really surprising. But I'd still use a RDBMS over it any day."
                 }
               ]
             }
@@ -202,11 +202,15 @@
       "items": [
         {
           "name": "Flutter",
-          "description": "One of my favorite frameworks ever - it's the main way I make mobile and desktop apps."
+          "description": "I really like making desktop and mobile apps with it, but sometimes it feels a bit too verbose. Still one of my favorites."
+        },
+        {
+          "name": "React Native",
+          "description": "I love React and the ecosystem around it. Combined with Expo, React Native is a joy to use."
         },
         {
           "name": "Firebase",
-          "description": "My favorite BaaS. Comes in handy when I need a backend for my app (mostly for auth)."
+          "description": "My favorite BaaS. Comes in handy when I need a backend for my app, or an identity provider for my own custom backend."
         }
       ]
     },
@@ -224,7 +228,7 @@
         },
         {
           "name": "Java",
-          "description": "I actually kinda love Java. I use it to make Minecraft addons for Spigot."
+          "description": "I actually kinda love Java. I use it to make Minecraft addons and mods, or for CLI tools and web scrapers."
         }
       ]
     },
@@ -238,7 +242,7 @@
         },
         {
           "name": "Godot",
-          "description": "The most fun I've had developing software in ages. It's very easy to use."
+          "description": "The most fun I've had developing software in ages. It's very easy to use and it's one of my favorite tools."
         }
       ]
     }

@@ -117,8 +117,8 @@ const Home: NextPage<{
               (Date.now() - new Date(2003, 6, 22).getTime()) /
                 (1000 * 60 * 60 * 24 * 365)
             )}{" "}
-            year old Computer Science student from Bosnia & Herzegovina, and an
-            experienced programmer and full-stack web developer.
+            year old Croatian Computer Science student, an experienced
+            programmer, and a full-stack web developer.
           </p>
         </section>
         <div className="absolute blur-md bg-gradient-to-b from-blue-600 to-blue-500 w-full -mt-8 sm:-mt-12 sm:h-8 h-8 z-0"></div>
@@ -355,14 +355,43 @@ export const getStaticProps: GetStaticProps<{
   }[];
   sizeBytes: SizeBytes;
 }> = async () => {
-  // Only get entries for current day
-  const entries = (await getEntries()).slice(-(new Date().getHours() + 1)).map<{
+  // Only get entries for last day in 1 hour intervals
+  // If a 1 hour interval has no entries, it will be counted as 0 views
+  const entries = (await getEntries()).map<{
     recordStartTimestamp: number;
     totalViews: number;
   }>(e => ({
     recordStartTimestamp: e.recordStartTimestamp.getTime(),
     totalViews: e.totalViews,
   }));
+  const normalizedEntries: {
+    recordStartTimestamp: number;
+    totalViews: number;
+  }[] = [];
+
+  const timespan = 24 * 60 * 60 * 1000; // 1 day
+  const currentTimestamp = Date.now() + 3600000; // adjust for timezone
+  const startTimestamp = currentTimestamp - timespan;
+  for (let i = startTimestamp; i < currentTimestamp; i += 3600000) {
+    // adjust for timezone
+    const hourStart = new Date(i);
+    const matchingEntry = entries.find(entry => {
+      return (
+        entry.recordStartTimestamp <= hourStart.getTime() &&
+        entry.recordStartTimestamp + 3600000 > hourStart.getTime()
+      );
+    });
+
+    if (matchingEntry) {
+      normalizedEntries.push(matchingEntry);
+    } else {
+      normalizedEntries.push({
+        recordStartTimestamp: hourStart.getTime(),
+        totalViews: 0,
+      });
+    }
+  }
+
   // Calculate snippet and make serializable
   const posts = (await getPosts()).map<{
     id: string;
@@ -382,7 +411,7 @@ export const getStaticProps: GetStaticProps<{
 
   return {
     props: {
-      entries,
+      entries: normalizedEntries,
       posts,
       sizeBytes,
     },
