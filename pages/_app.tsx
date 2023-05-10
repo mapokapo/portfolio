@@ -17,6 +17,10 @@ function MyApp({ Component, pageProps }: AppProps) {
         <meta charSet="utf-8" />
         <title>Leo Petrovic | My Portfolio</title>
         <meta
+          name="google-site-verification"
+          content="9_qEiY98Q8uHDB5H293-c3ixYEp9bDIEwqcfjvEJbPU"
+        />
+        <meta
           name="description"
           content="Leo's personal portfolio website"
         />
