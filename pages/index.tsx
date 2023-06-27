@@ -37,6 +37,7 @@ import LinkCircle from "../components/LinkCircle";
 import getPosts from "../utils/getPosts";
 import getBuildSize, { SizeBytes } from "../utils/getBuildSize";
 import dynamic from "next/dynamic";
+import TypewriterComponent from "typewriter-effect";
 
 const Home: NextPage<{
   entries: { recordStartTimestamp: number; totalViews: number }[];
@@ -92,11 +93,26 @@ const Home: NextPage<{
       <section
         className="bg-gradient-to-tr gap-2 animate-gradient-move from-blue-600 to-blue-500 w-full min-h-screen flex justify-center items-center flex-col"
         style={{ backgroundSize: "400% 400%" }}>
-        <h1
-          className="text-transparent font-bold text-7xl sm:text-9xl animate-gradient-move bg-clip-text bg-gradient-to-r from-indigo-300 to-sky-200"
-          style={{ backgroundSize: "400% 400%" }}>
-          Hello
-        </h1>
+        <TypewriterComponent
+          options={{
+            loop: true,
+          }}
+          onInit={typewriter => {
+            typewriter
+              .changeDelay(100)
+              .changeDeleteSpeed(60)
+              .typeString("Hello")
+              .pauseFor(2000)
+              .deleteAll()
+              .pauseFor(500)
+              .typeString("My name is Leo")
+              .pauseFor(2000)
+              .deleteAll()
+              .pauseFor(350)
+              .start();
+          }}
+          component={"h1"}
+        />
         <span className="text-gray-100 text-xl">Welcome to my website</span>
         <MdExpandMore
           size={36}
@@ -106,30 +122,32 @@ const Home: NextPage<{
           Learn more about me...
         </span>
       </section>
-      <section className="flex flex-col gap-3 sm:gap-8 py-4 sm:py-8 relative bg-gradient-to-b from-blue-600 to-slate-900">
-        <section className="flex flex-col sm:mx-16 p-4 py-8 gap-6">
-          <h1 className="text-5xl font-bold text-white text-center">
+      <section className="flex flex-col py-4 sm:py-8 relative bg-gradient-to-b from-blue-600 to-slate-900">
+        <section className="flex flex-col justify-center sm:mx-16 pb-16 h-[50vh] p-4 gap-6">
+          <h2 className="text-5xl font-bold text-white text-center">
             Queue intro...
-          </h1>
+          </h2>
           <p className="text-center text-xl text-white">
             My name is Leo Petrović. I am a{" "}
             {Math.floor(
               (Date.now() - new Date(2003, 6, 22).getTime()) /
                 (1000 * 60 * 60 * 24 * 365)
             )}{" "}
-            year old Croatian Computer Science student, an experienced
-            programmer, and a full-stack web developer.
+            year old Computer Science student, an experienced programmer, and a
+            full-stack web developer.
           </p>
         </section>
-        <div className="absolute blur-md bg-gradient-to-b from-blue-600 to-blue-500 w-full -mt-8 sm:-mt-12 sm:h-8 h-8 z-0"></div>
-        {data.sections.map((s, i) => (
-          <SectionPanel
-            key={i}
-            title={s.title}
-            content={s.content}
-            icon={iconMap[s.icon]}
-          />
-        ))}
+        <div className="absolute blur-lg bg-gradient-to-b from-[rgba(37,99,235,0.8)] to-blue-600 w-full -mt-8 sm:-mt-16 sm:h-16 h-8 z-0"></div>
+        <div className="flex flex-col gap-4 sm:gap-32">
+          {data.sections.map(s => (
+            <SectionPanel
+              key={s.title}
+              title={s.title}
+              content={s.content}
+              icon={iconMap[s.icon]}
+            />
+          ))}
+        </div>
       </section>
       <section className="bg-slate-900 flex flex-col justify-center items-center mt-24 gap-4">
         <h2 className="text-white text-5xl sm:text-7xl">Showcase</h2>
@@ -138,9 +156,9 @@ const Home: NextPage<{
         </span>
         <MdEast className="text-gray-400 text-4xl sm:hidden" />
         <div className="gap-4 px-4 items-stretch overflow-x-auto w-full flex sm:flex-wrap sm:px-[5%] md:mx-16 my-2 sm:my-8 sm:justify-center">
-          {data.showcaseTiles.map((s, i) => (
+          {data.showcaseTiles.map(s => (
             <ShowcaseTile
-              key={i}
+              key={s.title}
               title={s.title}
               description={s.description}
               meta={{
@@ -160,15 +178,14 @@ const Home: NextPage<{
         <span className="text-white text-opacity-75 px-3 text-xl text-center sm:mb-6">
           Finally, the part you&apos;ve been waiting for
         </span>
-        <div className="flex flex-col">
-          {data.techStack.map((e, i) => (
+        <ul className="flex flex-col">
+          {data.techStack.map(e => (
             <TreeRenderer
-              root={true}
-              key={i}
+              key={e.name}
               item={e}
             />
           ))}
-        </div>
+        </ul>
       </section>
       <section className="bg-slate-900 md:mx-8 flex flex-col justify-center items-center mt-24 gap-4">
         <h2 className="text-white text-5xl sm:text-7xl">Website info</h2>
@@ -178,7 +195,7 @@ const Home: NextPage<{
         </span>
         <div className="grid grid-flow-row grid-cols-1 md:grid-cols-2 gap-4 lg:gap-8 w-full mt-4 p-4 lg:p-8">
           <article className="websiteinfo-article col-span-1 row-span-1">
-            <h5 className="text-4xl sm:text-5xl">Build size</h5>
+            <h3 className="text-4xl sm:text-5xl">Build size</h3>
             <div className="flex flex-col text-2xl gap-3 justify-center">
               {sizeBytes === null ? (
                 <span>Unavailable.</span>
@@ -214,9 +231,9 @@ const Home: NextPage<{
             </div>
           </article>
           <article className="websiteinfo-article col-span-1 row-span-3">
-            <h5 className="text-4xl sm:text-5xl md:mb-4 lg:mb-8">
+            <h3 className="text-4xl sm:text-5xl md:mb-4 lg:mb-8">
               Latest devblog posts
-            </h5>
+            </h3>
             {posts.length === 0 ? (
               <span className="text-xl font-semibold ml-2">
                 Nothing here yet.
@@ -237,7 +254,7 @@ const Home: NextPage<{
             )}
           </article>
           <article className="flex flex-col gap-4 bg-slate-800 rounded-lg justify-evenly text-white px-6 md:px-8 lg:px-12 py-6 lg:py-8 col-span-1 row-span-2">
-            <h5 className="text-4xl sm:text-5xl">Statistics</h5>
+            <h3 className="text-4xl sm:text-5xl">Statistics</h3>
             <span className="text-xl text-white text-opacity-70 mb-auto">
               Hourly website visits
             </span>
@@ -251,9 +268,9 @@ const Home: NextPage<{
             </Suspense>
           </article>
           <article className="flex sm:flex-row flex-col sm:flex-wrap gap-x-4 gap-y-4 bg-slate-800 rounded-lg px-6 md:px-8 lg:px-12 py-6 lg:py-8 text-slate-700 col-span-1 md:col-span-2 h-min">
-            <h5 className="text-4xl sm:text-5xl sm:text-start text-center text-white">
+            <h3 className="text-4xl sm:text-5xl sm:text-start text-center text-white">
               Built with:
-            </h5>
+            </h3>
             <a
               target={"_blank"}
               href="https://nextjs.org/"

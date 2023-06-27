@@ -7,10 +7,11 @@ import {
   PointElement,
   LineElement,
 } from "chart.js";
+import { Line } from "react-chartjs-2";
+
 ChartJS.defaults.font.size = 16;
 ChartJS.defaults.color = "#ddd";
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement);
-import { Line } from "react-chartjs-2";
 
 type Props = {
   entries: PageView[];

@@ -11,9 +11,8 @@ interface Item {
 
 type Props = {
   item: Item;
-  root?: boolean;
 };
-const TreeRenderer: React.FC<Props> = ({ item, root = false }) => {
+const TreeRenderer: React.FC<Props> = ({ item }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [ref, bounds] = useMeasure();
   const itemsStyles = useSpring({
@@ -31,13 +30,13 @@ const TreeRenderer: React.FC<Props> = ({ item, root = false }) => {
 
   return (
     <li
-      role={root ? "tree" : undefined}
-      aria-expanded={isExpanded}
       className={
         "flex flex-col overflow-hidden " +
         (item.items !== undefined ? "" : "ml-8")
       }>
       <LabelContainer
+        aria-expanded={isExpanded}
+        aria-controls={item.name}
         onClick={e => {
           e.stopPropagation();
           setIsExpanded(!isExpanded);
@@ -52,9 +51,9 @@ const TreeRenderer: React.FC<Props> = ({ item, root = false }) => {
               />
             </animated.div>
           )}
-          <h5 className="sm:text-3xl text-2xl whitespace-nowrap text-white">
+          <span className="sm:text-3xl text-2xl whitespace-nowrap text-white">
             {item.name}
-          </h5>
+          </span>
         </div>
         <span
           className={
@@ -65,15 +64,16 @@ const TreeRenderer: React.FC<Props> = ({ item, root = false }) => {
         </span>
       </LabelContainer>
       {item.items !== undefined && (
-        <animated.div style={itemsStyles}>
+        <animated.div
+          style={itemsStyles}
+          id={item.name}>
           <ul
-            role="treeitem"
             style={{ display: isExpanded ? "flex" : "none" }}
             ref={ref}
             className={"flex flex-col md:ml-12 sm:ml-6 ml-3"}>
-            {item.items.map((e, i) => (
+            {item.items.map(e => (
               <TreeRenderer
-                key={i}
+                key={e.name}
                 item={e}
               />
             ))}

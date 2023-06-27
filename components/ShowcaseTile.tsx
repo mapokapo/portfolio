@@ -52,7 +52,7 @@ const ShowcaseTile: React.FC<Props> = ({
           </div>
         )}
         <div className="flex flex-col gap-4 flex-1 mt-4">
-          <h4 className="text-white mb-auto text-4xl text-center">{title}</h4>
+          <h3 className="text-white mb-auto text-4xl text-center">{title}</h3>
           <p className="text-white sm:flex hidden text-center text-xl">
             {description}
           </p>
@@ -68,14 +68,14 @@ const ShowcaseTile: React.FC<Props> = ({
         <div
           ref={ref}
           className="p-2 flex flex-col text-white gap-1">
-          <h5 className="text-2xl text-start">Made with:</h5>
+          <span className="text-2xl text-start">Made with:</span>
           <ul className="list-inside">
-            {madeWith.map((t, i) => (
+            {madeWith.map(e => (
               <li
-                key={i}
+                key={e.label}
                 className="text-lg flex items-center gap-2">
-                {t.icon}
-                {t.label}
+                {e.icon}
+                {e.label}
               </li>
             ))}
           </ul>
