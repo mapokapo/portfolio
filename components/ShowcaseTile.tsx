@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { animated, useSpring } from "@react-spring/web";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import { MdExpandMore, MdLaunch } from "react-icons/md";
 import useMeasure from "react-use-measure";
 
@@ -40,13 +40,14 @@ const ShowcaseTile: React.FC<Props> = ({
       }>
       <div className="select-none w-full my-auto">
         {imageUrl !== undefined && (
-          <div className="flex justify-center mx-auto relative h-16 w-16 items-center mb-auto">
+          <div className="flex justify-center flex-1 items-center mb-auto">
             <Image
               alt={"Image of project called " + title}
               src={imageUrl}
               className="opacity-90"
-              fill={true}
-              sizes="(max-width: 640px) 100vw, 640px"
+              layout="fixed"
+              width={64}
+              height={64}
             />
           </div>
         )}

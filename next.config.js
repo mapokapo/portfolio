@@ -3,9 +3,9 @@ const nextConfig = {
   experimental: {
     scrollRestoration: true,
   },
-  reactStrictMode: false,
-  productionBrowserSourceMaps: true,
-  swcMinify: false,
+  reactStrictMode: true,
+  productionBrowserSourceMaps: false,
+  swcMinify: true,
   images: {
     domains: [
       "github.com",

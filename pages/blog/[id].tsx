@@ -1,6 +1,6 @@
 import { GetStaticPaths, GetStaticProps } from "next";
 import Head from "next/head";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import { useRouter } from "next/router";
 import React, { PropsWithChildren } from "react";
 import getPosts, { Post } from "../../utils/getPosts";
@@ -43,9 +43,8 @@ const Devblog: React.FC<Props> = ({ post }) => {
           <Image
             alt={"Devblog post titled " + post.title}
             src={post.imageUrl}
-            fill={true}
-            sizes="(min-width: 768px) 400px, (min-width: 640px) 300px, 400px"
-            priority
+            objectFit="cover"
+            layout="fill"
           />
         </div>
         <span className="text-opacity-60 text-white text-center sm:text-start">
