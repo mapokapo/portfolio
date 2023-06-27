@@ -3,9 +3,9 @@ const nextConfig = {
   experimental: {
     scrollRestoration: true,
   },
-  reactStrictMode: true,
-  productionBrowserSourceMaps: false,
-  swcMinify: true,
+  reactStrictMode: false,
+  productionBrowserSourceMaps: true,
+  swcMinify: false,
   images: {
     domains: [
       "github.com",
@@ -13,7 +13,6 @@ const nextConfig = {
       "storage.googleapis.com",
       "localhost",
     ],
-    unoptimized: true,
   },
 };
 

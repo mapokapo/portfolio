@@ -1,4 +1,4 @@
-import Image from "next/legacy/image";
+import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import getRelativeTime from "../utils/getRelativeTime";
@@ -36,8 +36,9 @@ const DevblogPost: React.FC<Props> = ({
             <Image
               alt={"Devblog post titled " + title}
               src={imageUrl}
-              objectFit="contain"
-              layout="fill"
+              className="object-contain p-1"
+              fill={true}
+              sizes="(min-width: 1280px) 6rem, 5rem"
             />
           </div>
           <div className="flex flex-col flex-[3] xl:flex-[4] justify-center">
