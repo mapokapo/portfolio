@@ -38,26 +38,26 @@ const ShowcaseTile: React.FC<Props> = ({
           ? "bg-slate-800 cursor-pointer hover:brightness-125 transition-all py-8 px-4 pb-2 relative sm:w-[300px] sm:h-full h-min min-w-[250px] flex shadow-md shadow-slate-800 flex-col"
           : "bg-slate-800 cursor-pointer hover:brightness-125 transition-all py-8 px-4 pb-2 relative sm:w-[300px] sm:h-full h-min min-w-[250px] flex shadow-md shadow-slate-800 flex-col aspect-square"
       }>
-      <div className="select-none w-full my-auto">
+      <div className="select-none w-full h-full pb-4 justify-between flex flex-col">
         {imageUrl !== undefined && (
-          <div className="flex justify-center mx-auto relative h-16 w-16 items-center mb-auto">
+          <div className="flex justify-center mx-auto h-16 items-center">
             <Image
               alt={"Image of project called " + title}
               src={imageUrl}
               className="opacity-90"
-              fill={true}
-              sizes="(max-width: 640px) 100vw, 640px"
+              width={64}
+              height={64}
             />
           </div>
         )}
-        <div className="flex flex-col gap-4 mt-4">
+        <div className="flex flex-col gap-4">
           <h3 className="text-white mb-auto text-4xl text-center">{title}</h3>
           <p className="text-white sm:flex hidden text-center text-xl">
             {description}
           </p>
         </div>
         <MdExpandMore
-          className="text-white mx-auto mt-4"
+          className="text-white mx-auto"
           size={24}
         />
       </div>
