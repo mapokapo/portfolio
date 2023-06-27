@@ -9,19 +9,23 @@ import getRelativeTime from "../../utils/getRelativeTime";
 type Props = {
   post: Post;
 };
+const Layout: React.FC<PropsWithChildren & { post: Post }> = ({
+  post,
+  children,
+}) => (
+  <>
+    <Head>
+      <title>{post === undefined ? "Loading post..." : post.title}</title>
+    </Head>
+    {children}
+  </>
+);
+
 const Devblog: React.FC<Props> = ({ post }) => {
   const router = useRouter();
-  const Layout: React.FC<PropsWithChildren> = ({ children }) => (
-    <>
-      <Head>
-        <title>{post === undefined ? "Loading post..." : post.title}</title>
-      </Head>
-      {children}
-    </>
-  );
   if (router.isFallback) {
     return (
-      <Layout>
+      <Layout post={post}>
         <main className="flex justify-center items-center">
           <span className="text-xl text-white">Loading...</span>
         </main>
@@ -30,7 +34,7 @@ const Devblog: React.FC<Props> = ({ post }) => {
   }
 
   return (
-    <Layout>
+    <Layout post={post}>
       <main className="items-center sm:items-start px-4 py-6 sm:px-16 md:px-32 lg:px-48 xl:px-64 sm:py-16 flex flex-col w-full h-full min-h-screen bg-slate-900 gap-4 text-white">
         <h1 className="text-6xl sm:text-7xl text-center sm:text-start">
           {post.title}
@@ -38,9 +42,10 @@ const Devblog: React.FC<Props> = ({ post }) => {
         <div className="md:min-h-[400px] min-w-[200px] max-w-[400px] sm:w-auto w-full sm:min-h-[300px] aspect-square relative flex mt-10">
           <Image
             alt={"Devblog post titled " + post.title}
-            objectFit="cover"
             src={post.imageUrl}
-            layout="fill"
+            fill={true}
+            sizes="(min-width: 768px) 400px, (min-width: 640px) 300px, 400px"
+            priority
           />
         </div>
         <span className="text-opacity-60 text-white text-center sm:text-start">

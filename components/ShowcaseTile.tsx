@@ -40,18 +40,17 @@ const ShowcaseTile: React.FC<Props> = ({
       }>
       <div className="select-none w-full my-auto">
         {imageUrl !== undefined && (
-          <div className="flex justify-center flex-1 items-center mb-auto">
+          <div className="flex justify-center mx-auto relative h-16 w-16 items-center mb-auto">
             <Image
               alt={"Image of project called " + title}
               src={imageUrl}
               className="opacity-90"
-              layout="fixed"
-              width={64}
-              height={64}
+              fill={true}
+              sizes="(max-width: 640px) 100vw, 640px"
             />
           </div>
         )}
-        <div className="flex flex-col gap-4 flex-1 mt-4">
+        <div className="flex flex-col gap-4 mt-4">
           <h3 className="text-white mb-auto text-4xl text-center">{title}</h3>
           <p className="text-white sm:flex hidden text-center text-xl">
             {description}

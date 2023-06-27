@@ -57,7 +57,7 @@
       "title": "MC Plugins",
       "description": "Various server-side addons for Spigot",
       "meta": {
-        "imageUrl": "/assets/images/minecraft_logo.svg",
+        "imageUrl": "/assets/images/minecraft_logo.png",
         "madeWith": ["Java 17"]
       }
     },

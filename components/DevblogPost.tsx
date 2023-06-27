@@ -27,15 +27,18 @@ const DevblogPost: React.FC<Props> = ({
   };
 
   return (
-    <Link href={`/blog/${id}`}>
-      <li className="flex gap-2 cursor-pointer flex-col items-center justify-center ">
+    <li>
+      <Link
+        href={`/blog/${id}`}
+        className="flex gap-2 cursor-pointer flex-col items-center justify-center">
         <div className="gap-4 flex w-full">
-          <div className="relative w-full hidden flex-1 overflow-hidden lg:flex">
+          <div className="relative xl:w-24 xl:h-24 w-20 h-20 hidden overflow-hidden lg:flex">
             <Image
               alt={"Devblog post titled " + title}
-              objectFit="contain"
               src={imageUrl}
-              layout="fill"
+              className="object-contain p-1"
+              fill={true}
+              sizes="(min-width: 1280px) 6rem, 5rem"
             />
           </div>
           <div className="flex flex-col flex-[3] xl:flex-[4] justify-center">
@@ -55,8 +58,8 @@ const DevblogPost: React.FC<Props> = ({
             {content}
           </p>
         </div>
-      </li>
-    </Link>
+      </Link>
+    </li>
   );
 };
 
