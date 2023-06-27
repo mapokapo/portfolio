@@ -13,6 +13,7 @@ const nextConfig = {
       "storage.googleapis.com",
       "localhost",
     ],
+    unoptimized: true,
   },
 };
 
