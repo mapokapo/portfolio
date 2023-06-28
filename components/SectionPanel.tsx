@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { MdExpandLess, MdExpandMore } from "react-icons/md";
 import useMeasure from "react-use-measure";
 import useVisibility from "../utils/hooks/useVisibility";
+import useMounted from "../utils/hooks/useMounted";
 
 type Props = {
   icon: React.ReactNode;
@@ -10,6 +11,7 @@ type Props = {
   content: string;
 };
 const SectionPanel: React.FC<Props> = ({ icon, title, content }) => {
+  const mounted = useMounted();
   const [sectionElement, setSectionElement] = useState<"button" | "div">("div");
   const [expanded, setExpanded] = useState(false);
   const [visible, visibilityRef] = useVisibility(-200);
@@ -22,8 +24,8 @@ const SectionPanel: React.FC<Props> = ({ icon, title, content }) => {
   });
   const fadeInStyles = useSpring({
     from: {
-      opacity: 0,
-      left: -200,
+      opacity: mounted ? 0 : 1,
+      left: mounted ? -200 : 0,
     },
     to: {
       opacity: shouldFadeIn ? 1 : 0,
