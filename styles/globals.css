@@ -24,6 +24,7 @@
 .Typewriter {
   @apply text-transparent font-bold text-7xl text-center sm:text-9xl animate-gradient-move bg-clip-text bg-gradient-to-r from-indigo-300 to-sky-200 mx-8 pl-2;
   background-size: 400% 400%;
+  line-height: 1.4;
 }
 
 .Typewriter__cursor {
