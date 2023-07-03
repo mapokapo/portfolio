@@ -70,7 +70,7 @@ const SectionPanel: React.FC<Props> = ({ icon, title, content }) => {
       style={fadeInStyles}
       className="z-10 relative">
       <SectionElement
-        className="bg-slate-800 z-10 flex shadow-md text-start shadow-slate-800 flex-col p-4 py-8 gap-2 sm:gap-8 sm:p-16 sm:mx-16"
+        className="bg-slate-800 z-10 flex shadow-md text-start shadow-slate-800 flex-col p-4 py-8 gap-2 sm:gap-8 sm:p-16 lg:mx-[15%] sm:mx-16 mx-[5%]"
         onClick={
           sectionElement === "button" ? () => setExpanded(!expanded) : undefined
         }>

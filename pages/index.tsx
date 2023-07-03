@@ -155,7 +155,7 @@ const Home: NextPage<{
           Here&apos;s a short list of projects I made so far...
         </span>
         <MdEast className="text-gray-400 text-4xl sm:hidden" />
-        <div className="gap-4 px-4 items-stretch overflow-x-auto w-full flex sm:flex-wrap sm:px-[5%] md:mx-16 my-2 sm:my-8 sm:justify-center">
+        <div className="gap-4 px-4 items-stretch overflow-x-auto flex sm:flex-wrap my-2 sm:my-8 sm:mx-16 lg:mx-[10%] sm:w-auto w-full sm:justify-center">
           {data.showcaseTiles.map(s => (
             <ShowcaseTile
               key={s.title}
@@ -187,7 +187,7 @@ const Home: NextPage<{
           ))}
         </ul>
       </section>
-      <section className="bg-slate-900 md:mx-8 flex flex-col justify-center items-center mt-24 gap-4">
+      <section className="bg-slate-900 md:mx-8 lg:mx-[7%] flex flex-col justify-center items-center mt-24 gap-4">
         <h2 className="text-white text-5xl sm:text-7xl">Website info</h2>
         <span className="text-white text-opacity-75 px-3 text-xl text-center">
           I&apos;ll be placing website updates and info here, for those

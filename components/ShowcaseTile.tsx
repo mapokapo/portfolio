@@ -33,11 +33,9 @@ const ShowcaseTile: React.FC<Props> = ({
     <button
       aria-expanded={isExpanded}
       onClick={() => setIsExpanded(!isExpanded)}
-      className={
-        isFirefox
-          ? "bg-slate-800 cursor-pointer hover:brightness-125 transition-all py-8 px-4 pb-2 relative sm:w-[300px] sm:h-full h-min min-w-[250px] flex shadow-md shadow-slate-800 flex-col"
-          : "bg-slate-800 cursor-pointer hover:brightness-125 transition-all py-8 px-4 pb-2 relative sm:w-[300px] sm:h-full h-min min-w-[250px] flex shadow-md shadow-slate-800 flex-col aspect-square"
-      }>
+      className={`bg-slate-800 cursor-pointer hover:brightness-125 transition-all py-8 px-4 pb-2 relative sm:w-[300px] sm:h-full h-min min-w-[250px] flex shadow-md shadow-slate-800 flex-col ${
+        isFirefox ? "" : "aspect-square"
+      }`}>
       <div className="select-none w-full h-full pb-4 justify-between flex flex-col">
         {imageUrl !== undefined && (
           <div className="flex justify-center mx-auto h-16 items-center">
