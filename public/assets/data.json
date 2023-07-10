@@ -31,7 +31,7 @@
       "description": "A match-making social media app",
       "meta": {
         "linkUrl": "https://github.com/mapokapo/diaspora-app",
-        "imageUrl": "https://raw.githubusercontent.com/mapokapo/diaspora-app/master/assets/images/logo.svg",
+        "imageUrl": "/assets/images/diaspora_logo.png",
         "madeWith": ["Flutter", "Firebase"]
       }
     },
@@ -40,7 +40,7 @@
       "description": "A COVID-19 risk assesment app",
       "meta": {
         "linkUrl": "https://github.com/mapokapo/riskfactor",
-        "imageUrl": "https://raw.githubusercontent.com/mapokapo/riskfactor/master/assets/images/app_icon.svg",
+        "imageUrl": "/assets/images/riskfactor_logo.png",
         "madeWith": ["Flutter", "Firebase"]
       }
     },
@@ -49,7 +49,7 @@
       "description": "A modern fitness tracking app",
       "meta": {
         "linkUrl": "https://github.com/mapokapo/sportsmart-app",
-        "imageUrl": "https://github.com/mapokapo/sportsmart-app/raw/master/src/media/sportsmart_icons/logo.png",
+        "imageUrl": "/assets/images/sportsmart_logo.png",
         "madeWith": ["React Native", "Algolia", "Firebase"]
       }
     },
