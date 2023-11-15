@@ -38,7 +38,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         />
         <meta
           property="og:url"
-          content="https://leopetrovic.com"
+          content="https://leopetrovic.vercel.app"
         />
         <meta
           property="og:image"

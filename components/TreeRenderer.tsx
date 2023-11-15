@@ -11,8 +11,9 @@ interface Item {
 
 type Props = {
   item: Item;
+  parentExpandedOrIsRoot: boolean;
 };
-const TreeRenderer: React.FC<Props> = ({ item }) => {
+const TreeRenderer: React.FC<Props> = ({ item, parentExpandedOrIsRoot }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [ref, bounds] = useMeasure();
   const itemsStyles = useSpring({
@@ -37,6 +38,7 @@ const TreeRenderer: React.FC<Props> = ({ item }) => {
       <LabelContainer
         aria-expanded={isExpanded}
         aria-controls={item.name}
+        tabIndex={parentExpandedOrIsRoot ? undefined : -1}
         onClick={e => {
           e.stopPropagation();
           setIsExpanded(!isExpanded);
@@ -68,13 +70,16 @@ const TreeRenderer: React.FC<Props> = ({ item }) => {
           style={itemsStyles}
           id={item.name}>
           <ul
-            style={{ display: isExpanded ? "flex" : "none" }}
+            style={{
+              height: isExpanded ? "auto" : "0",
+            }}
             ref={ref}
-            className={"flex flex-col md:ml-12 sm:ml-6 ml-3"}>
+            className="flex flex-col md:ml-12 sm:ml-6 ml-3">
             {item.items.map(e => (
               <TreeRenderer
                 key={e.name}
                 item={e}
+                parentExpandedOrIsRoot={isExpanded}
               />
             ))}
           </ul>

@@ -2,17 +2,17 @@
   "sections": [
     {
       "title": "Humble beginnings",
-      "content": "My first encounter with software development was at 13 years old. In 2016, I signed up for a youth robotics tournament, in which my team and I won first place (...for 3 years in a row). After my success, I got really interested in programming. I enrolled in a prestigious coding academy for young people in my town soon after, although I was by far the youngest person to ever attend that course. I learned what programming is, and how to make my first website. It was the starting point of my career.",
+      "content": "My first encounter with software development was at 13 years old. In 2016, I signed up for a youth robotics tournament, in which my team and I won first place (3 times in a row!). After my success, I acquired an interest in programming. I enrolled in a prestigious youth coding academy soon after, although I was by far the youngest person to ever attend that course. I learned what programming is, and how to make my first website. It was the starting point of my career.",
       "icon": "Home"
     },
     {
       "title": "Hard work pays off",
-      "content": "Spending a few years learning is nothing to ignore, and as I found out, practicing programming at home in your free time really pays off. During this time, I had to decide which area to specialize in: frontend, backend, mobile... It was hard to decide, so I naturally tried everything. Nowadays I consider myself a full stack developer, capable of making web, desktop, and mobile applications, as well as backend servers, CLI tools, and games in multiple languages. It wasn't easy, mind you. I was going to high school at the same time and I was also competing in multiple tournaments organized by my school (in which our team, of course, won multiple times in a row again).",
+      "content": "Spending a few years learning is nothing to ignore, and as I found out, practicing programming at home in your free time really pays off. During this time, I had to decide which area to specialize in: frontend, backend, mobile... It was hard to decide, so I naturally tried everything. Nowadays I consider myself a full stack developer, capable of making web, desktop, and mobile applications, as well as backend servers, CLI tools, and games in multiple languages. It wasn't easy - I was going to high school at the same time and I was also competing in multiple tournaments organized by my school (in which our team, of course, won multiple times in a row again).",
       "icon": "Code"
     },
     {
       "title": "The snowball effect",
-      "content": "It was 2022. School was ending, and I really had to get serious about my future career. I was still very cautious when looking for jobs or education opportunities, because I was unsure what I was getting myself into. Thankfully, I didn't have to fret too much about that, because I got offered a summer internship! This was a great opportunity for me, and I learned a lot. In fact, I even got a job offer at the same company, which was quite a new experience to me. I was still looking to improve my knowledge and to get formally educated, so unfortunately I had to decline the job offer in favor of going to university. What follows after, I am yet to find out.",
+      "content": "In 2022, high school was ending, which meant I really had to get serious about my future. I was still very cautious when looking for jobs or education opportunities, because I was unsure what I was getting myself into. Thankfully, I didn't have to worry too much, because I got offered a summer internship! This was a great opportunity for me, and I learned a lot. In fact, I even got a job offer at the same company, which was quite a new experience to me. I was a freshman at this point, so unfortunately I had to decline the job offer in favor of focusing on my studies. Today, having experience behind my back, I'm looking for new opportunities to grow and learn.",
       "icon": "TrendingUp"
     }
   ],
@@ -108,17 +108,17 @@
                 },
                 {
                   "name": "Svelte",
-                  "description": "It's a joy to use and gives a vanilla-JS type feel to making web apps again."
+                  "description": "Great for effective solutions and working fast."
                 },
                 {
                   "name": "Angular",
-                  "description": "Perfect for making large scale SPAs. I enjoy using it."
+                  "description": "A unique approach to building websites. I like it, but I don't use it often."
                 }
               ]
             },
             {
               "name": "CSS",
-              "description": "I rarely use CSS frameworks, but these come in handy.",
+              "description": "Having battled with CSS for years, I've found a few tools that I always keep under my belt.",
               "items": [
                 {
                   "name": "Tailwind",
@@ -151,22 +151,8 @@
               ]
             },
             {
-              "name": "Python",
-              "description": "I rarely use Python for web development, but when I do, I use these.",
-              "items": [
-                {
-                  "name": "Django",
-                  "description": "I'm still experimenting with it, but I love me a good batteries-included framework."
-                },
-                {
-                  "name": "Flask",
-                  "description": "Python analogue of ExpressJS, though FastAPI is seeming better every day."
-                }
-              ]
-            },
-            {
               "name": "Java",
-              "description": "For very big backends.",
+              "description": "A robust language with a lot of features. I use it for a lot of things.",
               "items": [
                 {
                   "name": "Spring Boot",
@@ -179,7 +165,7 @@
               "description": "Good ol' SQL. Although I rarely ever write it directly.",
               "items": [
                 {
-                  "name": "MySQL/MariaDB",
+                  "name": "MariaDB",
                   "description": "My default database of choice."
                 },
                 {
@@ -201,12 +187,12 @@
       "description": "What I use to make mobile applications (most of the time).",
       "items": [
         {
-          "name": "Flutter",
-          "description": "I really like making desktop and mobile apps with it, but sometimes it feels a bit too verbose. Still one of my favorites."
-        },
-        {
           "name": "React Native",
           "description": "I love React and the ecosystem around it. Combined with Expo, React Native is a joy to use."
+        },
+        {
+          "name": "Flutter",
+          "description": "I really like making desktop and mobile apps with it, but sometimes it feels a bit too verbose. Still one of my favorites."
         },
         {
           "name": "Firebase",
@@ -215,8 +201,22 @@
       ]
     },
     {
-      "name": "System Development",
-      "description": "Random languages I occasionally use. Still mostly experimenting in this field.",
+      "name": "Game Development",
+      "description": "Mostly for fun, although it would be cool to make a full game someday...",
+      "items": [
+        {
+          "name": "Godot",
+          "description": "The most fun I've had developing software in ages. It's very easy to use and it's one of my favorite tools."
+        },
+        {
+          "name": "Unity",
+          "description": "My introduction to gamedev. It's actually pretty fun, but the age shows at times."
+        }
+      ]
+    },
+    {
+      "name": "Miscellaneous",
+      "description": "Random languages I occasionally use.",
       "items": [
         {
           "name": "Rust",
@@ -228,21 +228,7 @@
         },
         {
           "name": "Java",
-          "description": "I actually kinda love Java. I use it to make Minecraft addons and mods, or for CLI tools and web scrapers."
-        }
-      ]
-    },
-    {
-      "name": "Game Development",
-      "description": "Mostly for fun, although it would be cool to make a full game...",
-      "items": [
-        {
-          "name": "Unity",
-          "description": "My introduction to gamedev. It's actually pretty fun, but the age shows at times."
-        },
-        {
-          "name": "Godot",
-          "description": "The most fun I've had developing software in ages. It's very easy to use and it's one of my favorite tools."
+          "description": "I use it to make Minecraft addons and mods, backends, or CLI tools and web scrapers."
         }
       ]
     }

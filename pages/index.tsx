@@ -183,6 +183,7 @@ const Home: NextPage<{
             <TreeRenderer
               key={e.name}
               item={e}
+              parentExpandedOrIsRoot={true}
             />
           ))}
         </ul>
