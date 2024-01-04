@@ -42,11 +42,11 @@ const DevblogPost: React.FC<Props> = ({
             />
           </div>
           <div className="flex flex-col flex-[3] xl:flex-[4] justify-center">
-            <h4 className="text-3xl xl:text-4xl break-normal font-semibold">
+            <h4 className="text-2xl xl:text-4xl break-normal font-semibold">
               {title}
             </h4>
             {relativeTime !== null && (
-              <span className="opacity-50 ml-px mt-1">
+              <span className="opacity-50 ml-px mt-1 text-xs sm:text-base ">
                 Published {relativeTime} • {getReadTimeMinutes(content)} minute
                 read
               </span>
@@ -54,7 +54,7 @@ const DevblogPost: React.FC<Props> = ({
           </div>
         </div>
         <div className="flex flex-col gap-2">
-          <p className="line-clamp-3 xl:line-clamp-4 text-xl ml-px">
+          <p className="line-clamp-3 xl:line-clamp-4 text-base sm:text-xl ml-px">
             {content}
           </p>
         </div>

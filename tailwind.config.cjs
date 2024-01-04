@@ -16,6 +16,12 @@ module.exports = {
       animation: {
         "gradient-move": "gradient-move 5s ease infinite",
       },
+      screens: {
+        xs: "327px",
+        "xs-max": {
+          max: "327px",
+        },
+      },
     },
   },
   plugins: [require("@tailwindcss/line-clamp")],

@@ -36,30 +36,28 @@ const TreeRenderer: React.FC<Props> = ({ item, parentExpandedOrIsRoot }) => {
         (item.items !== undefined ? "" : "ml-8")
       }>
       <LabelContainer
-        aria-expanded={isExpanded}
-        aria-controls={item.name}
         tabIndex={parentExpandedOrIsRoot ? undefined : -1}
         onClick={e => {
           e.stopPropagation();
           setIsExpanded(!isExpanded);
         }}
         className="flex flex-col md:flex-row gap-x-4 gap-y-2 px-3 mb-1 py-2 pb-3 md:items-center hover:backdrop-brightness-200 cursor-pointer overflow-visible">
-        <div className="flex items-end">
+        <div className="flex sm:items-end">
           {item.items !== undefined && (
             <animated.div style={arrowStyles}>
               <MdChevronRight
-                className="sm:text-4xl text-3xl"
+                className="sm:text-4xl text-2xl"
                 color="#fff"
               />
             </animated.div>
           )}
-          <span className="sm:text-3xl text-2xl whitespace-nowrap text-white">
+          <span className="sm:text-3xl text-xl whitespace-nowrap text-white">
             {item.name}
           </span>
         </div>
         <span
           className={
-            "sm:text-xl text-lg break-words text-start text-white text-opacity-50 " +
+            "sm:text-xl text-md break-words text-start text-white text-opacity-50 " +
             (item.items !== undefined ? "sm:ml-2 ml-4" : "")
           }>
           {item.description}

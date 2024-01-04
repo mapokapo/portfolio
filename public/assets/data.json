@@ -2,17 +2,17 @@
   "sections": [
     {
       "title": "Humble beginnings",
-      "content": "My first encounter with software development was at 13 years old. In 2016, I signed up for a youth robotics tournament, in which my team and I won first place (3 times in a row!). After my success, I acquired an interest in programming. I enrolled in a prestigious youth coding academy soon after, although I was by far the youngest person to ever attend that course. I learned what programming is, and how to make my first website. It was the starting point of my career.",
+      "content": "My first encounter with software development was at 13 years old.<br /><br />In 2016, I signed up for an annual youth robotics tournament organized by SPARK, in which my team and I won first place (3 years in a row!).<br /><br />After my success, I acquired an interest in programming. I enrolled in a prestigious coding academy soon after, which I successfully graduated although I was by far the youngest person to ever attend that course. I learned what programming is, and how to make my first website. It was the starting point of my career.",
       "icon": "Home"
     },
     {
       "title": "Hard work pays off",
-      "content": "Spending a few years learning is nothing to ignore, and as I found out, practicing programming at home in your free time really pays off. During this time, I had to decide which area to specialize in: frontend, backend, mobile... It was hard to decide, so I naturally tried everything. Nowadays I consider myself a full stack developer, capable of making web, desktop, and mobile applications, as well as backend servers, CLI tools, and games in multiple languages. It wasn't easy - I was going to high school at the same time and I was also competing in multiple tournaments organized by my school (in which our team, of course, won multiple times in a row again).",
+      "content": "Spending a few years learning is nothing to ignore, and as I found out, practicing programming at home in your free time really pays off. During this time, I had to decide which area to specialize in: frontend, backend, mobile... It was hard to decide, so I naturally tried everything.<br /><br />Nowadays I consider myself a full stack developer, capable of making web, desktop, and mobile applications, as well as backend servers, CLI tools, and games in multiple languages. It wasn't easy however - I was going to high school at the same time and I was also competing in multiple tournaments organized by my school.<br /><br />(...in which my team, of course, won multiple times in a row again).",
       "icon": "Code"
     },
     {
       "title": "The snowball effect",
-      "content": "In 2022, high school was ending, which meant I really had to get serious about my future. I was still very cautious when looking for jobs or education opportunities, because I was unsure what I was getting myself into. Thankfully, I didn't have to worry too much, because I got offered a summer internship! This was a great opportunity for me, and I learned a lot. In fact, I even got a job offer at the same company, which was quite a new experience to me. I was a freshman at this point, so unfortunately I had to decline the job offer in favor of focusing on my studies. Today, having experience behind my back, I'm looking for new opportunities to grow and learn.",
+      "content": "In 2022, high school was ending, which meant I really had to get serious about my future. I was still very cautious when looking for jobs or education opportunities, because I was unsure what I was getting myself into.<br /><br />Thankfully, I didn't have to worry too much, because I got offered a summer internship! This was a great opportunity for me, and I learned a lot. In fact, I even got a job offer at the same company, which was quite a new experience to me.<br /><br />I was a freshman in university at this point, so unfortunately I had to decline the job offer in favor of focusing on my studies.<br /><br />Today, having experience behind my back, I'm looking for new opportunities to grow and learn.",
       "icon": "TrendingUp"
     }
   ],

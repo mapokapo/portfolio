@@ -36,22 +36,22 @@ const Devblog: React.FC<Props> = ({ post }) => {
   return (
     <Layout post={post}>
       <main className="items-center sm:items-start px-4 py-6 sm:px-16 md:px-32 lg:px-48 xl:px-64 sm:py-16 flex flex-col w-full h-full min-h-screen bg-slate-900 gap-4 text-white">
-        <h1 className="text-6xl sm:text-7xl text-center sm:text-start">
-          {post.title}
-        </h1>
-        <div className="md:min-h-[400px] min-w-[200px] max-w-[400px] sm:w-auto w-full sm:min-h-[300px] aspect-square relative flex mt-10">
+        <div className="md:min-h-[300px] min-w-[100px] max-w-[300px] sm:w-auto w-1/2 sm:min-h-[100px] aspect-square relative flex">
           <Image
             alt={"Devblog post titled " + post.title}
             src={post.imageUrl}
             fill={true}
-            sizes="(min-width: 768px) 400px, (min-width: 640px) 300px, 400px"
+            sizes="(min-width: 768px) 300px, (min-width: 640px) 100px, 300px"
             priority
           />
         </div>
-        <span className="text-opacity-60 text-white text-center sm:text-start">
+        <h1 className="text-4xl sm:text-6xl text-center sm:text-start">
+          {post.title}
+        </h1>
+        <span className="text-opacity-60 text-white text-center sm:text-start sm:text-base text-sm">
           Published {getRelativeTime(new Date(post.published))}
         </span>
-        <p className="text-xl mt-4">{post.content}</p>
+        <p className="text-base sm:text-xl mt-4">{post.content}</p>
       </main>
     </Layout>
   );

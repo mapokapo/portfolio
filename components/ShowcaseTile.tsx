@@ -3,6 +3,7 @@ import { animated, useSpring } from "@react-spring/web";
 import Image from "next/image";
 import { MdExpandMore, MdLaunch } from "react-icons/md";
 import useMeasure from "react-use-measure";
+import Link from "next/link";
 
 type Props = {
   title: string;
@@ -49,8 +50,10 @@ const ShowcaseTile: React.FC<Props> = ({
           </div>
         )}
         <div className="flex flex-col gap-4">
-          <h3 className="text-white mb-auto text-4xl text-center">{title}</h3>
-          <p className="text-white sm:flex hidden text-center text-xl">
+          <h3 className="text-white mb-auto text-2xl sm:text-4xl text-center">
+            {title}
+          </h3>
+          <p className="text-white flex text-center text-sm sm:text-xl ">
             {description}
           </p>
         </div>
@@ -77,7 +80,7 @@ const ShowcaseTile: React.FC<Props> = ({
             ))}
           </ul>
           {isExpanded && linkUrl !== undefined && (
-            <a
+            <Link
               onClick={e => {
                 e.stopPropagation();
               }}
@@ -87,7 +90,7 @@ const ShowcaseTile: React.FC<Props> = ({
               rel="noreferrer">
               <MdLaunch />
               <span>Visit project</span>
-            </a>
+            </Link>
           )}
         </div>
       </animated.div>
