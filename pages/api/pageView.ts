@@ -49,7 +49,7 @@ export async function updatePageViews() {
   const col = admin.firestore().collection("pageViews");
 
   // Remove entries older than 2 weeks
-  deleteOldEntries(col);
+  await deleteOldEntries(col);
 
   // Get most recent entry from db or null if there are no entries
   const currentEntry = await getMostRecentEntry(col);

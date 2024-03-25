@@ -8,6 +8,8 @@ function MyApp({ Component, pageProps }: AppProps) {
     if (typeof window !== "undefined")
       fetch("/api/pageView", {
         method: "GET",
+      }).catch(e => {
+        console.error(e);
       });
   }, []);
 
