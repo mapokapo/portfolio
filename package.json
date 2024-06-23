@@ -24,7 +24,7 @@
     "typewriter-effect": "^2.20.1"
   },
   "devDependencies": {
-    "@next/bundle-analyzer": "^12.3.1",
+    "@next/bundle-analyzer": "^14.2.4",
     "@next/eslint-plugin-next": "^14.2.1",
     "@types/node": "18.7.18",
     "@types/react": "^18.2.69",
