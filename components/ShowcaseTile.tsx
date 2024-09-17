@@ -46,6 +46,7 @@ const ShowcaseTile: React.FC<Props> = ({
               className="opacity-90"
               width={64}
               height={64}
+              quality={100}
             />
           </div>
         )}
