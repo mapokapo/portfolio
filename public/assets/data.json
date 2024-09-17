@@ -83,6 +83,22 @@
           "Redis"
         ]
       }
+    },
+    {
+      "title": "FSRE Notifier",
+      "description": "A personal experimental project to track my university timetable",
+      "meta": {
+        "linkUrl": "https://github.com/FSRE-Timetable-Notify/fsre-timetable-notify",
+        "imageUrl": "/assets/images/fsre_timetable_notify.png",
+        "madeWith": [
+          "Spring Boot",
+          "Firebase",
+          "React",
+          "Tailwind",
+          "Typescript",
+          "Flutter"
+        ]
+      }
     }
   ],
   "techStack": [

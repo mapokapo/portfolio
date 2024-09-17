@@ -85,6 +85,8 @@ const Home: NextPage<{
     "Vue 3": <SiVuedotjs color="#4FC08D" />,
     Docker: <SiDocker color="#2496ED" />,
     Redis: <SiRedis color="#DC382D" />,
+    Tailwind: <SiTailwindcss color="#38BDF8" />,
+    React: <SiReact color="#58C4DC" />,
   };
 
   const LineGraph = dynamic(() => import("../components/LineGraph"), {
