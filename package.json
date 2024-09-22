@@ -10,7 +10,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@react-spring/web": "^9.5.4",
+    "@react-spring/web": "^9.7.4",
     "caniuse-lite": "^1.0.30001660",
     "chart.js": "^4.4.2",
     "cross-env": "^7.0.3",
