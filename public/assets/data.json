@@ -1,4 +1,58 @@
 {
+  "quotes": [
+    {
+      "quote": "The only way to do great work is to love what you do",
+      "author": "Steve Jobs"
+    },
+    {
+      "quote": "The best way to predict the future is to create it",
+      "author": "Alan Kay"
+    },
+    {
+      "quote": "The only limit to our realization of tomorrow will be our doubts of today",
+      "author": "Franklin D. Roosevelt"
+    },
+    {
+      "quote": "I cannot remember the books I've read any more than the meals I have eaten; even so, they have made me",
+      "author": "Ralph Waldo Emerson"
+    },
+    {
+      "quote": "To unlearn grass and sky in favor of where and why",
+      "author": "exurb1a"
+    },
+    {
+      "quote": "Don't believe everything you think",
+      "author": "Buddha"
+    },
+    {
+      "quote": "For small creatures such as we, the vastness of life is bearable only through love",
+      "author": "Carl Sagan"
+    },
+    {
+      "quote": "Ignorance is in our bones, but kindness is in our DNA",
+      "author": "exurb1a"
+    },
+    {
+      "quote": "There are no mistakes",
+      "author": "Richard Bach"
+    },
+    {
+      "quote": "The only way to make sense out of change is to plunge into it, move with it, and join the dance",
+      "author": "Alan Watts"
+    },
+    {
+      "quote": "It's possible to not make a single mistake yet still lose. That's not weakness, that's life",
+      "author": "Jean Luc Picard"
+    },
+    {
+      "quote": "If you wish to make an apple pie from scratch, you must first invent the universe",
+      "author": "Carl Sagan"
+    },
+    {
+      "quote": "Despite everything, it's still you",
+      "author": "Flowey"
+    }
+  ],
   "sections": [
     {
       "title": "Humble beginnings",

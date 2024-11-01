@@ -1,5 +1,5 @@
 import type { GetStaticProps, InferGetStaticPropsType, NextPage } from "next";
-import React, { ReactNode, useEffect, useState } from "react";
+import React, { ReactNode, useEffect, useMemo, useState } from "react";
 import {
   MdExpandMore,
   MdHome,
@@ -39,6 +39,8 @@ import getBuildSize, { SizeBytes } from "../utils/getBuildSize";
 import dynamic from "next/dynamic";
 import TypewriterComponent from "typewriter-effect";
 import Link from "next/link";
+import { randomChoice } from "../utils/random";
+import { mapRange } from "../utils/mapRange";
 
 const Home: NextPage<{
   entries: { recordStartTimestamp: number; totalViews: number }[];
@@ -50,13 +52,17 @@ const Home: NextPage<{
     snippet: string;
   }[];
   sizeBytes: SizeBytes;
+  quote: {
+    quote: string;
+    author: string;
+  };
 }> = ({
   entries,
   posts,
   sizeBytes,
+  quote,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
-  const [hasScrolledToLastQuarter, setHasScrolledToLastQuarter] =
-    useState(false);
+  const [scrollPercentage, setScrollPercentage] = useState(0);
   const humanFileSize = (bytes: number) => {
     const i = bytes === 0 ? 0 : Math.floor(Math.log(bytes) / Math.log(1024));
     return (
@@ -93,15 +99,24 @@ const Home: NextPage<{
     ssr: false,
   });
 
+  const lineGraph = useMemo(
+    () => (
+      <LineGraph
+        entries={entries.map<PageView>(e => ({
+          ...e,
+          recordStartTimestamp: new Date(e.recordStartTimestamp),
+        }))}
+      />
+    ),
+    [entries]
+  );
+
   useEffect(() => {
     const handleScroll = () => {
-      const scrollPercentage =
+      setScrollPercentage(
         (window.scrollY / (document.body.scrollHeight - window.innerHeight)) *
-        100;
-
-      if (scrollPercentage >= 75) {
-        setHasScrolledToLastQuarter(true);
-      }
+          100
+      );
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -114,6 +129,16 @@ const Home: NextPage<{
       <section
         className="relative flex min-h-screen w-full animate-gradient-move flex-col items-center justify-center gap-2 bg-gradient-to-tr from-blue-600 to-blue-500 pt-[10%]"
         style={{ backgroundSize: "400% 400%" }}>
+        <blockquote
+          className="fixed left-1/2 top-8 w-max max-w-full -translate-x-1/2 rounded-lg p-4 text-center text-white text-opacity-90"
+          style={{
+            opacity: mapRange(scrollPercentage, 0, 10, 1, 0),
+          }}>
+          "{quote.quote}"
+          <footer className="mr-1 text-end text-sm text-white text-opacity-50">
+            - {quote.author}
+          </footer>
+        </blockquote>
         <TypewriterComponent
           options={{
             loop: true,
@@ -289,14 +314,7 @@ const Home: NextPage<{
             <span className="mb-auto text-lg text-white text-opacity-70 sm:text-xl">
               Hourly website visits
             </span>
-            {hasScrolledToLastQuarter && (
-              <LineGraph
-                entries={entries.map<PageView>(e => ({
-                  ...e,
-                  recordStartTimestamp: new Date(e.recordStartTimestamp),
-                }))}
-              />
-            )}
+            {lineGraph}
           </article>
           <article className="col-span-1 flex h-min flex-col gap-x-4 gap-y-4 rounded-lg bg-slate-800 px-6 py-6 text-slate-700 sm:flex-row sm:flex-wrap md:col-span-2 md:px-8 lg:px-12 lg:py-8">
             <h3 className="text-center text-3xl text-white sm:text-start sm:text-5xl">
@@ -402,6 +420,10 @@ export const getStaticProps: GetStaticProps<{
     snippet: string;
   }[];
   sizeBytes: SizeBytes;
+  quote: {
+    quote: string;
+    author: string;
+  };
 }> = async () => {
   // Only get entries for last day in 1 hour intervals
   // If a 1 hour interval has no entries, it will be counted as 0 views
@@ -462,6 +484,7 @@ export const getStaticProps: GetStaticProps<{
       entries: normalizedEntries,
       posts,
       sizeBytes,
+      quote: randomChoice(data.quotes),
     },
     revalidate: 60,
   };
