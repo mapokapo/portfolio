@@ -87,17 +87,17 @@ const SectionPanel: React.FC<Props> = ({ icon, title, content }) => {
     <animated.article
       ref={visibilityRef}
       style={fadeInStyles}
-      className="z-10 relative w-full">
+      className="relative z-10 w-full">
       {sectionType === "button" ? (
         <animated.button
-          className="bg-slate-800 z-10 flex shadow-md text-start shadow-slate-800 flex-col p-2 py-8 xs:p-8 gap-2 sm:gap-8 sm:p-16 xs-max:!m-0"
+          className="z-10 flex flex-col gap-2 bg-slate-800 p-2 py-8 text-start shadow-md shadow-slate-800 sm:gap-8 sm:p-16 xs:p-8 xs-max:!m-0"
           style={fullWidthStyles}
           onClick={() => setExpanded(!expanded)}>
-          <div className="flex gap-4 flex-col sm:flex-row items-center w-full text-white px-4 sm:px-0 sm:mb-0 mb-3">
-            <div className="text-5xl -mb-2 sm:text-5xl">{icon}</div>
+          <div className="mb-3 flex w-full flex-col items-center gap-4 px-4 text-white sm:mb-0 sm:flex-row sm:px-0">
+            <div className="-mb-2 text-5xl sm:text-5xl">{icon}</div>
             <animated.h3
               style={expandedTitleStyles}
-              className="sm:text-start text-center">
+              className="text-center sm:text-start">
               {title}
             </animated.h3>
           </div>
@@ -106,25 +106,25 @@ const SectionPanel: React.FC<Props> = ({ icon, title, content }) => {
             className="overflow-hidden sm:hidden">
             <p
               ref={expandRef}
-              className="text-white text-md sm:py-8 sm:text-2xl"
+              className="text-md text-white sm:py-8 sm:text-2xl"
               dangerouslySetInnerHTML={{ __html: content }}></p>
           </animated.div>
-          <ExpandIcon className="text-3xl text-white sm:hidden w-full" />
+          <ExpandIcon className="w-full text-3xl text-white sm:hidden" />
         </animated.button>
       ) : (
         <animated.div
-          className="bg-slate-800 z-10 flex shadow-md text-start shadow-slate-800 flex-col p-4 py-8 gap-2 sm:gap-8 sm:p-16 lg:mx-[15%] sm:mx-16 mx-[5%]"
+          className="z-10 mx-[5%] flex flex-col gap-2 bg-slate-800 p-4 py-8 text-start shadow-md shadow-slate-800 sm:mx-16 sm:gap-8 sm:p-16 lg:mx-[15%]"
           style={fullWidthStyles}>
-          <div className="flex gap-4 flex-col sm:flex-row items-center w-full text-white px-4 sm:px-0 sm:mb-0 mb-3">
-            <div className="text-5xl -mb-2 sm:text-5xl">{icon}</div>
-            <h3 className="text-4xl sm:text-start text-center sm:text-5xl">
+          <div className="mb-3 flex w-full flex-col items-center gap-4 px-4 text-white sm:mb-0 sm:flex-row sm:px-0">
+            <div className="-mb-2 text-5xl sm:text-5xl">{icon}</div>
+            <h3 className="text-center text-4xl sm:text-start sm:text-5xl">
               {title}
             </h3>
           </div>
           <p
-            className="text-white hidden sm:flex leading-8 text-xl"
+            className="hidden text-xl leading-8 text-white sm:flex"
             dangerouslySetInnerHTML={{ __html: content }}></p>
-          <ExpandIcon className="text-3xl text-white sm:hidden w-full" />
+          <ExpandIcon className="w-full text-3xl text-white sm:hidden" />
         </animated.div>
       )}
     </animated.article>

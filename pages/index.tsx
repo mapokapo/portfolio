@@ -110,9 +110,9 @@ const Home: NextPage<{
   }, []);
 
   return (
-    <main className="w-full h-full flex flex-col bg-slate-900">
+    <main className="flex h-full w-full flex-col bg-slate-900">
       <section
-        className="bg-gradient-to-tr pt-[10%] gap-2 animate-gradient-move from-blue-600 to-blue-500 w-full min-h-screen flex justify-center items-center flex-col"
+        className="relative flex min-h-screen w-full animate-gradient-move flex-col items-center justify-center gap-2 bg-gradient-to-tr from-blue-600 to-blue-500 pt-[10%]"
         style={{ backgroundSize: "400% 400%" }}>
         <TypewriterComponent
           options={{
@@ -134,7 +134,7 @@ const Home: NextPage<{
           }}
           component={"h1"}
         />
-        <span className="text-gray-100 sm:text-2xl text-lg">
+        <span className="text-lg text-gray-100 sm:text-2xl">
           Welcome to my website
         </span>
         <MdExpandMore
@@ -142,17 +142,17 @@ const Home: NextPage<{
           color={"#eee"}
           className="mb-auto animate-bounce"
         />
-        <span className="text-opacity-50 sm:mt-16 mb-20 sm:mb-24 text-white sm:text-xl text-lg">
+        <span className="mb-20 text-lg text-white text-opacity-50 sm:mb-24 sm:mt-16 sm:text-xl">
           Learn more about me...
         </span>
       </section>
-      <section className="flex flex-col py-4 sm:py-8 relative bg-gradient-to-b from-blue-600 to-slate-900">
-        <div className="absolute blur-md bg-gradient-to-b from-[rgb(37,99,235)] to-[rgba(37,99,235,0.99)] w-full -mt-8 sm:-mt-14 sm:h-16 h-8 z-0"></div>
-        <section className="flex flex-col justify-center sm:mx-16 pb-16 h-[50vh] p-4 gap-6">
-          <h2 className="sm:text-6xl text-4xl z-10 font-bold text-white text-center">
+      <section className="relative flex flex-col bg-gradient-to-b from-blue-600 to-slate-900 py-4 sm:py-8">
+        <div className="absolute z-0 -mt-8 h-8 w-full bg-gradient-to-b from-[rgb(37,99,235)] to-[rgba(37,99,235,0.99)] blur-md sm:-mt-14 sm:h-16"></div>
+        <section className="flex h-[50vh] flex-col justify-center gap-6 p-4 pb-16 sm:mx-16">
+          <h2 className="z-10 text-center text-4xl font-bold text-white sm:text-6xl">
             Queue intro...
           </h2>
-          <p className="text-center sm:text-2xl text-lg text-white">
+          <p className="text-center text-lg text-white sm:text-2xl">
             My name is Leo Petrović. I am a{" "}
             {Math.floor(
               (Date.now() - new Date(2003, 6, 22).getTime()) /
@@ -162,7 +162,7 @@ const Home: NextPage<{
             full-stack web developer.
           </p>
         </section>
-        <div className="flex flex-col gap-12 sm:gap-24 w-full">
+        <div className="flex w-full flex-col gap-12 sm:gap-24">
           {data.sections.map(s => (
             <SectionPanel
               key={s.title}
@@ -173,13 +173,13 @@ const Home: NextPage<{
           ))}
         </div>
       </section>
-      <section className="bg-slate-900 flex flex-col justify-center items-center mt-24 gap-4">
-        <h2 className="text-white text-4xl sm:text-7xl">Showcase</h2>
-        <span className="text-white text-opacity-75 px-3 text-lg sm:text-xl text-center">
+      <section className="mt-24 flex flex-col items-center justify-center gap-4 bg-slate-900">
+        <h2 className="text-4xl text-white sm:text-7xl">Showcase</h2>
+        <span className="px-3 text-center text-lg text-white text-opacity-75 sm:text-xl">
           Here&apos;s a short list of projects I made so far...
         </span>
-        <MdEast className="text-gray-400 text-4xl sm:hidden" />
-        <div className="gap-4 px-4 items-stretch overflow-x-auto flex sm:flex-wrap my-2 sm:my-8 md:mx-16 lg:mx-[10%] sm:w-auto w-full sm:justify-center">
+        <MdEast className="text-4xl text-gray-400 sm:hidden" />
+        <div className="my-2 flex w-full items-stretch gap-4 overflow-x-auto px-4 sm:my-8 sm:w-auto sm:flex-wrap sm:justify-center md:mx-16 lg:mx-[10%]">
           {data.showcaseTiles.map(s => (
             <ShowcaseTile
               key={s.title}
@@ -197,9 +197,9 @@ const Home: NextPage<{
           ))}
         </div>
       </section>
-      <section className="bg-slate-900 flex flex-col justify-center items-center mt-20 gap-4">
-        <h2 className="text-white text-4xl sm:text-7xl">Tech stack</h2>
-        <span className="text-white text-opacity-75 px-3 text-lg sm:text-xl text-center sm:mb-6">
+      <section className="mt-20 flex flex-col items-center justify-center gap-4 bg-slate-900">
+        <h2 className="text-4xl text-white sm:text-7xl">Tech stack</h2>
+        <span className="px-3 text-center text-lg text-white text-opacity-75 sm:mb-6 sm:text-xl">
           Finally, the part you&apos;ve been waiting for
         </span>
         <ul className="flex flex-col">
@@ -212,46 +212,46 @@ const Home: NextPage<{
           ))}
         </ul>
       </section>
-      <section className="bg-slate-900 md:mx-8 lg:mx-[7%] flex flex-col justify-center items-center mt-24 gap-4">
-        <h2 className="text-white text-4xl sm:text-7xl">Website info</h2>
-        <span className="text-white text-opacity-75 px-3 text-lg sm:text-xl text-center">
+      <section className="mt-24 flex flex-col items-center justify-center gap-4 bg-slate-900 md:mx-8 lg:mx-[7%]">
+        <h2 className="text-4xl text-white sm:text-7xl">Website info</h2>
+        <span className="px-3 text-center text-lg text-white text-opacity-75 sm:text-xl">
           I&apos;ll be placing website updates and info here, for those
           interested
         </span>
-        <div className="grid grid-flow-row grid-cols-1 md:grid-cols-2 gap-4 lg:gap-8 w-full mt-4 p-4 lg:p-8">
+        <div className="mt-4 grid w-full grid-flow-row grid-cols-1 gap-4 p-4 md:grid-cols-2 lg:gap-8 lg:p-8">
           <article className="websiteinfo-article col-span-1 row-span-1">
             <h3 className="text-3xl sm:text-5xl">Build size</h3>
-            <div className="flex flex-col text-2xl gap-3 justify-center">
+            <div className="flex flex-col justify-center gap-3 text-2xl">
               {sizeBytes === null ? (
                 <span>Unavailable.</span>
               ) : (
                 <>
                   <div className="flex items-center justify-between gap-4">
-                    <span className="font-semibold text-xl">Javascript</span>
+                    <span className="text-xl font-semibold">Javascript</span>
                     <span className="text-xl">
                       {humanFileSize(sizeBytes.javascript)}
                     </span>
                   </div>
-                  <hr className="mt-4 mb-2 h-px w-full opacity-50" />
+                  <hr className="mb-2 mt-4 h-px w-full opacity-50" />
                   <div className="flex justify-between">
-                    <span className="font-semibold text-xl">CSS</span>
+                    <span className="text-xl font-semibold">CSS</span>
                     <span className="text-xl">
                       {humanFileSize(sizeBytes.css)}
                     </span>
                   </div>
-                  <hr className="mt-4 mb-2 h-px w-full opacity-50" />
+                  <hr className="mb-2 mt-4 h-px w-full opacity-50" />
                   <div className="flex justify-between">
-                    <span className="font-semibold text-xl">Images</span>
+                    <span className="text-xl font-semibold">Images</span>
                     <span className="text-xl">
                       {humanFileSize(sizeBytes.images)}
                     </span>
                   </div>
-                  <hr className="mt-4 mb-2 h-px w-full opacity-50" />
+                  <hr className="mb-2 mt-4 h-px w-full opacity-50" />
                   <div className="flex justify-between">
-                    <span className="font-bold text-2xl sm:text-4xl">
+                    <span className="text-2xl font-bold sm:text-4xl">
                       Total
                     </span>
-                    <span className="font-bold text-2xl sm:text-4xl">
+                    <span className="text-2xl font-bold sm:text-4xl">
                       {humanFileSize(
                         sizeBytes.javascript + sizeBytes.css + sizeBytes.images
                       )}
@@ -266,11 +266,11 @@ const Home: NextPage<{
               Latest devblog posts
             </h3>
             {posts.length === 0 ? (
-              <span className="sm:text-xl text-md font-semibold ml-2">
+              <span className="text-md ml-2 font-semibold sm:text-xl">
                 Nothing here yet.
               </span>
             ) : (
-              <ul className="flex flex-col gap-8 md:gap-12 xl:gap-16 h-full overflow-y-auto">
+              <ul className="flex h-full flex-col gap-8 overflow-y-auto md:gap-12 xl:gap-16">
                 {posts.map(p => (
                   <DevblogPost
                     key={p.id}
@@ -284,9 +284,9 @@ const Home: NextPage<{
               </ul>
             )}
           </article>
-          <article className="flex flex-col gap-4 bg-slate-800 rounded-lg justify-evenly text-white px-6 md:px-8 lg:px-12 py-6 lg:py-8 col-span-1 row-span-2">
+          <article className="col-span-1 row-span-2 flex flex-col justify-evenly gap-4 rounded-lg bg-slate-800 px-6 py-6 text-white md:px-8 lg:px-12 lg:py-8">
             <h3 className="text-3xl sm:text-5xl">Statistics</h3>
-            <span className="text-lg sm:text-xl text-white text-opacity-70 mb-auto">
+            <span className="mb-auto text-lg text-white text-opacity-70 sm:text-xl">
               Hourly website visits
             </span>
             {hasScrolledToLastQuarter && (
@@ -298,68 +298,68 @@ const Home: NextPage<{
               />
             )}
           </article>
-          <article className="flex sm:flex-row flex-col sm:flex-wrap gap-x-4 gap-y-4 bg-slate-800 rounded-lg px-6 md:px-8 lg:px-12 py-6 lg:py-8 text-slate-700 col-span-1 md:col-span-2 h-min">
-            <h3 className="text-3xl sm:text-5xl sm:text-start text-center text-white">
+          <article className="col-span-1 flex h-min flex-col gap-x-4 gap-y-4 rounded-lg bg-slate-800 px-6 py-6 text-slate-700 sm:flex-row sm:flex-wrap md:col-span-2 md:px-8 lg:px-12 lg:py-8">
+            <h3 className="text-center text-3xl text-white sm:text-start sm:text-5xl">
               Built with:
             </h3>
             <Link
               target={"_blank"}
               href="https://nextjs.org/"
-              className="flex gap-2 items-center bg-slate-200 px-4 sm:py-2 py-1 rounded-full"
+              className="flex items-center gap-2 rounded-full bg-slate-200 px-4 py-1 sm:py-2"
               rel="noreferrer">
               <SiNextdotjs
                 color="#000000"
                 size={36}
               />
-              <span className="sm:text-3xl text-xl sm:w-auto w-full text-center">
+              <span className="w-full text-center text-xl sm:w-auto sm:text-3xl">
                 Next.JS
               </span>
             </Link>
             <Link
               target={"_blank"}
               href="https://www.typescriptlang.org/"
-              className="flex gap-2 items-center bg-slate-200 px-5 sm:py-2 py-1 rounded-full"
+              className="flex items-center gap-2 rounded-full bg-slate-200 px-5 py-1 sm:py-2"
               rel="noreferrer">
               <SiTypescript
                 color="#3178C6"
                 size={32}
               />
-              <span className="sm:text-3xl text-xl sm:w-auto w-full text-center">
+              <span className="w-full text-center text-xl sm:w-auto sm:text-3xl">
                 Typescript
               </span>
             </Link>
             <Link
               target={"_blank"}
               href="https://reactjs.org/"
-              className="flex gap-2 items-center bg-slate-200 px-5 sm:py-2 py-1 rounded-full"
+              className="flex items-center gap-2 rounded-full bg-slate-200 px-5 py-1 sm:py-2"
               rel="noreferrer">
               <SiReact
                 color="#61DAFB"
                 size={34}
               />
-              <span className="sm:text-3xl text-xl sm:w-auto w-full text-center">
+              <span className="w-full text-center text-xl sm:w-auto sm:text-3xl">
                 React
               </span>
             </Link>
             <Link
               target={"_blank"}
               href="https://tailwindcss.com/"
-              className="flex gap-2 items-center bg-slate-200 px-5 sm:py-2 py-1 rounded-full"
+              className="flex items-center gap-2 rounded-full bg-slate-200 px-5 py-1 sm:py-2"
               rel="noreferrer">
               <SiTailwindcss
                 color="#06B6D4"
                 size={36}
               />
-              <span className="sm:text-3xl text-xl sm:w-auto w-full text-center">
+              <span className="w-full text-center text-xl sm:w-auto sm:text-3xl">
                 Tailwind
               </span>
             </Link>
           </article>
         </div>
       </section>
-      <section className="bg-slate-900 md:mx-8 flex flex-col justify-center items-center mt-20 gap-4">
-        <h2 className="text-white text-4xl sm:text-7xl">Links</h2>
-        <span className="text-white text-opacity-75 px-3 text-lg sm:text-xl text-center">
+      <section className="mt-20 flex flex-col items-center justify-center gap-4 bg-slate-900 md:mx-8">
+        <h2 className="text-4xl text-white sm:text-7xl">Links</h2>
+        <span className="px-3 text-center text-lg text-white text-opacity-75 sm:text-xl">
           If you want to stay in touch or check out my other projects
         </span>
         <div className="flex justify-between gap-8">
@@ -385,7 +385,7 @@ const Home: NextPage<{
           />
         </div>
       </section>
-      <footer className="flex justify-center items-center my-8 text-white sm:text-base">
+      <footer className="my-8 flex items-center justify-center text-white sm:text-base">
         <p>Leo Petrovic • 2022</p>
       </footer>
     </main>

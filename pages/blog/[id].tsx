@@ -26,7 +26,7 @@ const Devblog: React.FC<Props> = ({ post }) => {
   if (router.isFallback) {
     return (
       <Layout post={post}>
-        <main className="flex justify-center items-center">
+        <main className="flex items-center justify-center">
           <span className="text-xl text-white">Loading...</span>
         </main>
       </Layout>
@@ -35,8 +35,8 @@ const Devblog: React.FC<Props> = ({ post }) => {
 
   return (
     <Layout post={post}>
-      <main className="items-center sm:items-start px-4 py-6 sm:px-16 md:px-32 lg:px-48 xl:px-64 sm:py-16 flex flex-col w-full h-full min-h-screen bg-slate-900 gap-4 text-white">
-        <div className="md:min-h-[300px] min-w-[100px] max-w-[300px] sm:w-auto w-1/2 sm:min-h-[100px] aspect-square relative flex">
+      <main className="flex h-full min-h-screen w-full flex-col items-center gap-4 bg-slate-900 px-4 py-6 text-white sm:items-start sm:px-16 sm:py-16 md:px-32 lg:px-48 xl:px-64">
+        <div className="relative flex aspect-square w-1/2 min-w-[100px] max-w-[300px] sm:min-h-[100px] sm:w-auto md:min-h-[300px]">
           <Image
             alt={"Devblog post titled " + post.title}
             src={post.imageUrl}
@@ -45,13 +45,13 @@ const Devblog: React.FC<Props> = ({ post }) => {
             priority
           />
         </div>
-        <h1 className="text-4xl sm:text-6xl text-center sm:text-start">
+        <h1 className="text-center text-4xl sm:text-start sm:text-6xl">
           {post.title}
         </h1>
-        <span className="text-opacity-60 text-white text-center sm:text-start sm:text-base text-sm">
+        <span className="text-center text-sm text-white text-opacity-60 sm:text-start sm:text-base">
           Published {getRelativeTime(new Date(post.published))}
         </span>
-        <p className="text-base sm:text-xl mt-4">{post.content}</p>
+        <p className="mt-4 text-base sm:text-xl">{post.content}</p>
       </main>
     </Layout>
   );

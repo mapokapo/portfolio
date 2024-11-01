@@ -34,12 +34,12 @@ const ShowcaseTile: React.FC<Props> = ({
     <button
       aria-expanded={isExpanded}
       onClick={() => setIsExpanded(!isExpanded)}
-      className={`bg-slate-800 cursor-pointer hover:brightness-125 transition-all py-8 px-4 pb-2 relative sm:w-[300px] h-min min-w-[250px] flex shadow-md shadow-slate-800 flex-col ${
+      className={`relative flex h-min min-w-[250px] cursor-pointer flex-col bg-slate-800 px-4 py-8 pb-2 shadow-md shadow-slate-800 transition-all hover:brightness-125 sm:w-[300px] ${
         isFirefox ? "" : "aspect-square"
       }`}>
-      <div className="select-none w-full h-full pb-4 justify-between flex flex-col">
+      <div className="flex h-full w-full select-none flex-col justify-between pb-4">
         {imageUrl !== undefined && (
-          <div className="flex justify-center mx-auto h-16 items-center">
+          <div className="mx-auto flex h-16 items-center justify-center">
             <Image
               alt={"Image of project called " + title}
               src={imageUrl}
@@ -51,30 +51,30 @@ const ShowcaseTile: React.FC<Props> = ({
           </div>
         )}
         <div className="flex flex-col gap-4">
-          <h3 className="text-white mb-auto text-2xl sm:text-4xl text-center">
+          <h3 className="mb-auto text-center text-2xl text-white sm:text-4xl">
             {title}
           </h3>
-          <p className="text-white flex text-center text-sm sm:text-xl ">
+          <p className="flex text-center text-sm text-white sm:text-xl">
             {description}
           </p>
         </div>
         <MdExpandMore
-          className="text-white mx-auto"
+          className="mx-auto text-white"
           size={24}
         />
       </div>
       <animated.div
         style={styles}
-        className="bg-slate-800 overflow-hidden w-full">
+        className="w-full overflow-hidden bg-slate-800">
         <div
           ref={ref}
-          className="p-2 flex flex-col text-white gap-1">
-          <span className="text-2xl text-start">Made with:</span>
+          className="flex flex-col gap-1 p-2 text-white">
+          <span className="text-start text-2xl">Made with:</span>
           <ul className="list-inside">
             {madeWith.map(e => (
               <li
                 key={e.label}
-                className="text-lg flex items-center gap-2">
+                className="flex items-center gap-2 text-lg">
                 {e.icon}
                 {e.label}
               </li>
@@ -87,7 +87,7 @@ const ShowcaseTile: React.FC<Props> = ({
               }}
               href={linkUrl}
               target="_blank"
-              className="flex gap-2 justify-center items-center mx-auto mt-4 hover:bg-slate-700 px-4 py-2 rounded-lg"
+              className="mx-auto mt-4 flex items-center justify-center gap-2 rounded-lg px-4 py-2 hover:bg-slate-700"
               rel="noreferrer">
               <MdLaunch />
               <span>Visit project</span>

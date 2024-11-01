@@ -8,5 +8,6 @@
   "singleAttributePerLine": true,
   "semi": true,
   "proseWrap": "always",
-  "printWidth": 80
+  "printWidth": 80,
+  "plugins": ["prettier-plugin-tailwindcss"]
 }

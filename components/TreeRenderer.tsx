@@ -41,24 +41,24 @@ const TreeRenderer: React.FC<Props> = ({ item, parentExpandedOrIsRoot }) => {
           e.stopPropagation();
           setIsExpanded(!isExpanded);
         }}
-        className="flex flex-col md:flex-row gap-x-4 gap-y-2 px-3 mb-1 py-2 pb-3 md:items-center hover:backdrop-brightness-200 cursor-pointer overflow-visible">
+        className="mb-1 flex cursor-pointer flex-col gap-x-4 gap-y-2 overflow-visible px-3 py-2 pb-3 hover:backdrop-brightness-200 md:flex-row md:items-center">
         <div className="flex sm:items-end">
           {item.items !== undefined && (
             <animated.div style={arrowStyles}>
               <MdChevronRight
-                className="sm:text-4xl text-2xl"
+                className="text-2xl sm:text-4xl"
                 color="#fff"
               />
             </animated.div>
           )}
-          <span className="sm:text-3xl text-xl whitespace-nowrap text-white">
+          <span className="whitespace-nowrap text-xl text-white sm:text-3xl">
             {item.name}
           </span>
         </div>
         <span
           className={
-            "sm:text-xl text-md break-words text-start text-white text-opacity-50 " +
-            (item.items !== undefined ? "sm:ml-2 ml-4" : "")
+            "text-md break-words text-start text-white text-opacity-50 sm:text-xl " +
+            (item.items !== undefined ? "ml-4 sm:ml-2" : "")
           }>
           {item.description}
         </span>
@@ -72,7 +72,7 @@ const TreeRenderer: React.FC<Props> = ({ item, parentExpandedOrIsRoot }) => {
               height: isExpanded ? "auto" : "0",
             }}
             ref={ref}
-            className="flex flex-col md:ml-12 sm:ml-6 ml-3">
+            className="ml-3 flex flex-col sm:ml-6 md:ml-12">
             {item.items.map(e => (
               <TreeRenderer
                 key={e.name}

@@ -12,7 +12,7 @@ const LinkCircle: React.FC<Props> = ({ name, link, icon }) => {
       target={"_blank"}
       aria-label={name}
       href={link}
-      className="rounded-full w-16 h-16 flex justify-center items-center"
+      className="flex h-16 w-16 items-center justify-center rounded-full"
       rel="noreferrer">
       {icon}
     </Link>

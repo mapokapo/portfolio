@@ -30,9 +30,9 @@ const DevblogPost: React.FC<Props> = ({
     <li>
       <Link
         href={`/blog/${id}`}
-        className="flex gap-2 cursor-pointer flex-col items-center justify-center">
-        <div className="gap-4 flex w-full">
-          <div className="relative xl:w-24 xl:h-24 w-20 h-20 hidden overflow-hidden lg:flex">
+        className="flex cursor-pointer flex-col items-center justify-center gap-2">
+        <div className="flex w-full gap-4">
+          <div className="relative hidden h-20 w-20 overflow-hidden lg:flex xl:h-24 xl:w-24">
             <Image
               alt={"Devblog post titled " + title}
               src={imageUrl}
@@ -41,12 +41,12 @@ const DevblogPost: React.FC<Props> = ({
               sizes="(min-width: 1280px) 6rem, 5rem"
             />
           </div>
-          <div className="flex flex-col flex-[3] xl:flex-[4] justify-center">
-            <h4 className="text-2xl xl:text-4xl break-normal font-semibold">
+          <div className="flex flex-[3] flex-col justify-center xl:flex-[4]">
+            <h4 className="break-normal text-2xl font-semibold xl:text-4xl">
               {title}
             </h4>
             {relativeTime !== null && (
-              <span className="opacity-50 ml-px mt-1 text-xs sm:text-base ">
+              <span className="ml-px mt-1 text-xs opacity-50 sm:text-base">
                 Published {relativeTime} • {getReadTimeMinutes(content)} minute
                 read
               </span>
@@ -54,7 +54,7 @@ const DevblogPost: React.FC<Props> = ({
           </div>
         </div>
         <div className="flex flex-col gap-2">
-          <p className="line-clamp-3 xl:line-clamp-4 text-base sm:text-xl ml-px">
+          <p className="ml-px line-clamp-3 text-base sm:text-xl xl:line-clamp-4">
             {content}
           </p>
         </div>
