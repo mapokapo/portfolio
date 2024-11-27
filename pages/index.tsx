@@ -26,6 +26,7 @@ import {
   SiTypescript,
   SiVuedotjs,
   SiWebpack,
+  SiExpo,
 } from "react-icons/si";
 import SectionPanel from "../components/SectionPanel";
 import ShowcaseTile from "../components/ShowcaseTile";
@@ -93,6 +94,7 @@ const Home: NextPage<{
     Redis: <SiRedis color="#DC382D" />,
     Tailwind: <SiTailwindcss color="#38BDF8" />,
     React: <SiReact color="#58C4DC" />,
+    Expo: <SiExpo color="#000020" />,
   };
 
   const LineGraph = dynamic(() => import("../components/LineGraph"), {

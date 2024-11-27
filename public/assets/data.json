@@ -153,6 +153,15 @@
           "Flutter"
         ]
       }
+    },
+    {
+      "title": "RAMU Math App",
+      "description": "A practice project for mobile app development in university",
+      "meta": {
+        "linkUrl": "https://github.com/mapokapo/ramu-math-app",
+        "imageUrl": "/assets/images/ramu_math_app.png",
+        "madeWith": ["React Native", "Expo", "Typescript", "Firebase"]
+      }
     }
   ],
   "techStack": [
@@ -195,6 +204,10 @@
                   "description": "A library of utility-classes to use instead of writing your own. This is my favorite way to write CSS."
                 },
                 {
+                  "name": "shadcn/ui",
+                  "description": "The best React component library I've ever used. It has become a standard part of my frontend stack."
+                },
+                {
                   "name": "Material Design",
                   "description": "This technically has nothing to do with CSS, but it's my favorite design spec."
                 }
@@ -207,8 +220,18 @@
           "description": "Programming languages, frameworks, and services I use to develop APIs.",
           "items": [
             {
+              "name": "Java",
+              "description": "A robust language with a lot of features. I use it for most backend projects I make nowadays.",
+              "items": [
+                {
+                  "name": "Spring Boot",
+                  "description": "Having used it extensively in an internship, I like the way it handles backends. Makes complex projects easy."
+                }
+              ]
+            },
+            {
               "name": "NodeJS",
-              "description": "What I'll use 80% of the time when making a robust backend.",
+              "description": "Though there are better alternatives, NodeJS was was my first exposure to backend and it still holds up.",
               "items": [
                 {
                   "name": "NestJS",
@@ -217,22 +240,16 @@
                 {
                   "name": "KoaJS",
                   "description": "Quite a bit better than ExpressJS. Very enjoyable and easy to use."
-                }
-              ]
-            },
-            {
-              "name": "Java",
-              "description": "A robust language with a lot of features. I use it for a lot of things.",
-              "items": [
+                },
                 {
-                  "name": "Spring Boot",
-                  "description": "Being the inspiration for NestJS, I like it a lot. Leaves no room for error and allows for a lot of customization."
+                  "name": "Bun",
+                  "description": "A bit weird to label this as 'a subset of NodeJS', but Bun provides -a lot- OOTB, including a fast npm alternative."
                 }
               ]
             },
             {
               "name": "SQL",
-              "description": "Good ol' SQL. Although I rarely ever write it directly.",
+              "description": "Good ol' SQL.",
               "items": [
                 {
                   "name": "MariaDB",
@@ -244,7 +261,7 @@
                 },
                 {
                   "name": "MongoDB",
-                  "description": "I love JSON = I love Mongo. Not really surprising. But I'd still use a RDBMS over it any day."
+                  "description": "JSON is pretty nice. Having said that, I'd still rather use an RDBMS."
                 }
               ]
             }
@@ -258,11 +275,11 @@
       "items": [
         {
           "name": "React Native",
-          "description": "I love React and the ecosystem around it. Combined with Expo, React Native is a joy to use."
+          "description": "I love React and the ecosystem around it. Combined with Expo, it is very powerful and productive environment."
         },
         {
           "name": "Flutter",
-          "description": "I really like making desktop and mobile apps with it, but sometimes it feels a bit too verbose. Still one of my favorites."
+          "description": "I really like making desktop and mobile apps with it, but sometimes it feels a bit too verbose. Still one of my favorites for its performance and DX."
         },
         {
           "name": "Firebase",
@@ -286,7 +303,7 @@
     },
     {
       "name": "Miscellaneous",
-      "description": "Random languages I occasionally use.",
+      "description": "Random languages or tools I occasionally use.",
       "items": [
         {
           "name": "Rust",
@@ -299,6 +316,14 @@
         {
           "name": "Java",
           "description": "I use it to make Minecraft addons and mods, backends, or CLI tools and web scrapers."
+        },
+        {
+          "name": "C#",
+          "description": "I had a light exposure to C# and I could imagine myself working with it in the future."
+        },
+        {
+          "name": "Pocketbase",
+          "description": "A lightweight Firebase alternative which (IMO) has a better API, and uses SQL instead of NoSQL. Sounds too good to be true."
         }
       ]
     }
