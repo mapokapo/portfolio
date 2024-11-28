@@ -72,63 +72,12 @@
   ],
   "showcaseTiles": [
     {
-      "title": "Bitdraw",
-      "description": "A simple HTML5 Canvas wrapper library for my personal projects",
-      "meta": {
-        "linkUrl": "https://github.com/mapokapo/bitdraw",
-        "imageUrl": "/assets/images/bitdraw_logo.png",
-        "madeWith": ["Typescript", "Webpack"]
-      }
-    },
-    {
-      "title": "Diaspora",
-      "description": "A match-making social media app",
-      "meta": {
-        "linkUrl": "https://github.com/mapokapo/diaspora-app",
-        "imageUrl": "/assets/images/diaspora_logo.png",
-        "madeWith": ["Flutter", "Firebase"]
-      }
-    },
-    {
-      "title": "Riskfactor",
-      "description": "A COVID-19 risk assesment app",
-      "meta": {
-        "linkUrl": "https://github.com/mapokapo/riskfactor",
-        "imageUrl": "/assets/images/riskfactor_logo.png",
-        "madeWith": ["Flutter", "Firebase"]
-      }
-    },
-    {
-      "title": "Sportsmart",
-      "description": "A modern fitness tracking app",
-      "meta": {
-        "linkUrl": "https://github.com/mapokapo/sportsmart-app",
-        "imageUrl": "/assets/images/sportsmart_logo.png",
-        "madeWith": ["React Native", "Algolia", "Firebase"]
-      }
-    },
-    {
-      "title": "MC Plugins",
-      "description": "Various server-side addons for Spigot",
-      "meta": {
-        "imageUrl": "/assets/images/minecraft_logo.png",
-        "madeWith": ["Java 17"]
-      }
-    },
-    {
-      "title": "JS Canvas apps",
-      "description": "A variety of games and simulations made using the HTML5 Canvas API",
-      "meta": {
-        "imageUrl": "/assets/images/html5_canvas_logo.png",
-        "madeWith": ["Typescript", "Webpack", "Bitdraw"]
-      }
-    },
-    {
       "title": "Lucky Six",
       "description": "A realtime betting platform made during my internship",
       "meta": {
         "imageUrl": "/assets/images/lucky_six_logo.png",
         "madeWith": [
+          "Java",
           "Spring Boot",
           "Postgres",
           "Socket.IO",
@@ -145,18 +94,65 @@
         "linkUrl": "https://github.com/FSRE-Timetable-Notify/fsre-timetable-notify",
         "imageUrl": "/assets/images/fsre_timetable_notify.png",
         "madeWith": [
+          "Java",
           "Spring Boot",
+          "MariaDB",
           "Firebase",
           "React",
           "Tailwind",
           "Typescript",
-          "Flutter"
+          "Flutter",
+          "Docker"
         ]
       }
     },
     {
+      "title": "Sportsmart",
+      "description": "A modern fitness tracking app",
+      "meta": {
+        "linkUrl": "https://github.com/mapokapo/sportsmart-app",
+        "imageUrl": "/assets/images/sportsmart_logo.png",
+        "madeWith": ["React Native", "Algolia", "Firebase"]
+      }
+    },
+    {
+      "title": "Riskfactor",
+      "description": "A COVID-19 risk assesment app",
+      "meta": {
+        "linkUrl": "https://github.com/mapokapo/riskfactor",
+        "imageUrl": "/assets/images/riskfactor_logo.png",
+        "madeWith": ["Flutter", "Firebase"]
+      }
+    },
+    {
+      "title": "Diaspora",
+      "description": "A match-making social media app",
+      "meta": {
+        "linkUrl": "https://github.com/mapokapo/diaspora-app",
+        "imageUrl": "/assets/images/diaspora_logo.png",
+        "madeWith": ["Flutter", "Firebase"]
+      }
+    },
+    {
+      "title": "MC Plugins",
+      "description": "Various private Spigot plugins for my MC servers",
+      "meta": {
+        "imageUrl": "/assets/images/minecraft_logo.png",
+        "madeWith": ["Java"]
+      }
+    },
+    {
+      "title": "Bitdraw",
+      "description": "A simple HTML5 Canvas wrapper library for my personal projects",
+      "meta": {
+        "linkUrl": "https://github.com/mapokapo/bitdraw",
+        "imageUrl": "/assets/images/bitdraw_logo.png",
+        "madeWith": ["Typescript", "Webpack"]
+      }
+    },
+    {
       "title": "RAMU Math App",
-      "description": "A practice project for mobile app development in university",
+      "description": "An Expo project for a mobile app development class",
       "meta": {
         "linkUrl": "https://github.com/mapokapo/ramu-math-app",
         "imageUrl": "/assets/images/ramu_math_app.png",

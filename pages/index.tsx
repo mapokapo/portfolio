@@ -16,7 +16,6 @@ import {
   SiOpenjdk,
   SiLinkedin,
   SiNextdotjs,
-  SiNpm,
   SiPostgresql,
   SiReact,
   SiRedis,
@@ -27,6 +26,7 @@ import {
   SiVuedotjs,
   SiWebpack,
   SiExpo,
+  SiMariadb,
 } from "react-icons/si";
 import SectionPanel from "../components/SectionPanel";
 import ShowcaseTile from "../components/ShowcaseTile";
@@ -84,8 +84,7 @@ const Home: NextPage<{
     Firebase: <SiFirebase color="#FFCC30" />,
     "React Native": <SiReact color="#61DAFB" />,
     Algolia: <SiAlgolia color="#5468FF" />,
-    "Java 17": <SiOpenjdk color="#f89820" />,
-    Bitdraw: <SiNpm color="#CB3837" />,
+    Java: <SiOpenjdk color="#f89820" />,
     "Spring Boot": <SiSpringboot color="#6DB33F" />,
     Postgres: <SiPostgresql color="#4169E1" />,
     "Socket.IO": <SiSocketdotio color="#010101" />,
@@ -95,6 +94,7 @@ const Home: NextPage<{
     Tailwind: <SiTailwindcss color="#38BDF8" />,
     React: <SiReact color="#58C4DC" />,
     Expo: <SiExpo color="#000020" />,
+    MariaDB: <SiMariadb color="#008bb2" />,
   };
 
   const LineGraph = dynamic(() => import("../components/LineGraph"), {
