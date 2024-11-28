@@ -27,6 +27,8 @@ import {
   SiWebpack,
   SiExpo,
   SiMariadb,
+  SiNestjs,
+  SiSqlite,
 } from "react-icons/si";
 import SectionPanel from "../components/SectionPanel";
 import ShowcaseTile from "../components/ShowcaseTile";
@@ -95,6 +97,8 @@ const Home: NextPage<{
     React: <SiReact color="#58C4DC" />,
     Expo: <SiExpo color="#000020" />,
     MariaDB: <SiMariadb color="#008bb2" />,
+    NestJS: <SiNestjs color="#E0234E" />,
+    SQLite: <SiSqlite color="#429CD5" />,
   };
 
   const LineGraph = dynamic(() => import("../components/LineGraph"), {

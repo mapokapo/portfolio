@@ -107,6 +107,23 @@
       }
     },
     {
+      "title": "Reddit Clone",
+      "description": "A faithful and full-featured full-stack Reddit clone",
+      "meta": {
+        "linkUrl": "https://github.com/mapokapo/reddit-clone",
+        "imageUrl": "/assets/images/reddit_clone_logo.png",
+        "madeWith": [
+          "NestJS",
+          "Typescript",
+          "SQLite",
+          "Firebase",
+          "React",
+          "Tailwind",
+          "Socket.IO"
+        ]
+      }
+    },
+    {
       "title": "Sportsmart",
       "description": "A modern fitness tracking app",
       "meta": {
