@@ -21,7 +21,7 @@
     "react-dom": "^18.3.1",
     "react-icons": "^4.12.0",
     "react-use-measure": "^2.1.1",
-    "sharp": "^0.32.6",
+    "sharp": "^0.33.5",
     "typewriter-effect": "^2.20.1"
   },
   "devDependencies": {
