@@ -35,7 +35,7 @@ const ShowcaseTile: React.FC<Props> = ({
       aria-expanded={isExpanded}
       onClick={() => setIsExpanded(!isExpanded)}
       className={`relative flex h-min min-w-[250px] cursor-pointer flex-col bg-slate-800 px-4 py-8 pb-2 shadow-md shadow-slate-800 transition-all hover:brightness-125 sm:w-[300px] ${
-        isFirefox ? "" : "aspect-square"
+        isFirefox ? isExpanded ? "aspect-auto" : "aspect-square" : "aspect-square"
       }`}>
       <div className="flex h-full w-full select-none flex-col justify-between pb-4">
         {imageUrl !== undefined && (

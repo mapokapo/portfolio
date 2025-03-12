@@ -168,12 +168,12 @@
       }
     },
     {
-      "title": "RAMU Math App",
-      "description": "An Expo project for a mobile app development class",
+      "title": "FitQuest",
+      "description": "A fitness app made in Expo for my mobile app development class",
       "meta": {
-        "linkUrl": "https://github.com/mapokapo/ramu-math-app",
-        "imageUrl": "/assets/images/ramu_math_app.png",
-        "madeWith": ["React Native", "Expo", "Typescript", "Firebase"]
+        "linkUrl": "https://github.com/mapokapo/ramu-fitquest-app",
+        "imageUrl": "/assets/images/ramu_fitquest_app.png",
+        "madeWith": ["React Native", "Expo", "Typescript", "Supabase"]
       }
     }
   ],
