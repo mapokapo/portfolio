@@ -91,7 +91,12 @@
       "title": "FSRE Notifier",
       "description": "A personal experimental project to track my university timetable",
       "meta": {
-        "linkUrl": "https://github.com/FSRE-Timetable-Notify/fsre-timetable-notify",
+        "links": [
+          {
+            "label": "Project",
+            "url": "https://github.com/FSRE-Timetable-Notify/fsre-timetable-notify"
+          }
+        ],
         "imageUrl": "/assets/images/fsre_timetable_notify.png",
         "madeWith": [
           "Java",
@@ -107,10 +112,15 @@
       }
     },
     {
-      "title": "Reddit Clone",
+      "title": "RC",
       "description": "A faithful and full-featured full-stack Reddit clone",
       "meta": {
-        "linkUrl": "https://github.com/mapokapo/reddit-clone",
+        "links": [
+          {
+            "label": "Project",
+            "url": "https://github.com/mapokapo/reddit-clone"
+          }
+        ],
         "imageUrl": "/assets/images/reddit_clone_logo.png",
         "madeWith": [
           "NestJS",
@@ -127,7 +137,12 @@
       "title": "Sportsmart",
       "description": "A modern fitness tracking app",
       "meta": {
-        "linkUrl": "https://github.com/mapokapo/sportsmart-app",
+        "links": [
+          {
+            "label": "Project",
+            "url": "https://github.com/mapokapo/sportsmart-app"
+          }
+        ],
         "imageUrl": "/assets/images/sportsmart_logo.png",
         "madeWith": ["React Native", "Algolia", "Firebase"]
       }
@@ -136,7 +151,12 @@
       "title": "Riskfactor",
       "description": "A COVID-19 risk assesment app",
       "meta": {
-        "linkUrl": "https://github.com/mapokapo/riskfactor",
+        "links": [
+          {
+            "label": "Project",
+            "url": "https://github.com/mapokapo/riskfactor"
+          }
+        ],
         "imageUrl": "/assets/images/riskfactor_logo.png",
         "madeWith": ["Flutter", "Firebase"]
       }
@@ -145,33 +165,72 @@
       "title": "Diaspora",
       "description": "A match-making social media app",
       "meta": {
-        "linkUrl": "https://github.com/mapokapo/diaspora-app",
+        "links": [
+          {
+            "label": "Project",
+            "url": "https://github.com/mapokapo/diaspora-app"
+          }
+        ],
         "imageUrl": "/assets/images/diaspora_logo.png",
         "madeWith": ["Flutter", "Firebase"]
       }
     },
     {
-      "title": "MC Plugins",
-      "description": "Various private Spigot plugins for my MC servers",
+      "title": "Nexora",
+      "description": "A real-time social networking and chat platform",
       "meta": {
-        "imageUrl": "/assets/images/minecraft_logo.png",
-        "madeWith": ["Java"]
+        "links": [
+          {
+            "label": "Frontend",
+            "url": "https://github.com/mapokapo/nexora-frontend"
+          },
+          {
+            "label": "Backend",
+            "url": "https://github.com/mapokapo/nexora-backend"
+          }
+        ],
+        "imageUrl": "/assets/images/nexora_logo.png",
+        "madeWith": [
+          "React",
+          "Hono.js",
+          "Bun",
+          "Typescript",
+          "Firebase",
+          "Tailwind"
+        ]
       }
     },
     {
-      "title": "Bitdraw",
-      "description": "A simple HTML5 Canvas wrapper library for my personal projects",
+      "title": "EduLink",
+      "description": "Managing collaboration between companies seeking training and leaders providing it",
       "meta": {
-        "linkUrl": "https://github.com/mapokapo/bitdraw",
-        "imageUrl": "/assets/images/bitdraw_logo.png",
-        "madeWith": ["Typescript", "Webpack"]
+        "links": [
+          {
+            "label": "Project",
+            "url": "https://github.com/mapokapo/edulink-frontend"
+          }
+        ],
+        "imageUrl": "/assets/images/edulink_logo.png",
+        "madeWith": [
+          "Nuxt",
+          "Vue 3",
+          "Typescript",
+          "Supabase",
+          "Docker",
+          "Tailwind"
+        ]
       }
     },
     {
       "title": "FitQuest",
       "description": "A fitness app made in Expo for my mobile app development class",
       "meta": {
-        "linkUrl": "https://github.com/mapokapo/ramu-fitquest-app",
+        "links": [
+          {
+            "label": "Project",
+            "url": "https://github.com/mapokapo/ramu-fitquest-app"
+          }
+        ],
         "imageUrl": "/assets/images/ramu_fitquest_app.png",
         "madeWith": ["React Native", "Expo", "Typescript", "Supabase"]
       }
@@ -251,7 +310,7 @@
                   "description": "My favorite way to write modular backends in NodeJS."
                 },
                 {
-                  "name": "KoaJS",
+                  "name": "HonoJS",
                   "description": "Quite a bit better than ExpressJS. Very enjoyable and easy to use."
                 },
                 {
@@ -333,6 +392,10 @@
         {
           "name": "C#",
           "description": "I had a light exposure to C# and I could imagine myself working with it in the future."
+        },
+        {
+          "name": "Supabase",
+          "description": "Firebase but better."
         },
         {
           "name": "Pocketbase",

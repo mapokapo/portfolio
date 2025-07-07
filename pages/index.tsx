@@ -30,6 +30,9 @@ import {
   SiMariadb,
   SiNestjs,
   SiSqlite,
+  SiNuxtdotjs,
+  SiBun,
+  SiHono,
 } from "react-icons/si";
 import SectionPanel from "../components/SectionPanel";
 import ShowcaseTile from "../components/ShowcaseTile";
@@ -101,6 +104,9 @@ const Home: NextPage<{
     MariaDB: <SiMariadb color="#008bb2" />,
     NestJS: <SiNestjs color="#E0234E" />,
     SQLite: <SiSqlite color="#429CD5" />,
+    Nuxt: <SiNuxtdotjs color="#00DC82" />,
+    Bun: <SiBun color="#FFCC00" />,
+    Hono: <SiHono color="#FF4C00" />,
   };
 
   const LineGraph = dynamic(() => import("../components/LineGraph"), {
@@ -220,7 +226,7 @@ const Home: NextPage<{
               description={s.description}
               meta={{
                 imageUrl: s.meta.imageUrl,
-                linkUrl: s.meta.linkUrl,
+                links: s.meta.links,
                 madeWith: s.meta.madeWith.map(e => ({
                   icon: iconMap[e],
                   label: e,

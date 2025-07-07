@@ -10,14 +10,17 @@ type Props = {
   description: string;
   meta: {
     imageUrl?: string;
-    linkUrl?: string;
+    links?: {
+      label: string;
+      url: string;
+    }[];
     madeWith: { icon: React.ReactNode; label: string }[];
   };
 };
 const ShowcaseTile: React.FC<Props> = ({
   title,
   description,
-  meta: { imageUrl, madeWith, linkUrl },
+  meta: { imageUrl, madeWith, links },
 }: Props) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [ref, bounds] = useMeasure();
@@ -35,11 +38,15 @@ const ShowcaseTile: React.FC<Props> = ({
       aria-expanded={isExpanded}
       onClick={() => setIsExpanded(!isExpanded)}
       className={`relative flex h-min min-w-[250px] cursor-pointer flex-col bg-slate-800 px-4 py-8 pb-2 shadow-md shadow-slate-800 transition-all hover:brightness-125 sm:w-[300px] ${
-        isFirefox ? isExpanded ? "aspect-auto" : "aspect-square" : "aspect-square"
+        isFirefox
+          ? isExpanded
+            ? "aspect-auto"
+            : "aspect-square"
+          : "aspect-square"
       }`}>
       <div className="flex h-full w-full select-none flex-col justify-between pb-4">
         {imageUrl !== undefined && (
-          <div className="mx-auto flex h-16 items-center justify-center">
+          <div className="mx-auto mb-2 flex h-16 items-center justify-center">
             <Image
               alt={"Image of project called " + title}
               src={imageUrl}
@@ -80,19 +87,22 @@ const ShowcaseTile: React.FC<Props> = ({
               </li>
             ))}
           </ul>
-          {isExpanded && linkUrl !== undefined && (
-            <Link
-              onClick={e => {
-                e.stopPropagation();
-              }}
-              href={linkUrl}
-              target="_blank"
-              className="mx-auto mt-4 flex items-center justify-center gap-2 rounded-lg px-4 py-2 hover:bg-slate-700"
-              rel="noreferrer">
-              <MdLaunch />
-              <span>Visit project</span>
-            </Link>
-          )}
+          {isExpanded &&
+            links !== undefined &&
+            links.length > 0 &&
+            links.map((link, i) => (
+              <Link
+                onClick={e => {
+                  e.stopPropagation();
+                }}
+                href={link.url}
+                target="_blank"
+                className={`mx-auto flex items-center justify-center gap-2 rounded-lg px-4 py-2 hover:bg-slate-700 ${i === 0 ? "mt-4" : "mt-1"}`}
+                rel="noreferrer">
+                <MdLaunch />
+                <span>{link.label}</span>
+              </Link>
+            ))}
         </div>
       </animated.div>
     </button>
