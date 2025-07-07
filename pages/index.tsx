@@ -87,7 +87,7 @@ const Home: NextPage<{
     Typescript: <SiTypescript color="#3178C6" />,
     Webpack: <SiWebpack color="#8DD6F9" />,
     Flutter: <SiFlutter color="#2FB8F6" />,
-    Firebase: <SiFirebase color="#FFCC30" />,
+    Firebase: <SiFirebase color="#DD2C00" />,
     Supabase: <SiSupabase color="#3CCE8D" />,
     "React Native": <SiReact color="#61DAFB" />,
     Algolia: <SiAlgolia color="#5468FF" />,
@@ -102,11 +102,11 @@ const Home: NextPage<{
     React: <SiReact color="#58C4DC" />,
     Expo: <SiExpo color="#000020" />,
     MariaDB: <SiMariadb color="#008bb2" />,
-    NestJS: <SiNestjs color="#E0234E" />,
+    Nest: <SiNestjs color="#E0234E" />,
     SQLite: <SiSqlite color="#429CD5" />,
     Nuxt: <SiNuxtdotjs color="#00DC82" />,
-    Bun: <SiBun color="#FFCC00" />,
-    Hono: <SiHono color="#FF4C00" />,
+    Bun: <SiBun color="#FBF0DF" />,
+    Hono: <SiHono color="#E36002" />,
   };
 
   const LineGraph = dynamic(() => import("../components/LineGraph"), {

@@ -77,13 +77,13 @@
       "meta": {
         "imageUrl": "/assets/images/lucky_six_logo.png",
         "madeWith": [
+          "Redis",
           "Java",
           "Spring Boot",
-          "Postgres",
-          "Socket.IO",
           "Vue 3",
           "Docker",
-          "Redis"
+          "Postgres",
+          "Socket.IO"
         ]
       }
     },
@@ -99,15 +99,15 @@
         ],
         "imageUrl": "/assets/images/fsre_timetable_notify.png",
         "madeWith": [
+          "Firebase",
           "Java",
           "Spring Boot",
           "MariaDB",
-          "Firebase",
           "React",
           "Tailwind",
-          "Typescript",
           "Flutter",
-          "Docker"
+          "Docker",
+          "Typescript"
         ]
       }
     },
@@ -123,12 +123,12 @@
         ],
         "imageUrl": "/assets/images/reddit_clone_logo.png",
         "madeWith": [
-          "NestJS",
-          "Typescript",
-          "SQLite",
+          "Nest",
           "Firebase",
           "React",
           "Tailwind",
+          "SQLite",
+          "Typescript",
           "Socket.IO"
         ]
       }
@@ -144,7 +144,7 @@
           }
         ],
         "imageUrl": "/assets/images/sportsmart_logo.png",
-        "madeWith": ["React Native", "Algolia", "Firebase"]
+        "madeWith": ["Firebase", "React Native", "Algolia"]
       }
     },
     {
@@ -158,7 +158,7 @@
           }
         ],
         "imageUrl": "/assets/images/riskfactor_logo.png",
-        "madeWith": ["Flutter", "Firebase"]
+        "madeWith": ["Firebase", "Flutter"]
       }
     },
     {
@@ -172,7 +172,7 @@
           }
         ],
         "imageUrl": "/assets/images/diaspora_logo.png",
-        "madeWith": ["Flutter", "Firebase"]
+        "madeWith": ["Firebase", "Flutter"]
       }
     },
     {
@@ -191,12 +191,12 @@
         ],
         "imageUrl": "/assets/images/nexora_logo.png",
         "madeWith": [
-          "React",
-          "Hono.js",
-          "Bun",
-          "Typescript",
           "Firebase",
-          "Tailwind"
+          "Hono",
+          "Bun",
+          "React",
+          "Tailwind",
+          "Typescript"
         ]
       }
     },
@@ -212,12 +212,12 @@
         ],
         "imageUrl": "/assets/images/edulink_logo.png",
         "madeWith": [
+          "Supabase",
           "Nuxt",
           "Vue 3",
-          "Typescript",
-          "Supabase",
+          "Tailwind",
           "Docker",
-          "Tailwind"
+          "Typescript"
         ]
       }
     },
@@ -232,7 +232,7 @@
           }
         ],
         "imageUrl": "/assets/images/ramu_fitquest_app.png",
-        "madeWith": ["React Native", "Expo", "Typescript", "Supabase"]
+        "madeWith": ["Supabase", "React Native", "Typescript", "Expo"]
       }
     }
   ],
