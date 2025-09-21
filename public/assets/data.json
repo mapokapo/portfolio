@@ -1,18 +1,6 @@
 {
   "quotes": [
     {
-      "quote": "The only way to do great work is to love what you do",
-      "author": "Steve Jobs"
-    },
-    {
-      "quote": "The best way to predict the future is to create it",
-      "author": "Alan Kay"
-    },
-    {
-      "quote": "The only limit to our realization of tomorrow will be our doubts of today",
-      "author": "Franklin D. Roosevelt"
-    },
-    {
       "quote": "I cannot remember the books I've read any more than the meals I have eaten; even so, they have made me",
       "author": "Ralph Waldo Emerson"
     },
@@ -21,20 +9,8 @@
       "author": "exurb1a"
     },
     {
-      "quote": "Don't believe everything you think",
-      "author": "Buddha"
-    },
-    {
-      "quote": "For small creatures such as we, the vastness of life is bearable only through love",
-      "author": "Carl Sagan"
-    },
-    {
       "quote": "Ignorance is in our bones, but kindness is in our DNA",
       "author": "exurb1a"
-    },
-    {
-      "quote": "There are no mistakes",
-      "author": "Richard Bach"
     },
     {
       "quote": "The only way to make sense out of change is to plunge into it, move with it, and join the dance",
@@ -47,27 +23,28 @@
     {
       "quote": "If you wish to make an apple pie from scratch, you must first invent the universe",
       "author": "Carl Sagan"
-    },
-    {
-      "quote": "Despite everything, it's still you",
-      "author": "Flowey"
     }
   ],
   "sections": [
     {
-      "title": "Humble beginnings",
-      "content": "My first encounter with software development was at 13 years old.<br /><br />In 2016, I signed up for an annual youth robotics tournament organized by SPARK, in which my team and I won first place (3 years in a row!).<br /><br />After my success, I acquired an interest in programming. I enrolled in a prestigious coding academy soon after, which I successfully graduated although I was by far the youngest person to ever attend that course. I learned what programming is, and how to make my first website. It was the starting point of my career.",
+      "title": "Beginnings",
+      "content": "My first encounter with software development was at 13 years old.<br /><br />In 2016, by recommendation of my maths teacher, I signed up for an annual children's robotics tournament, organized by SPARK - a local programming academy. My team and I had a surprising success in the tournament and we ended up winning first place and keeping the title for 3 years in a row!<br /><br />This success sparked a new interest in programming. I enrolled into the SPARK academy soon after, which I successfully graduated. I ended up being the youngest person to ever attend that course in history. I learned what programming is, and how to make my first website. It was the starting point of my career.",
       "icon": "Home"
     },
     {
-      "title": "Hard work pays off",
-      "content": "Spending a few years learning is nothing to ignore, and as I found out, practicing programming at home in your free time really pays off. During this time, I had to decide which area to specialize in: frontend, backend, mobile... It was hard to decide, so I naturally tried everything.<br /><br />Nowadays I consider myself a full stack developer, capable of making web, desktop, and mobile applications, as well as backend servers, CLI tools, and games in multiple languages. It wasn't easy however - I was going to high school at the same time and I was also competing in multiple tournaments organized by my school.<br /><br />(...in which my team, of course, won multiple times in a row again).",
+      "title": "Curiosity",
+      "content": "My wild curiosity about this new hobby pushed me enough to spend a few years learning, and it's is something I'm thankful for. As I found out, practicing programming at home in your free time really pays off. Eventually, I had to decide which area to specialize in: frontend, backend, mobile... It was hard to decide, so I naturally tried everything.<br /><br />I finished the advanced programming course in SPARK, went through a few more tournaments, and even held lectures to my peers. Nowadays I consider myself a full stack developer, capable of making web, desktop, and mobile applications, as well as backend servers, CLI tools, and games in multiple languages. It wasn't all easy sailing though - I was going to a demanding high school at the same time which caused me a lot of stress.<br /><br />Still, I managed to confirm my success by winning more tournaments through my school.",
       "icon": "Code"
     },
     {
       "title": "The snowball effect",
-      "content": "In 2022, high school was ending, which meant I really had to get serious about my future. I was still very cautious when looking for jobs or education opportunities, because I was unsure what I was getting myself into.<br /><br />Thankfully, I didn't have to worry too much, because I got offered a summer internship! This was a great opportunity for me, and I learned a lot. In fact, I even got a job offer at the same company, which was quite a new experience to me.<br /><br />I was a freshman in university at this point, so unfortunately I had to decline the job offer in favor of focusing on my studies.<br /><br />Today, having experience behind my back, I'm looking for new opportunities to grow and learn.",
+      "content": "In 2022, high school was ending, which meant I really had to get serious about my future. I was still very cautious when looking for jobs or education opportunities, because I was unsure what I was getting myself into.<br /><br />Thankfully, I didn't have to worry too much, because Nsoft - the software development company which founded SPARK - offered me a summer internship! This was a great opportunity for me, and I learned a lot. In fact, I even got a job offer at the same company, which was quite a new experience to me.<br /><br />I was already a freshman in university at this point, so unfortunately I had to decline the job offer in favor of focusing on my studies.",
       "icon": "TrendingUp"
+    },
+    {
+      "title": "Horizons",
+      "content": "Having gone through a whole assortment of new experiences during university, I finished my BSc in Computer Science in 2025. I figured that it was time to finally get some real work experience. During summer of that year, I accepted a job offer at Sportradar - Nsoft's parent company - as a junior backend developer.<br /><br />I plan on continuing my studies and getting a MSc in CS by 2027. After that, time can only tell - I might try out the academic route by getting a PhD, as recommended by a few of my professors. One thing I know for certain: my love for software development will never fade away.",
+      "icon": "World"
     }
   ],
   "showcaseTiles": [
@@ -77,13 +54,13 @@
       "meta": {
         "imageUrl": "/assets/images/lucky_six_logo.png",
         "madeWith": [
-          "Redis",
           "Java",
           "Spring Boot",
-          "Vue 3",
-          "Docker",
           "Postgres",
-          "Socket.IO"
+          "Vue 3",
+          "Socket.IO",
+          "Redis",
+          "Docker"
         ]
       }
     },
@@ -99,37 +76,15 @@
         ],
         "imageUrl": "/assets/images/fsre_timetable_notify.png",
         "madeWith": [
-          "Firebase",
           "Java",
           "Spring Boot",
           "MariaDB",
-          "React",
-          "Tailwind",
-          "Flutter",
-          "Docker",
-          "Typescript"
-        ]
-      }
-    },
-    {
-      "title": "RC",
-      "description": "A faithful and full-featured full-stack Reddit clone",
-      "meta": {
-        "links": [
-          {
-            "label": "Project",
-            "url": "https://github.com/mapokapo/reddit-clone"
-          }
-        ],
-        "imageUrl": "/assets/images/reddit_clone_logo.png",
-        "madeWith": [
-          "Nest",
           "Firebase",
+          "Flutter",
           "React",
-          "Tailwind",
-          "SQLite",
           "Typescript",
-          "Socket.IO"
+          "Tailwind",
+          "Docker"
         ]
       }
     },
@@ -144,7 +99,7 @@
           }
         ],
         "imageUrl": "/assets/images/sportsmart_logo.png",
-        "madeWith": ["Firebase", "React Native", "Algolia"]
+        "madeWith": ["React Native", "Firebase", "Algolia"]
       }
     },
     {
@@ -158,21 +113,7 @@
           }
         ],
         "imageUrl": "/assets/images/riskfactor_logo.png",
-        "madeWith": ["Firebase", "Flutter"]
-      }
-    },
-    {
-      "title": "Diaspora",
-      "description": "A match-making social media app",
-      "meta": {
-        "links": [
-          {
-            "label": "Project",
-            "url": "https://github.com/mapokapo/diaspora-app"
-          }
-        ],
-        "imageUrl": "/assets/images/diaspora_logo.png",
-        "madeWith": ["Firebase", "Flutter"]
+        "madeWith": ["Flutter", "Firebase"]
       }
     },
     {
@@ -191,12 +132,12 @@
         ],
         "imageUrl": "/assets/images/nexora_logo.png",
         "madeWith": [
-          "Firebase",
-          "Hono",
           "Bun",
+          "Hono",
+          "Firebase",
           "React",
-          "Tailwind",
-          "Typescript"
+          "Typescript",
+          "Tailwind"
         ]
       }
     },
@@ -212,13 +153,69 @@
         ],
         "imageUrl": "/assets/images/edulink_logo.png",
         "madeWith": [
-          "Supabase",
-          "Nuxt",
           "Vue 3",
+          "Nuxt",
+          "Supabase",
+          "Typescript",
           "Tailwind",
-          "Docker",
-          "Typescript"
+          "Docker"
         ]
+      }
+    },
+    {
+      "title": "LandmarksAR",
+      "description": "A mobile app offering AR touristic experiences",
+      "meta": {
+        "links": [
+          {
+            "label": "Project",
+            "url": "https://github.com/mapokapo/landmarksar"
+          }
+        ],
+        "imageUrl": "/assets/images/siroki_brijeg_coat_of_args.png",
+        "madeWith": [
+          "Unreal Engine",
+          "Laravel",
+          "React",
+          "Typescript",
+          "Tailwind"
+        ]
+      }
+    },
+    {
+      "title": "RC",
+      "description": "A faithful and full-featured full-stack Reddit clone",
+      "meta": {
+        "links": [
+          {
+            "label": "Project",
+            "url": "https://github.com/mapokapo/reddit-clone"
+          }
+        ],
+        "imageUrl": "/assets/images/reddit_clone_logo.png",
+        "madeWith": [
+          "Nest",
+          "SQLite",
+          "Firebase",
+          "React",
+          "Socket.IO",
+          "Typescript",
+          "Tailwind"
+        ]
+      }
+    },
+    {
+      "title": "Diaspora",
+      "description": "A match-making social media app",
+      "meta": {
+        "links": [
+          {
+            "label": "Project",
+            "url": "https://github.com/mapokapo/diaspora-app"
+          }
+        ],
+        "imageUrl": "/assets/images/diaspora_logo.png",
+        "madeWith": ["Flutter", "Firebase"]
       }
     },
     {
@@ -232,18 +229,18 @@
           }
         ],
         "imageUrl": "/assets/images/ramu_fitquest_app.png",
-        "madeWith": ["Supabase", "React Native", "Typescript", "Expo"]
+        "madeWith": ["React Native", "Expo", "Supabase", "Typescript"]
       }
     }
   ],
   "techStack": [
     {
       "name": "Web",
-      "description": "Stuff I use to make websites.",
+      "description": "My main area of expertise.",
       "items": [
         {
           "name": "Frontend",
-          "description": "Clientside UI-building tools that I used, currently use, or otherwise enjoy.",
+          "description": "Client-side UI-building tools.",
           "items": [
             {
               "name": "Javascript",
@@ -269,19 +266,15 @@
             },
             {
               "name": "CSS",
-              "description": "Having battled with CSS for years, I've found a few tools that I always keep under my belt.",
+              "description": "I've found a few CSS tools that I always keep under my belt.",
               "items": [
                 {
                   "name": "Tailwind",
-                  "description": "A library of utility-classes to use instead of writing your own. This is my favorite way to write CSS."
+                  "description": "My favorite way of writing CSS."
                 },
                 {
                   "name": "shadcn/ui",
-                  "description": "The best React component library I've ever used. It has become a standard part of my frontend stack."
-                },
-                {
-                  "name": "Material Design",
-                  "description": "This technically has nothing to do with CSS, but it's my favorite design spec."
+                  "description": "My favorite React component library."
                 }
               ]
             }
@@ -293,17 +286,21 @@
           "items": [
             {
               "name": "Java",
-              "description": "A robust language with a lot of features. I use it for most backend projects I make nowadays.",
+              "description": "A robust backend language with a lot of features.",
               "items": [
                 {
                   "name": "Spring Boot",
-                  "description": "Having used it extensively in an internship, I like the way it handles backends. Makes complex projects easy."
+                  "description": "Makes complex projects easy."
+                },
+                {
+                  "name": "Quarkus",
+                  "description": "Like a more modern Spring Boot."
                 }
               ]
             },
             {
               "name": "NodeJS",
-              "description": "Though there are better alternatives, NodeJS was was my first exposure to backend and it still holds up.",
+              "description": "NodeJS was was my first exposure to backend and it still holds up.",
               "items": [
                 {
                   "name": "NestJS",
@@ -312,16 +309,12 @@
                 {
                   "name": "HonoJS",
                   "description": "Quite a bit better than ExpressJS. Very enjoyable and easy to use."
-                },
-                {
-                  "name": "Bun",
-                  "description": "A bit weird to label this as 'a subset of NodeJS', but Bun provides -a lot- OOTB, including a fast npm alternative."
                 }
               ]
             },
             {
-              "name": "SQL",
-              "description": "Good ol' SQL.",
+              "name": "Databases",
+              "description": "Usually just good ol' SQL.",
               "items": [
                 {
                   "name": "MariaDB",
@@ -333,7 +326,7 @@
                 },
                 {
                   "name": "MongoDB",
-                  "description": "JSON is pretty nice. Having said that, I'd still rather use an RDBMS."
+                  "description": "JSON is pretty nice, though I'd still rather use an RDBMS."
                 }
               ]
             }
@@ -343,19 +336,19 @@
     },
     {
       "name": "Mobile",
-      "description": "What I use to make mobile applications (most of the time).",
+      "description": "What I use to make mobile applications.",
       "items": [
         {
           "name": "React Native",
-          "description": "I love React and the ecosystem around it. Combined with Expo, it is very powerful and productive environment."
+          "description": "I love React and the ecosystem around it, especially Expo."
         },
         {
           "name": "Flutter",
-          "description": "I really like making desktop and mobile apps with it, but sometimes it feels a bit too verbose. Still one of my favorites for its performance and DX."
+          "description": "One of my favorite tools due to its performance and DX, though a bit verbose at times."
         },
         {
           "name": "Firebase",
-          "description": "My favorite BaaS. Comes in handy when I need a backend for my app, or an identity provider for my own custom backend."
+          "description": "Comes in handy when I need a backend for my app, or an identity provider for my backend."
         }
       ]
     },
@@ -365,7 +358,7 @@
       "items": [
         {
           "name": "Godot",
-          "description": "The most fun I've had developing software in ages. It's very easy to use and it's one of my favorite tools."
+          "description": "The most fun I've had developing software in ages."
         },
         {
           "name": "Unity",
@@ -379,15 +372,15 @@
       "items": [
         {
           "name": "Rust",
-          "description": "I really like Rust, but I don't think I'm anyhwere near capable of using it."
+          "description": "I really like Rust, but I don't think I'm anywhere near capable of using it."
         },
         {
           "name": "Python",
-          "description": "I use it for CLI tools, services, automation, and web scraping. Pretty handy."
+          "description": "I use it for CLI tools, services, automation, and web scraping."
         },
         {
           "name": "Java",
-          "description": "I use it to make Minecraft addons and mods, backends, or CLI tools and web scrapers."
+          "description": "I use it to make Minecraft addons and mods, and backends."
         },
         {
           "name": "C#",
@@ -399,7 +392,7 @@
         },
         {
           "name": "Pocketbase",
-          "description": "A lightweight Firebase alternative which (IMO) has a better API, and uses SQL instead of NoSQL. Sounds too good to be true."
+          "description": "A lightweight Firebase alternative which (IMO) has a better API."
         }
       ]
     }

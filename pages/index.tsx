@@ -33,7 +33,10 @@ import {
   SiNuxtdotjs,
   SiBun,
   SiHono,
+  SiLaravel,
+  SiUnrealengine,
 } from "react-icons/si";
+import { TbWorld } from "react-icons/tb";
 import SectionPanel from "../components/SectionPanel";
 import ShowcaseTile from "../components/ShowcaseTile";
 import TreeRenderer from "../components/TreeRenderer";
@@ -48,6 +51,7 @@ import TypewriterComponent from "typewriter-effect";
 import Link from "next/link";
 import { randomChoice } from "../utils/random";
 import { mapRange } from "../utils/mapRange";
+import AnimatedDetails from "../components/AnimatedDetails";
 
 const Home: NextPage<{
   entries: { recordStartTimestamp: number; totalViews: number }[];
@@ -81,8 +85,9 @@ const Home: NextPage<{
   const iconMap: Record<string, ReactNode> = {
     // Sections
     Home: <MdHome color="#d35400" />,
-    Code: <MdCode color="#3498db" />,
-    TrendingUp: <MdTrendingUp color="#2ecc71" />,
+    Code: <MdCode color="#2ecc71" />,
+    TrendingUp: <MdTrendingUp color="#3498db" />,
+    World: <TbWorld color="#F1A20F" />,
     // Showcase
     Typescript: <SiTypescript color="#3178C6" />,
     Webpack: <SiWebpack color="#8DD6F9" />,
@@ -107,6 +112,8 @@ const Home: NextPage<{
     Nuxt: <SiNuxtdotjs color="#00DC82" />,
     Bun: <SiBun color="#FBF0DF" />,
     Hono: <SiHono color="#E36002" />,
+    Laravel: <SiLaravel color="#F05340" />,
+    "Unreal Engine": <SiUnrealengine color="#000000" />,
   };
 
   const LineGraph = dynamic(() => import("../components/LineGraph"), {
@@ -186,31 +193,44 @@ const Home: NextPage<{
         </span>
       </section>
       <section className="relative flex flex-col bg-gradient-to-b from-blue-600 to-slate-900 py-4 sm:py-8">
-        <div className="absolute z-0 -mt-8 h-8 w-full bg-gradient-to-b from-[rgb(37,99,235)] to-[rgba(37,99,235,0.99)] blur-md sm:-mt-14 sm:h-16"></div>
-        <section className="flex h-[50vh] flex-col justify-center gap-6 p-4 pb-16 sm:mx-16">
+        <div className="absolute z-0 -mt-8 h-8 w-full bg-gradient-to-b from-[rgb(37,99,235)] to-[#235EDD] blur-md sm:-mt-14 sm:h-16"></div>
+        <section className="flex h-[25vw] min-h-[300px] flex-col justify-center gap-6 p-4 pb-16 sm:mx-16">
           <h2 className="z-10 text-center text-4xl font-bold text-white sm:text-6xl">
-            Queue intro...
+            Intro
           </h2>
           <p className="text-center text-lg text-white sm:text-2xl">
-            My name is Leo Petrović. I am a{" "}
+            My name is{" "}
+            <span
+              className="cursor-default border-b border-dotted border-white"
+              title="Pronunciation: Leh-oh Peh-troh-vich">
+              Leo Petrović
+            </span>
+            . I am a{" "}
             {Math.floor(
               (Date.now() - new Date(2003, 6, 22).getTime()) /
                 (1000 * 60 * 60 * 24 * 365)
             )}{" "}
-            year old Computer Science student, an experienced programmer, and a
-            full-stack web developer.
+            year old computer science student, a software developer, and
+            technology enthusiast.
           </p>
         </section>
-        <div className="flex w-full flex-col gap-12 sm:gap-24">
-          {data.sections.map(s => (
-            <SectionPanel
-              key={s.title}
-              title={s.title}
-              content={s.content}
-              icon={iconMap[s.icon]}
-            />
-          ))}
-        </div>
+        <AnimatedDetails
+          summary={
+            <h2 className="z-10 text-center text-xl font-bold text-white underline sm:text-2xl">
+              Read more about me
+            </h2>
+          }>
+          <div className="flex w-full flex-col gap-12 sm:gap-24">
+            {data.sections.map(s => (
+              <SectionPanel
+                key={s.title}
+                title={s.title}
+                content={s.content}
+                icon={iconMap[s.icon]}
+              />
+            ))}
+          </div>
+        </AnimatedDetails>
       </section>
       <section className="mt-24 flex flex-col items-center justify-center gap-4 bg-slate-900">
         <h2 className="text-4xl text-white sm:text-7xl">Showcase</h2>
@@ -239,7 +259,7 @@ const Home: NextPage<{
       <section className="mt-20 flex flex-col items-center justify-center gap-4 bg-slate-900">
         <h2 className="text-4xl text-white sm:text-7xl">Tech stack</h2>
         <span className="px-3 text-center text-lg text-white text-opacity-75 sm:mb-6 sm:text-xl">
-          Finally, the part you&apos;ve been waiting for
+          The important part
         </span>
         <ul className="flex flex-col">
           {data.techStack.map(e => (
@@ -261,43 +281,37 @@ const Home: NextPage<{
           <article className="websiteinfo-article col-span-1 row-span-1">
             <h3 className="text-3xl sm:text-5xl">Build size</h3>
             <div className="flex flex-col justify-center gap-3 text-2xl">
-              {sizeBytes === null ? (
-                <span>Unavailable.</span>
-              ) : (
-                <>
-                  <div className="flex items-center justify-between gap-4">
-                    <span className="text-xl font-semibold">Javascript</span>
-                    <span className="text-xl">
-                      {humanFileSize(sizeBytes.javascript)}
-                    </span>
-                  </div>
-                  <hr className="mb-2 mt-4 h-px w-full opacity-50" />
-                  <div className="flex justify-between">
-                    <span className="text-xl font-semibold">CSS</span>
-                    <span className="text-xl">
-                      {humanFileSize(sizeBytes.css)}
-                    </span>
-                  </div>
-                  <hr className="mb-2 mt-4 h-px w-full opacity-50" />
-                  <div className="flex justify-between">
-                    <span className="text-xl font-semibold">Images</span>
-                    <span className="text-xl">
-                      {humanFileSize(sizeBytes.images)}
-                    </span>
-                  </div>
-                  <hr className="mb-2 mt-4 h-px w-full opacity-50" />
-                  <div className="flex justify-between">
-                    <span className="text-2xl font-bold sm:text-4xl">
-                      Total
-                    </span>
-                    <span className="text-2xl font-bold sm:text-4xl">
-                      {humanFileSize(
-                        sizeBytes.javascript + sizeBytes.css + sizeBytes.images
-                      )}
-                    </span>
-                  </div>
-                </>
-              )}
+              <>
+                <div className="flex items-center justify-between gap-4">
+                  <span className="text-xl font-semibold">Javascript</span>
+                  <span className="text-xl">
+                    {humanFileSize(sizeBytes.javascript)}
+                  </span>
+                </div>
+                <hr className="mb-2 mt-4 h-px w-full opacity-50" />
+                <div className="flex justify-between">
+                  <span className="text-xl font-semibold">CSS</span>
+                  <span className="text-xl">
+                    {humanFileSize(sizeBytes.css)}
+                  </span>
+                </div>
+                <hr className="mb-2 mt-4 h-px w-full opacity-50" />
+                <div className="flex justify-between">
+                  <span className="text-xl font-semibold">Images</span>
+                  <span className="text-xl">
+                    {humanFileSize(sizeBytes.images)}
+                  </span>
+                </div>
+                <hr className="mb-2 mt-4 h-px w-full opacity-50" />
+                <div className="flex justify-between">
+                  <span className="text-2xl font-bold sm:text-4xl">Total</span>
+                  <span className="text-2xl font-bold sm:text-4xl">
+                    {humanFileSize(
+                      sizeBytes.css + sizeBytes.javascript + sizeBytes.images
+                    )}
+                  </span>
+                </div>
+              </>
             </div>
           </article>
           <article className="websiteinfo-article col-span-1 row-span-3">

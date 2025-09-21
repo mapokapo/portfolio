@@ -1,9 +1,6 @@
-import { animated, easings, useSpring } from "@react-spring/web";
+import { animated, useSpring } from "@react-spring/web";
 import React, { useEffect, useState } from "react";
 import { MdExpandLess, MdExpandMore } from "react-icons/md";
-import useMeasure from "react-use-measure";
-import useVisibility from "../utils/hooks/useVisibility";
-import useMounted from "../utils/hooks/useMounted";
 
 type Props = {
   icon: React.ReactNode;
@@ -11,19 +8,9 @@ type Props = {
   content: string;
 };
 const SectionPanel: React.FC<Props> = ({ icon, title, content }) => {
-  const mounted = useMounted();
   const [sectionType, setSectionType] = useState<"button" | "div">("div");
   const [expanded, setExpanded] = useState(false);
-  const [visible, visibilityRef] = useVisibility(-200);
-  const [shouldFadeIn, setShouldFadeIn] = useState(false);
-  const [expandRef, bounds] = useMeasure();
 
-  // Expand the section (mobile-only)
-  const expandStyles = useSpring({
-    to: {
-      height: expanded ? bounds.height : 0,
-    },
-  });
   // Incrase the section width when expanded (mobile-only)
   const fullWidthStyles = useSpring({
     to:
@@ -38,22 +25,6 @@ const SectionPanel: React.FC<Props> = ({ icon, title, content }) => {
   const expandedTitleStyles = useSpring({
     to: {
       fontSize: expanded ? "1.5rem" : "2rem",
-    },
-  });
-
-  // Fade in the section when scrolling
-  const fadeInStyles = useSpring({
-    from: {
-      opacity: mounted ? 0 : 1,
-      left: mounted ? -200 : 0,
-    },
-    to: {
-      opacity: shouldFadeIn ? 1 : 0,
-      left: shouldFadeIn ? 0 : -200,
-    },
-    config: {
-      duration: 900,
-      easing: easings.easeOutQuint,
     },
   });
 
@@ -75,19 +46,10 @@ const SectionPanel: React.FC<Props> = ({ icon, title, content }) => {
     };
   }, []);
 
-  useEffect(() => {
-    if (visible) {
-      setShouldFadeIn(true);
-    }
-  }, [visible, setShouldFadeIn]);
-
   const ExpandIcon = expanded ? MdExpandLess : MdExpandMore;
 
   return (
-    <animated.article
-      ref={visibilityRef}
-      style={fadeInStyles}
-      className="relative z-10 w-full">
+    <article className="relative z-10 w-full">
       {sectionType === "button" ? (
         <animated.button
           className="z-10 flex flex-col gap-2 bg-slate-800 p-2 py-8 text-start shadow-md shadow-slate-800 sm:gap-8 sm:p-16 xs:p-8 xs-max:!m-0"
@@ -101,11 +63,8 @@ const SectionPanel: React.FC<Props> = ({ icon, title, content }) => {
               {title}
             </animated.h3>
           </div>
-          <animated.div
-            style={expandStyles}
-            className="overflow-hidden sm:hidden">
+          <animated.div className="overflow-hidden sm:hidden">
             <p
-              ref={expandRef}
               className="text-md text-white sm:py-8 sm:text-2xl"
               dangerouslySetInnerHTML={{ __html: content }}></p>
           </animated.div>
@@ -122,12 +81,12 @@ const SectionPanel: React.FC<Props> = ({ icon, title, content }) => {
             </h3>
           </div>
           <p
-            className="hidden text-xl leading-8 text-white sm:flex"
+            className="hidden text-xl leading-8 text-white sm:block"
             dangerouslySetInnerHTML={{ __html: content }}></p>
           <ExpandIcon className="w-full text-3xl text-white sm:hidden" />
         </animated.div>
       )}
-    </animated.article>
+    </article>
   );
 };
 
