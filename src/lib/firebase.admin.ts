@@ -1,5 +1,4 @@
 import "server-only";
-
 import admin, { ServiceAccount } from "firebase-admin";
 
 const serviceAccount: ServiceAccount = JSON.parse(

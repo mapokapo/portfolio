@@ -1,5 +1,6 @@
-import { firestoreTimestamp } from "@/lib/schemas/firestoreTimestamp";
 import z from "zod";
+
+import { firestoreTimestamp } from "@/lib/schemas/firestoreTimestamp";
 
 export const pageViewSchema = z.object({
   recordStartTimestamp: firestoreTimestamp,

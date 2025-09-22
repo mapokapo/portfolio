@@ -1,24 +1,24 @@
+import { convert as html2text } from "html-to-text";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import { convert as html2text } from "html-to-text";
 
 export type BlogPostViewProps = {
-  id: string;
-  title: string;
-  imageUrl: string;
-  content: string;
-  publishedRelative: string;
   className?: string;
+  content: string;
+  id: string;
+  imageUrl: string;
+  publishedRelative: string;
+  title: string;
 };
 
 const BlogPostView: React.FC<BlogPostViewProps> = ({
-  id,
-  title,
-  imageUrl,
-  content,
-  publishedRelative,
   className,
+  content,
+  id,
+  imageUrl,
+  publishedRelative,
+  title,
 }) => {
   const getReadTimeMinutes = (text: string): number => {
     return Math.ceil(text.trim().split(/\s+/).length / 225);
@@ -27,16 +27,16 @@ const BlogPostView: React.FC<BlogPostViewProps> = ({
   return (
     <li className={className}>
       <Link
-        href={`/blog/${id}`}
-        className="flex cursor-pointer flex-col items-center justify-center gap-2">
+        className="flex cursor-pointer flex-col items-center justify-center gap-2"
+        href={`/blog/${id}`}>
         <div className="flex w-full gap-4">
           <div className="relative hidden h-20 w-20 overflow-hidden lg:flex xl:h-24 xl:w-24">
             <Image
               alt={"Devblog post titled " + title}
-              src={imageUrl}
               className="object-contain p-1"
               fill={true}
               sizes="(min-width: 1280px) 6rem, 5rem"
+              src={imageUrl}
             />
           </div>
           <div className="flex flex-[3] flex-col justify-center xl:flex-[4]">

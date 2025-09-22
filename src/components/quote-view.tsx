@@ -1,8 +1,9 @@
 "use client";
 
+import { useEffect, useState } from "react";
+
 import Quote from "@/lib/types/Quote";
 import { mapRange } from "@/lib/utils";
-import { useEffect, useState } from "react";
 
 export type QuoteViewProps = {
   quote: Quote;
@@ -32,7 +33,7 @@ const QuoteView: React.FC<QuoteViewProps> = ({ quote }) => {
       style={{
         opacity: mapRange(scrollPercentage, 0, 10, 1, 0),
       }}>
-      "{quote.text}"
+      &quot;{quote.text}&quot;
       <footer className="text-opacity-50 mr-1 text-end text-sm text-white">
         - {quote.author}
       </footer>

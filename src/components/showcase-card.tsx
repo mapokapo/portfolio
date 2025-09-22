@@ -1,13 +1,14 @@
 "use client";
 
-import { useState } from "react";
 import { animated, useSpring } from "@react-spring/web";
 import Image from "next/image";
+import Link from "next/link";
+import { useState } from "react";
 import { MdExpandMore, MdLaunch } from "react-icons/md";
 import useMeasure from "react-use-measure";
-import Link from "next/link";
-import Showcase from "@/lib/types/Showcase";
+
 import iconMap from "@/lib/const/iconMap";
+import Showcase from "@/lib/types/Showcase";
 
 export type ShowcaseCardProps = {
   showcase: Showcase;
@@ -23,17 +24,17 @@ const ShowcaseCard: React.FC<ShowcaseCardProps> = ({ showcase }) => {
   return (
     <button
       aria-expanded={isExpanded}
-      onClick={() => setIsExpanded(!isExpanded)}
-      className={`relative flex h-min w-full cursor-pointer flex-col bg-slate-800 px-4 py-8 pb-2 shadow-md shadow-slate-800 transition-all hover:brightness-125 sm:w-min ${isExpanded ? "min-w-screen sm:min-w-[600px]" : "min-w-[300px] sm:min-w-[400px]"}`}>
+      className={`relative flex h-min w-full cursor-pointer flex-col bg-slate-800 px-4 py-8 pb-2 shadow-md shadow-slate-800 transition-all hover:brightness-125 sm:w-min ${isExpanded ? "min-w-screen sm:min-w-[600px]" : "min-w-[300px] sm:min-w-[400px]"}`}
+      onClick={() => setIsExpanded(!isExpanded)}>
       <div className="flex h-full w-full flex-col justify-between pb-4 select-none">
         <div className="mx-auto mb-2 flex h-16 items-center justify-center">
           <Image
             alt={"Image of project called " + showcase.title}
-            src={showcase.meta.imageUrl}
             className="opacity-90"
-            width={64}
             height={64}
             quality={100}
+            src={showcase.meta.imageUrl}
+            width={64}
           />
         </div>
         <div className="flex flex-col gap-4">
@@ -50,11 +51,11 @@ const ShowcaseCard: React.FC<ShowcaseCardProps> = ({ showcase }) => {
         />
       </div>
       <animated.div
-        style={styles}
-        className="w-full overflow-hidden bg-slate-800">
+        className="w-full overflow-hidden bg-slate-800"
+        style={styles}>
         <div
-          ref={ref}
-          className="flex flex-col gap-1 p-2 text-white">
+          className="flex flex-col gap-1 p-2 text-white"
+          ref={ref}>
           <p className="space mx-2 mb-4 text-left text-sm text-gray-300">
             {showcase.content}
           </p>
@@ -62,8 +63,8 @@ const ShowcaseCard: React.FC<ShowcaseCardProps> = ({ showcase }) => {
           <ul className="flex list-inside flex-wrap justify-center gap-4">
             {showcase.meta.madeWith.map(label => (
               <li
-                key={label}
-                className="flex items-center gap-2 rounded-lg border border-gray-700 px-2 text-sm whitespace-nowrap sm:text-lg">
+                className="flex items-center gap-2 rounded-lg border border-gray-700 px-2 text-sm whitespace-nowrap sm:text-lg"
+                key={label}>
                 {iconMap[label]}
                 {label}
               </li>
@@ -74,14 +75,14 @@ const ShowcaseCard: React.FC<ShowcaseCardProps> = ({ showcase }) => {
             showcase.meta.links.length > 0 &&
             showcase.meta.links.map((link, i) => (
               <Link
+                className={`mx-auto flex items-center justify-center gap-2 rounded-lg px-4 py-2 hover:bg-slate-700 ${i === 0 ? "mt-4" : "mt-1"}`}
+                href={link.url}
                 key={link.label}
                 onClick={e => {
                   e.stopPropagation();
                 }}
-                href={link.url}
-                target="_blank"
-                className={`mx-auto flex items-center justify-center gap-2 rounded-lg px-4 py-2 hover:bg-slate-700 ${i === 0 ? "mt-4" : "mt-1"}`}
-                rel="noreferrer">
+                rel="noreferrer"
+                target="_blank">
                 <MdLaunch />
                 <span>{link.label}</span>
               </Link>

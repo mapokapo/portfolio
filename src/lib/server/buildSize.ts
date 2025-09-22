@@ -1,4 +1,5 @@
 import "server-only";
+
 import admin from "@/lib/firebase.admin";
 import { buildSizeSchema } from "@/lib/schemas/buildSize";
 
@@ -13,7 +14,7 @@ export async function getBuildSize() {
 
   if (!buildSizeResult.success) {
     console.error("Build size data is invalid:", buildSizeResult.error);
-    return { js: 0, css: 0, media: 0 };
+    return { css: 0, js: 0, media: 0 };
   }
 
   return buildSizeResult.data;

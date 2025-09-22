@@ -1,6 +1,7 @@
 import "server-only";
+
 import admin from "@/lib/firebase.admin";
-import { pageViewSchema, PageView } from "@/lib/schemas/pageView";
+import { PageView, pageViewSchema } from "@/lib/schemas/pageView";
 
 // 2 weeks
 const ENTRY_MAX_AGE = 2 * 7 * 24 * 60 * 60 * 1000;
@@ -49,6 +50,34 @@ const getMostRecentEntry = async (
   return { data: currentEntryResult.data, doc: currentEntryDoc };
 };
 
+export async function getPageViews() {
+  const docs = (await admin.firestore().collection("pageViews").get()).docs;
+
+  const pageViews = docs
+    .map(doc => {
+      const pageViewResult = pageViewSchema.safeParse(doc.data());
+      if (!pageViewResult.success) {
+        console.error(
+          "Invalid page view entry in database:",
+          doc.id,
+          pageViewResult.error
+        );
+        return null;
+      }
+      return pageViewResult.data;
+    })
+    .filter((entry): entry is PageView => entry !== null);
+
+  // Sort by ascending time
+  if (pageViews.length > 1)
+    pageViews.sort(
+      (a, b) =>
+        a.recordStartTimestamp.getTime() - b.recordStartTimestamp.getTime()
+    );
+
+  return pageViews;
+}
+
 export async function updatePageViews() {
   const col = admin.firestore().collection("pageViews");
 
@@ -87,32 +116,4 @@ export async function updatePageViews() {
       totalViews: admin.firestore.FieldValue.increment(1),
     });
   }
-}
-
-export async function getPageViews() {
-  const docs = (await admin.firestore().collection("pageViews").get()).docs;
-
-  const pageViews = docs
-    .map(doc => {
-      const pageViewResult = pageViewSchema.safeParse(doc.data());
-      if (!pageViewResult.success) {
-        console.error(
-          "Invalid page view entry in database:",
-          doc.id,
-          pageViewResult.error
-        );
-        return null;
-      }
-      return pageViewResult.data;
-    })
-    .filter((entry): entry is PageView => entry !== null);
-
-  // Sort by ascending time
-  if (pageViews.length > 1)
-    pageViews.sort(
-      (a, b) =>
-        a.recordStartTimestamp.getTime() - b.recordStartTimestamp.getTime()
-    );
-
-  return pageViews;
 }

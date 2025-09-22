@@ -1,7 +1,8 @@
 import "server-only";
-import TextData from "@/lib/types/TextData";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
+
+import TextData from "@/lib/types/TextData";
 
 export async function getTextData() {
   const textData = await readFile(

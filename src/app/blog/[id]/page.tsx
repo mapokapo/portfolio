@@ -1,6 +1,3 @@
-import BlogPostView from "@/components/blog-post-view";
-import { getBlogPost, getBlogPosts } from "@/lib/server/blogPosts";
-import { getReadTimeMinutes, getRelativeTime } from "@/lib/utils";
 import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -8,43 +5,9 @@ import { notFound } from "next/navigation";
 import React from "react";
 import { MdArrowBack, MdSchedule } from "react-icons/md";
 
-export async function generateMetadata({ params }: PageProps<"/blog/[id]">) {
-  const postId = (await params).id;
-  const post = await getBlogPost(postId);
-
-  if (!post) {
-    return {
-      title: "Post Not Found",
-      description: "The requested post does not exist.",
-    };
-  }
-
-  return {
-    title: post.title,
-    description: post.content.slice(0, 160),
-    keywords: post.title
-      .split(" ")
-      .concat(["blog", "devlog", "leo petrovic", "portfolio"]),
-    openGraph: {
-      title: post.title,
-      description: post.content.slice(0, 160),
-      images: [
-        {
-          url: post.image,
-          width: 384,
-          height: 384,
-          alt: post.title,
-        },
-      ],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: post.title,
-      description: post.content.slice(0, 160),
-      images: [post.image],
-    },
-  } satisfies Metadata;
-}
+import BlogPostView from "@/components/blog-post-view";
+import { getBlogPost, getBlogPosts } from "@/lib/server/blogPosts";
+import { getReadTimeMinutes, getRelativeTime } from "@/lib/utils";
 
 export default async function Blog({ params }: PageProps<"/blog/[id]">) {
   const postId = (await params).id;
@@ -60,19 +23,19 @@ export default async function Blog({ params }: PageProps<"/blog/[id]">) {
       <header className="relative h-[10vw] min-h-[320px] w-full overflow-hidden sm:h-[20vw]">
         <Image
           alt={"Cover image for " + post.title}
-          src={post.image}
-          fill
-          sizes="100vw"
           className="scale-125 object-cover blur-3xl brightness-60"
+          fill
           priority
+          sizes="100vw"
+          src={post.image}
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-slate-900"></div>
 
         <div className="relative z-10 mx-auto flex h-full w-full max-w-5xl flex-col px-4 sm:px-8 lg:px-10">
           <div className="mt-4 flex items-center gap-3 sm:mt-6">
             <Link
-              href="/"
-              className="flex items-center gap-2 rounded-full bg-black/40 px-3 py-1.5 text-sm backdrop-blur-2xl hover:bg-black/60">
+              className="flex items-center gap-2 rounded-full bg-black/40 px-3 py-1.5 text-sm backdrop-blur-2xl hover:bg-black/60"
+              href="/">
               <MdArrowBack size={18} />
               <span>Back</span>
             </Link>
@@ -101,11 +64,11 @@ export default async function Blog({ params }: PageProps<"/blog/[id]">) {
             <div className="relative mx-auto aspect-video w-full">
               <Image
                 alt={"Cover image for " + post.title}
-                src={post.image}
-                fill
-                sizes="(min-width: 1024px) 768px, (min-width: 640px) 600px, 100vw"
                 className="object-contain p-2"
+                fill
                 priority
+                sizes="(min-width: 1024px) 768px, (min-width: 640px) 600px, 100vw"
+                src={post.image}
               />
             </div>
           </div>
@@ -124,13 +87,13 @@ export default async function Blog({ params }: PageProps<"/blog/[id]">) {
           <ul className="flex flex-col gap-8 md:gap-10">
             {recommendedPosts.map(p => (
               <BlogPostView
-                key={p.id}
-                id={p.id}
-                title={p.title}
-                publishedRelative={getRelativeTime(p.published, now)}
-                imageUrl={p.image}
-                content={p.content}
                 className="rounded-lg border border-white/10 bg-slate-800/60 p-4 shadow-lg backdrop-blur transition-all hover:brightness-125"
+                content={p.content}
+                id={p.id}
+                imageUrl={p.image}
+                key={p.id}
+                publishedRelative={getRelativeTime(p.published, now)}
+                title={p.title}
               />
             ))}
           </ul>
@@ -138,4 +101,42 @@ export default async function Blog({ params }: PageProps<"/blog/[id]">) {
       )}
     </main>
   );
+}
+
+export async function generateMetadata({ params }: PageProps<"/blog/[id]">) {
+  const postId = (await params).id;
+  const post = await getBlogPost(postId);
+
+  if (!post) {
+    return {
+      description: "The requested post does not exist.",
+      title: "Post Not Found",
+    };
+  }
+
+  return {
+    description: post.content.slice(0, 160),
+    keywords: post.title
+      .split(" ")
+      .concat(["blog", "devlog", "leo petrovic", "portfolio"]),
+    openGraph: {
+      description: post.content.slice(0, 160),
+      images: [
+        {
+          alt: post.title,
+          height: 384,
+          url: post.image,
+          width: 384,
+        },
+      ],
+      title: post.title,
+    },
+    title: post.title,
+    twitter: {
+      card: "summary_large_image",
+      description: post.content.slice(0, 160),
+      images: [post.image],
+      title: post.title,
+    },
+  } satisfies Metadata;
 }

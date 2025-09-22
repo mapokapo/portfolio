@@ -1,13 +1,13 @@
 export default interface Showcase {
-  title: string;
-  description: string;
   content: string;
+  description: string;
   meta: {
     imageUrl: string;
-    madeWith: string[];
     links?: {
       label: string;
       url: string;
     }[];
+    madeWith: string[];
   };
+  title: string;
 }

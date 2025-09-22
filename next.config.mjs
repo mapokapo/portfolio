@@ -7,19 +7,19 @@ const nextConfig = {
   experimental: {
     scrollRestoration: true,
   },
-  reactStrictMode: true,
-  productionBrowserSourceMaps: false,
   images: {
+    qualities: [50, 75, 100],
     remotePatterns: [
       {
-        protocol: "https",
         hostname: "storage.googleapis.com",
-        port: "",
         pathname: "/**/*",
+        port: "",
+        protocol: "https",
       },
     ],
-    qualities: [50, 75, 100],
   },
+  productionBrowserSourceMaps: false,
+  reactStrictMode: true,
 };
 
 const withBundleAnalyzer = NextBundleAnalyzer({

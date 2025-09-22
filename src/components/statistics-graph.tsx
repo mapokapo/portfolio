@@ -1,14 +1,15 @@
 "use client";
 
-import React from "react";
 import {
-  Chart as ChartJS,
   CategoryScale,
+  Chart as ChartJS,
   LinearScale,
-  PointElement,
   LineElement,
+  PointElement,
 } from "chart.js";
+import React from "react";
 import { Line } from "react-chartjs-2";
+
 import { PageView } from "@/lib/schemas/pageView";
 
 ChartJS.defaults.font.size = 16;
@@ -23,26 +24,6 @@ const StatisticsGraph: React.FC<StatisticsGraphProps> = ({ entries }) => {
   return (
     <Line
       className="mb-auto"
-      options={{
-        responsive: true,
-        borderColor: "#ddd",
-        elements: {
-          point: {
-            radius: 0,
-          },
-        },
-        scales: {
-          y: {
-            ticks: {
-              stepSize: 1,
-            },
-          },
-        },
-        font: {
-          size: 32,
-          family: "Segoe UI",
-        },
-      }}
       data={{
         datasets: [
           {
@@ -53,6 +34,26 @@ const StatisticsGraph: React.FC<StatisticsGraphProps> = ({ entries }) => {
         labels: entries.map(
           entry => new Date(entry.recordStartTimestamp).getHours() + ":00"
         ),
+      }}
+      options={{
+        borderColor: "#ddd",
+        elements: {
+          point: {
+            radius: 0,
+          },
+        },
+        font: {
+          family: "Segoe UI",
+          size: 32,
+        },
+        responsive: true,
+        scales: {
+          y: {
+            ticks: {
+              stepSize: 1,
+            },
+          },
+        },
       }}
     />
   );

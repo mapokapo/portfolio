@@ -1,3 +1,14 @@
+import Link from "next/link";
+import { MdEast, MdExpandMore } from "react-icons/md";
+import {
+  SiGithub,
+  SiLinkedin,
+  SiNextdotjs,
+  SiReact,
+  SiTailwindcss,
+  SiTypescript,
+} from "react-icons/si";
+
 import BlogPostView from "@/components/blog-post-view";
 import CircularLink from "@/components/circular-link";
 import IntroText from "@/components/intro-text";
@@ -11,16 +22,6 @@ import { getBuildSize } from "@/lib/server/buildSize";
 import { getTextData } from "@/lib/server/getTextData";
 import { getPageViews } from "@/lib/server/pageViews";
 import { getRelativeTime, humanFileSize, randomChoice } from "@/lib/utils";
-import Link from "next/link";
-import { MdEast, MdExpandMore } from "react-icons/md";
-import {
-  SiGithub,
-  SiLinkedin,
-  SiNextdotjs,
-  SiReact,
-  SiTailwindcss,
-  SiTypescript,
-} from "react-icons/si";
 
 export default async function Home() {
   const textData = await getTextData();
@@ -39,9 +40,9 @@ export default async function Home() {
           Welcome to my website
         </span>
         <MdExpandMore
-          size={36}
-          color={"#eee"}
           className="mb-auto animate-bounce"
+          color={"#eee"}
+          size={36}
         />
         <span className="text-opacity-50 mb-20 text-lg text-white sm:mt-16 sm:mb-24 sm:text-xl">
           Learn more about me...
@@ -70,14 +71,14 @@ export default async function Home() {
           </p>
         </section>
         <Link
-          href="/lore"
-          className="mx-auto flex items-end gap-2 text-white">
+          className="mx-auto flex items-end gap-2 text-white"
+          href="/lore">
           <h2 className="z-10 text-center text-xl font-bold underline sm:text-2xl">
             Read more about me
           </h2>
           <MdEast
-            size={24}
             className="mb-0.5"
+            size={24}
           />
         </Link>
       </section>
@@ -104,8 +105,8 @@ export default async function Home() {
         <ul className="flex flex-col">
           {textData.techStack.map(e => (
             <TechStackTree
-              key={e.name}
               item={e}
+              key={e.name}
               parentExpandedOrIsRoot={true}
             />
           ))}
@@ -164,12 +165,12 @@ export default async function Home() {
               <ul className="mt-auto flex h-full max-h-[300px] flex-col gap-8 overflow-y-auto md:max-h-[500px] lg:max-h-[600px] xl:max-h-[800px]">
                 {blogPosts.map(p => (
                   <BlogPostView
-                    key={p.id}
+                    content={p.content}
                     id={p.id}
                     imageUrl={p.image}
+                    key={p.id}
                     publishedRelative={getRelativeTime(p.published, new Date())}
                     title={p.title}
-                    content={p.content}
                   />
                 ))}
               </ul>
@@ -192,10 +193,10 @@ export default async function Home() {
               Built with:
             </h3>
             <Link
-              target={"_blank"}
-              href="https://nextjs.org/"
               className="flex items-center gap-2 rounded-full bg-slate-200 px-4 py-1 sm:py-2"
-              rel="noreferrer">
+              href="https://nextjs.org/"
+              rel="noreferrer"
+              target={"_blank"}>
               <SiNextdotjs
                 color="#000000"
                 size={36}
@@ -205,10 +206,10 @@ export default async function Home() {
               </span>
             </Link>
             <Link
-              target={"_blank"}
-              href="https://www.typescriptlang.org/"
               className="flex items-center gap-2 rounded-full bg-slate-200 px-5 py-1 sm:py-2"
-              rel="noreferrer">
+              href="https://www.typescriptlang.org/"
+              rel="noreferrer"
+              target={"_blank"}>
               <SiTypescript
                 color="#3178C6"
                 size={32}
@@ -218,10 +219,10 @@ export default async function Home() {
               </span>
             </Link>
             <Link
-              target={"_blank"}
-              href="https://reactjs.org/"
               className="flex items-center gap-2 rounded-full bg-slate-200 px-5 py-1 sm:py-2"
-              rel="noreferrer">
+              href="https://reactjs.org/"
+              rel="noreferrer"
+              target={"_blank"}>
               <SiReact
                 color="#61DAFB"
                 size={34}
@@ -231,10 +232,10 @@ export default async function Home() {
               </span>
             </Link>
             <Link
-              target={"_blank"}
-              href="https://tailwindcss.com/"
               className="flex items-center gap-2 rounded-full bg-slate-200 px-5 py-1 sm:py-2"
-              rel="noreferrer">
+              href="https://tailwindcss.com/"
+              rel="noreferrer"
+              target={"_blank"}>
               <SiTailwindcss
                 color="#06B6D4"
                 size={36}
@@ -253,24 +254,24 @@ export default async function Home() {
         </span>
         <div className="flex justify-between gap-8">
           <CircularLink
-            name="Github link"
-            link="https://github.com/mapokapo"
             icon={
               <SiGithub
-                size={32}
                 color="#fff"
+                size={32}
               />
             }
+            link="https://github.com/mapokapo"
+            name="Github link"
           />
           <CircularLink
-            name="LinkedIn link"
-            link="https://www.linkedin.com/in/leo-petrovi%C4%87-7047b1162/"
             icon={
               <SiLinkedin
-                size={32}
                 color="#fff"
+                size={32}
               />
             }
+            link="https://www.linkedin.com/in/leo-petrovi%C4%87-7047b1162/"
+            name="LinkedIn link"
           />
         </div>
       </section>

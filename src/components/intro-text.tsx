@@ -5,9 +5,7 @@ import TypewriterComponent from "typewriter-effect";
 const IntroText: React.FC = () => {
   return (
     <TypewriterComponent
-      options={{
-        loop: true,
-      }}
+      component={"h1"}
       onInit={typewriter => {
         typewriter
           .changeDelay(100)
@@ -22,7 +20,9 @@ const IntroText: React.FC = () => {
           .pauseFor(350)
           .start();
       }}
-      component={"h1"}
+      options={{
+        loop: true,
+      }}
     />
   );
 };

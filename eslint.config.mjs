@@ -1,9 +1,9 @@
-import { dirname } from "path";
-import { fileURLToPath } from "url";
 import { FlatCompat } from "@eslint/eslintrc";
 import eslintConfigPrettier from "eslint-config-prettier";
-import { defineConfig } from "eslint-define-config";
 import perfectionist from "eslint-plugin-perfectionist";
+import { defineConfig } from "eslint/config";
+import { dirname } from "path";
+import { fileURLToPath } from "url";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -30,7 +30,7 @@ export default defineConfig([
     rules: {
       "perfectionist/sort-imports": "error",
     },
+    ...perfectionist.configs["recommended-natural"],
   },
-  perfectionist.configs["recommended-natural"],
   eslintConfigPrettier,
 ]);

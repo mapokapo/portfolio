@@ -2,19 +2,19 @@ import Link from "next/link";
 import React from "react";
 
 export type CircularLinkProps = {
-  name: string;
-  link: string;
   icon: React.ReactNode;
+  link: string;
+  name: string;
 };
 
-const CircularLink: React.FC<CircularLinkProps> = ({ name, link, icon }) => {
+const CircularLink: React.FC<CircularLinkProps> = ({ icon, link, name }) => {
   return (
     <Link
-      target={"_blank"}
       aria-label={name}
-      href={link}
       className="flex h-16 w-16 items-center justify-center rounded-full"
-      rel="noreferrer">
+      href={link}
+      rel="noreferrer"
+      target={"_blank"}>
       {icon}
     </Link>
   );
