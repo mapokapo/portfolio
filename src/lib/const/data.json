@@ -1,0 +1,410 @@
+{
+  "quotes": [
+    {
+      "text": "I cannot remember the books I've read any more than the meals I have eaten; even so, they have made me",
+      "author": "Ralph Waldo Emerson"
+    },
+    {
+      "text": "To unlearn grass and sky in favor of where and why",
+      "author": "exurb1a"
+    },
+    {
+      "text": "Ignorance is in our bones, but kindness is in our DNA",
+      "author": "exurb1a"
+    },
+    {
+      "text": "The only way to make sense out of change is to plunge into it, move with it, and join the dance",
+      "author": "Alan Watts"
+    },
+    {
+      "text": "It's possible to not make a single mistake yet still lose. That's not weakness, that's life",
+      "author": "Jean Luc Picard"
+    },
+    {
+      "text": "If you wish to make an apple pie from scratch, you must first invent the universe",
+      "author": "Carl Sagan"
+    }
+  ],
+  "sections": [
+    {
+      "title": "Beginnings",
+      "content": "My first encounter with software development was at 13 years old.<br /><br />In 2016, by recommendation of my maths teacher, I signed up for an annual children's robotics tournament, organized by SPARK - a local programming academy. My team and I had a surprising success in the tournament and we ended up winning first place and keeping the title for 3 years in a row!<br /><br />This success sparked a new interest in programming. I enrolled into the SPARK academy soon after, which I successfully graduated. I ended up being the youngest person to ever attend that course in history. I learned what programming is, and how to make my first website. It was the starting point of my career.",
+      "icon": "Home"
+    },
+    {
+      "title": "Curiosity",
+      "content": "My wild curiosity about this new hobby pushed me enough to spend a few years learning, and it's is something I'm thankful for. As I found out, practicing programming at home in your free time really pays off. Eventually, I had to decide which area to specialize in: frontend, backend, mobile... It was hard to decide, so I naturally tried everything.<br /><br />I finished the advanced programming course in SPARK, went through a few more tournaments, and even held lectures to my peers. Nowadays I consider myself a full stack developer, capable of making web, desktop, and mobile applications, as well as backend servers, CLI tools, and games in multiple languages. It wasn't all easy sailing though - I was going to a demanding high school at the same time which caused me a lot of stress.<br /><br />Still, I managed to confirm my success by winning more tournaments through my school.",
+      "icon": "Code"
+    },
+    {
+      "title": "The snowball effect",
+      "content": "In 2022, high school was ending, which meant I really had to get serious about my future. I was still very cautious when looking for jobs or education opportunities, because I was unsure what I was getting myself into.<br /><br />Thankfully, I didn't have to worry too much, because Nsoft - the software development company which founded SPARK - offered me a summer internship! This was a great opportunity for me, and I learned a lot. In fact, I even got a job offer at the same company, which was quite a new experience to me.<br /><br />I was already a freshman in university at this point, so unfortunately I had to decline the job offer in favor of focusing on my studies.",
+      "icon": "TrendingUp"
+    },
+    {
+      "title": "Horizons",
+      "content": "Having gone through a whole assortment of new experiences during university, I finished my BSc in Computer Science in 2025. I figured that it was time to finally get some real work experience. During summer of that year, I accepted a job offer at Sportradar - Nsoft's parent company - as a junior backend developer.<br /><br />I plan on continuing my studies and getting a MSc in CS by 2027. After that, time can only tell - I might try out the academic route by getting a PhD, as recommended by a few of my professors. One thing I know for certain: my love for software development will never fade away.",
+      "icon": "World"
+    }
+  ],
+  "showcase": [
+    {
+      "title": "Lucky Six",
+      "description": "A realtime betting platform team project made during my internship",
+      "content": "Implemented a full-featured betting platform with real-time updates. Developed a robust backend with Java and Spring Boot, utilizing PostgreSQL for data management and Redis for caching. Designed a themed frontend with Vue 3, ensuring brand consistency. Wrote tests, developer documentation, and collaborated with team members to ensure an error-free and efficient development process. Deployed the application using Docker and Kubernetes.",
+      "meta": {
+        "imageUrl": "/assets/images/lucky_six_logo.png",
+        "madeWith": [
+          "Java",
+          "Spring Boot",
+          "Postgres",
+          "Vue 3",
+          "Socket.IO",
+          "Redis",
+          "Docker"
+        ]
+      }
+    },
+    {
+      "title": "FSRE Notifier",
+      "description": "An experiment to track my school schedule which turned into a full project",
+      "content": "Developed a timetable notification system using Java and Spring Boot, with MariaDB serving as the database to manage subscriptions. Modernized existing university API to be used by the newly introduced FSRE app while ensuring no disruption to existing services. Implemented Firebase Cloud Messaging to deliver real-time notifications to users about their classes and various news. Created a cross-platform mobile application using Flutter with a focus on resilience. Designed a simple web application with React and Tailwind CSS, allowing users to view the timetable through an alternative frontend. Deployed the entire system using Docker for containerization, ensuring smooth deployment.",
+      "meta": {
+        "links": [
+          {
+            "label": "Project",
+            "url": "https://github.com/FSRE-Timetable-Notify/fsre-timetable-notify"
+          }
+        ],
+        "imageUrl": "/assets/images/fsre_timetable_notify.png",
+        "madeWith": [
+          "Java",
+          "Spring Boot",
+          "MariaDB",
+          "Firebase",
+          "Flutter",
+          "React",
+          "Typescript",
+          "Tailwind",
+          "Docker"
+        ]
+      }
+    },
+    {
+      "title": "Sportsmart",
+      "description": "A modern fitness tracking app with support for analytics",
+      "content": "Developed an award-winning fitness-tracking mobile application using React Native, focusing on scientific accuracy and user engagement. Utilized Firebase services for data storage and user authentication, and Google Maps for GPS tracking. Integrated Algolia for advanced search capabilities. Enhanced user satisfaction by implementing features such as gamified challenges, social sharing, and analytics.",
+      "meta": {
+        "links": [
+          {
+            "label": "Project",
+            "url": "https://github.com/mapokapo/sportsmart-app"
+          }
+        ],
+        "imageUrl": "/assets/images/sportsmart_logo.png",
+        "madeWith": ["React Native", "Firebase", "Algolia"]
+      }
+    },
+    {
+      "title": "Riskfactor",
+      "description": "A COVID-19 risk assessment and information app",
+      "content": "Developed an award-winning COVID-19 real-time risk assessment app, which uses information based on current infection risk factors and the result of an integrated form to provide the user with suggested actions. Developed the app using Flutter, utilizing Firebase for backend services such as data storage and user authentication. Implemented features such as emergency service contact information and up-to-date information on COVID-19 guidelines and statistics. Focused on user privacy and data security throughout the development process.",
+      "meta": {
+        "links": [
+          {
+            "label": "Project",
+            "url": "https://github.com/mapokapo/riskfactor"
+          }
+        ],
+        "imageUrl": "/assets/images/riskfactor_logo.png",
+        "madeWith": ["Flutter", "Firebase"]
+      }
+    },
+    {
+      "title": "Nexora",
+      "description": "A real-time social networking and chat platform made for my BSc thesis",
+      "content": "Developed a full-stack social networking platform using Bun and Hono for the backend, with Firebase for real-time data synchronization and user authentication. Created a responsive frontend using React and Tailwind CSS, ensuring a seamless user experience across devices. Implemented real-time chat functionality with Firestore. Developed the app in a functional style to showcase the advantages of FP in my thesis.",
+      "meta": {
+        "links": [
+          {
+            "label": "Frontend",
+            "url": "https://github.com/mapokapo/nexora-frontend"
+          },
+          {
+            "label": "Backend",
+            "url": "https://github.com/mapokapo/nexora-backend"
+          }
+        ],
+        "imageUrl": "/assets/images/nexora_logo.png",
+        "madeWith": [
+          "Bun",
+          "Hono",
+          "Firebase",
+          "React",
+          "Typescript",
+          "Tailwind"
+        ]
+      }
+    },
+    {
+      "title": "EduLink",
+      "description": "Collaboration between companies seeking training and leaders providing it",
+      "content": "Developed an education-focused web platform using Vue 3 and Nuxt for the frontend, with Supabase serving as the backend service for data management and user authentication. Implemented a multi-role service for interactions between teachers, students and organizations. Implemented features such as course creation, enrollment, progress tracking and administration. Deployed the application using Docker for containerization.",
+      "meta": {
+        "links": [
+          {
+            "label": "Project",
+            "url": "https://github.com/mapokapo/edulink-frontend"
+          }
+        ],
+        "imageUrl": "/assets/images/edulink_logo.png",
+        "madeWith": [
+          "Vue 3",
+          "Nuxt",
+          "Supabase",
+          "Typescript",
+          "Tailwind",
+          "Docker"
+        ]
+      }
+    },
+    {
+      "title": "LandmarksAR",
+      "description": "A mobile app offering AR touristic experiences",
+      "content": "Worked as a web developer in a team where we cooperated to create an augmented reality mobile application using Unreal Engine 5 for the Globalsoft 2023 hackathon in which we won 2nd place. The app provides users with immersive touristic experiences and QR-code-based 3D infographics for landmarks. Developed a frontend with React and Tailwind CSS to serve as an information center and utilized a Laravel backend to send email notifications.",
+      "meta": {
+        "links": [
+          {
+            "label": "Project",
+            "url": "https://github.com/mapokapo/landmarksar"
+          }
+        ],
+        "imageUrl": "/assets/images/siroki_brijeg_coat_of_args.png",
+        "madeWith": [
+          "Unreal Engine",
+          "Laravel",
+          "React",
+          "Typescript",
+          "Tailwind"
+        ]
+      }
+    },
+    {
+      "title": "RC",
+      "description": "A faithful and full-featured full-stack Reddit clone",
+      "content": "Developed a full-stack Reddit clone using NestJS for the backend, SQLite for data storage, and Firebase for real-time updates and authentication. Created a responsive frontend with React and Tailwind CSS, ensuring a seamless user experience across devices. Implemented features such as post creation, commenting, voting, and user profiles. Deployed the application using Docker for containerization.",
+      "meta": {
+        "links": [
+          {
+            "label": "Project",
+            "url": "https://github.com/mapokapo/reddit-clone"
+          }
+        ],
+        "imageUrl": "/assets/images/reddit_clone_logo.png",
+        "madeWith": [
+          "Nest",
+          "SQLite",
+          "Firebase",
+          "React",
+          "Socket.IO",
+          "Typescript",
+          "Tailwind"
+        ]
+      }
+    },
+    {
+      "title": "Diaspora",
+      "description": "A match-making social media app inspired by Tinder",
+      "content": "Developed a cross-platform mobile application using Flutter, focusing on user experience and performance. Utilized Firebase services for data storage and authentication, and implemented a custom Firebase lambda function to handle complex matching algorithms and real-time updates. Implemented features such as swipe-based matching, chat functionality, and user profiles.",
+      "meta": {
+        "links": [
+          {
+            "label": "Project",
+            "url": "https://github.com/mapokapo/diaspora-app"
+          }
+        ],
+        "imageUrl": "/assets/images/diaspora_logo.png",
+        "madeWith": ["Flutter", "Firebase"]
+      }
+    },
+    {
+      "title": "FitQuest",
+      "description": "A sample fitness app made in Expo for my mobile app development class",
+      "content": "Developed a fitness-tracking mobile application using React Native and Expo as part of my mobile app development class. Utilized Supabase for backend services such as data storage and user authentication. Implemented features such as workout challenges, progress tracking, profile viewing, leaderboards and real-time data. Ensured proper data security and validity through Supabase RLS.",
+      "meta": {
+        "links": [
+          {
+            "label": "Project",
+            "url": "https://github.com/mapokapo/ramu-fitquest-app"
+          }
+        ],
+        "imageUrl": "/assets/images/ramu_fitquest_app.png",
+        "madeWith": ["React Native", "Expo", "Supabase", "Typescript"]
+      }
+    }
+  ],
+  "techStack": [
+    {
+      "name": "Web",
+      "description": "My main area of expertise.",
+      "items": [
+        {
+          "name": "Frontend",
+          "description": "Client-side UI-building tools.",
+          "items": [
+            {
+              "name": "Javascript",
+              "description": "What I started with, and what I still use and love.",
+              "items": [
+                {
+                  "name": "Typescript",
+                  "description": "This is the flavor of JS I use most of the time."
+                },
+                {
+                  "name": "React",
+                  "description": "My go-to library for building websites."
+                },
+                {
+                  "name": "Svelte",
+                  "description": "Great for effective solutions and working fast."
+                },
+                {
+                  "name": "Angular",
+                  "description": "A unique approach to building websites. I like it, but I don't use it often."
+                }
+              ]
+            },
+            {
+              "name": "CSS",
+              "description": "I've found a few CSS tools that I always keep under my belt.",
+              "items": [
+                {
+                  "name": "Tailwind",
+                  "description": "My favorite way of writing CSS."
+                },
+                {
+                  "name": "shadcn/ui",
+                  "description": "My favorite React component library."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Backend",
+          "description": "Programming languages, frameworks, and services I use to develop APIs.",
+          "items": [
+            {
+              "name": "Java",
+              "description": "A robust backend language with a lot of features.",
+              "items": [
+                {
+                  "name": "Spring Boot",
+                  "description": "Makes complex projects easy."
+                },
+                {
+                  "name": "Quarkus",
+                  "description": "Like a more modern Spring Boot."
+                }
+              ]
+            },
+            {
+              "name": "NodeJS",
+              "description": "NodeJS was was my first exposure to backend and it still holds up.",
+              "items": [
+                {
+                  "name": "NestJS",
+                  "description": "My favorite way to write modular backends in NodeJS."
+                },
+                {
+                  "name": "HonoJS",
+                  "description": "Quite a bit better than ExpressJS. Very enjoyable and easy to use."
+                }
+              ]
+            },
+            {
+              "name": "Databases",
+              "description": "Usually just good ol' SQL.",
+              "items": [
+                {
+                  "name": "MariaDB",
+                  "description": "My default database of choice."
+                },
+                {
+                  "name": "Postgres",
+                  "description": "Like MySQL but with extra features that make sense to implement."
+                },
+                {
+                  "name": "MongoDB",
+                  "description": "JSON is pretty nice, though I'd still rather use an RDBMS."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Mobile",
+      "description": "What I use to make mobile applications.",
+      "items": [
+        {
+          "name": "React Native",
+          "description": "I love React and the ecosystem around it, especially Expo."
+        },
+        {
+          "name": "Flutter",
+          "description": "One of my favorite tools due to its performance and DX, though a bit verbose at times."
+        },
+        {
+          "name": "Firebase",
+          "description": "Comes in handy when I need a backend for my app, or an identity provider for my backend."
+        }
+      ]
+    },
+    {
+      "name": "Game Development",
+      "description": "Mostly for fun, although it would be cool to make a full game someday...",
+      "items": [
+        {
+          "name": "Godot",
+          "description": "The most fun I've had developing software in ages."
+        },
+        {
+          "name": "Unity",
+          "description": "My introduction to gamedev. It's actually pretty fun, but the age shows at times."
+        }
+      ]
+    },
+    {
+      "name": "Miscellaneous",
+      "description": "Random languages or tools I occasionally use.",
+      "items": [
+        {
+          "name": "Rust",
+          "description": "I really like Rust, but I don't think I'm anywhere near capable of using it."
+        },
+        {
+          "name": "Python",
+          "description": "I use it for CLI tools, services, automation, and web scraping."
+        },
+        {
+          "name": "Java",
+          "description": "I use it to make Minecraft addons and mods, and backends."
+        },
+        {
+          "name": "C#",
+          "description": "I had a light exposure to C# and I could imagine myself working with it in the future."
+        },
+        {
+          "name": "Supabase",
+          "description": "Firebase but better."
+        },
+        {
+          "name": "Pocketbase",
+          "description": "A lightweight Firebase alternative which (IMO) has a better API."
+        }
+      ]
+    }
+  ]
+}

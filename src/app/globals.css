@@ -1,0 +1,51 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+* {
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    "Open Sans",
+    "Helvetica Neue",
+    sans-serif;
+}
+
+@keyframes gradient-move {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-gradient-move {
+  animation: gradient-move 5s ease infinite;
+}
+
+@theme {
+  --breakpoint-xs: 372px;
+}
+
+.Typewriter {
+  @apply mx-8 mt-auto bg-gradient-to-r from-indigo-300 to-sky-200 bg-clip-text pl-2 text-center text-5xl font-bold text-transparent sm:text-9xl;
+  background-size: 400% 400%;
+  line-height: 1.4;
+}
+
+.Typewriter:empty:before {
+  content: "\200b";
+}
+
+.Typewriter__cursor {
+  @apply bg-gradient-to-r from-indigo-300 to-sky-200 bg-clip-text;
+}
