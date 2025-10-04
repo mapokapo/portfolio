@@ -68,7 +68,7 @@
     {
       "title": "FSRE Notifier",
       "description": "An experiment to track my school schedule which turned into a full project",
-      "content": "Developed a timetable notification system using Java and Spring Boot, with MariaDB serving as the database to manage subscriptions. Modernized existing university API to be used by the newly introduced FSRE app while ensuring no disruption to existing services. Implemented Firebase Cloud Messaging to deliver real-time notifications to users about their classes and various news. Created a cross-platform mobile application using Flutter with a focus on resilience. Designed a simple web application with React and Tailwind CSS, allowing users to view the timetable through an alternative frontend. Deployed the entire system using Docker for containerization, ensuring smooth deployment.",
+      "content": "Developed a timetable notification system using Java and Spring Boot, with MariaDB serving as the database to manage subscriptions. Modernized existing university API to be used by the newly introduced FSRE app while ensuring no disruption to existing services. Integrated Firebase Cloud Messaging to deliver real-time notifications to users about their classes and various news. Created a cross-platform mobile application using Flutter with a focus on resilience. Designed a simple web application with React and Tailwind CSS, allowing users to view the timetable through an alternative frontend. Deployed the entire system using Docker for containerization, ensuring smooth deployment.",
       "meta": {
         "links": [
           {

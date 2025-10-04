@@ -1,7 +1,7 @@
 import "server-only";
-import admin, { ServiceAccount } from "firebase-admin";
+import admin from "firebase-admin";
 
-const serviceAccount: ServiceAccount = JSON.parse(
+const serviceAccount: admin.ServiceAccount = JSON.parse(
   process.env.FIREBASE_SERVICE_ACCOUNT_KEY as string
 );
 

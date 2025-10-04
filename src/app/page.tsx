@@ -9,6 +9,7 @@ import {
   SiTypescript,
 } from "react-icons/si";
 
+import AnchorMenu from "@/components/anchor-menu";
 import BlogPostView from "@/components/blog-post-view";
 import CircularLink from "@/components/circular-link";
 import IntroText from "@/components/intro-text";
@@ -30,9 +31,19 @@ export default async function Home() {
   const buildSize = await getBuildSize();
 
   return (
-    <main className="flex h-full w-full flex-col bg-slate-900">
+    <main className="relative flex h-full w-full flex-col bg-slate-900">
+      <AnchorMenu
+        anchors={[
+          { id: "main", label: "Intro" },
+          { id: "showcase", label: "Showcase" },
+          { id: "tech-stack", label: "Tech stack" },
+          { id: "website-info", label: "Website info" },
+          { id: "links", label: "Links" },
+        ]}
+      />
       <section
-        className="relative flex min-h-screen w-full flex-col items-center justify-center gap-2 bg-gradient-to-tr from-blue-600 to-blue-500 pt-[10%]"
+        className="relative flex min-h-screen w-full scroll-mt-28 flex-col items-center justify-center gap-2 bg-gradient-to-tr from-blue-600 to-blue-500 pt-[10%]"
+        id="main"
         style={{ backgroundSize: "400% 400%" }}>
         <QuoteView quote={randomChoice(textData.quotes)} />
         <IntroText />
@@ -82,7 +93,9 @@ export default async function Home() {
           />
         </Link>
       </section>
-      <section className="mt-24 flex flex-col items-center justify-center gap-4 bg-slate-900">
+      <section
+        className="mt-24 flex scroll-mt-28 flex-col items-center justify-center gap-4 bg-slate-900"
+        id="showcase">
         <h2 className="text-4xl text-white sm:text-7xl">Showcase</h2>
         <span className="text-opacity-75 px-3 text-center text-lg text-white sm:text-xl">
           Here&apos;s a short list of projects I made so far...
@@ -97,7 +110,9 @@ export default async function Home() {
           ))}
         </div>
       </section>
-      <section className="mt-20 flex flex-col items-center justify-center gap-4 bg-slate-900">
+      <section
+        className="mt-20 flex scroll-mt-28 flex-col items-center justify-center gap-4 bg-slate-900"
+        id="tech-stack">
         <h2 className="text-4xl text-white sm:text-7xl">Tech stack</h2>
         <span className="text-opacity-75 px-3 text-center text-lg text-white sm:mb-6 sm:text-xl">
           The important part
@@ -112,7 +127,9 @@ export default async function Home() {
           ))}
         </ul>
       </section>
-      <section className="mt-24 flex flex-col items-center justify-center gap-4 bg-slate-900 md:mx-8 lg:mx-[7%]">
+      <section
+        className="mt-24 flex scroll-mt-28 flex-col items-center justify-center gap-4 bg-slate-900 md:mx-8 lg:mx-[7%]"
+        id="website-info">
         <h2 className="text-4xl text-white sm:text-7xl">Website info</h2>
         <span className="text-opacity-75 px-3 text-center text-lg text-white sm:text-xl">
           I&apos;ll be placing website updates and info here, for those
@@ -247,7 +264,9 @@ export default async function Home() {
           </article>
         </div>
       </section>
-      <section className="mt-20 flex flex-col items-center justify-center gap-4 bg-slate-900 md:mx-8">
+      <section
+        className="mt-20 flex scroll-mt-28 flex-col items-center justify-center gap-4 bg-slate-900 md:mx-8"
+        id="links">
         <h2 className="text-4xl text-white sm:text-7xl">Links</h2>
         <span className="text-opacity-75 px-3 text-center text-lg text-white sm:text-xl">
           If you want to stay in touch or check out my other projects

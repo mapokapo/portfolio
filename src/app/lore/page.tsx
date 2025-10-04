@@ -1,4 +1,6 @@
 import { Metadata } from "next";
+import Link from "next/link";
+import { MdArrowBack } from "react-icons/md";
 
 import iconMap from "@/lib/const/iconMap";
 import { getTextData } from "@/lib/server/getTextData";
@@ -37,26 +39,32 @@ export default async function Lore() {
   const textData = await getTextData();
 
   return (
-    <main className="flex h-full min-h-screen w-full flex-col items-center gap-16 bg-slate-900 px-4 py-12 text-white sm:px-48">
-      <h1 className="text-center text-4xl font-bold text-white sm:text-6xl">
-        My backstory
-      </h1>
-      <div className="flex w-full flex-col gap-4 sm:gap-12">
+    <main className="flex h-full min-h-screen w-full flex-col items-center gap-8 bg-slate-900 p-4 text-white sm:px-48">
+      <div className="flex w-full flex-col gap-4">
+        <Link
+          className="mr-auto flex items-center gap-2 rounded-full bg-black/40 px-3 py-1.5 text-sm backdrop-blur-2xl hover:bg-black/60"
+          href="/">
+          <MdArrowBack size={18} />
+          <span>Back</span>
+        </Link>
+        <h1 className="text-center text-4xl font-bold text-white sm:text-6xl">
+          My story
+        </h1>
+      </div>
+      <div className="flex w-full flex-col gap-12">
         {textData.sections.map(s => (
           <article
             className="w-full"
             key={s.title}>
             <div className="flex flex-col gap-2 bg-slate-800 p-4 px-8 py-8 text-start shadow-md shadow-slate-800 sm:gap-8 sm:p-16">
               <div className="mb-3 flex w-full flex-col items-center gap-4 px-4 text-white sm:mb-0 sm:flex-row sm:px-0">
-                <div className="-mb-2 text-5xl sm:text-5xl">
-                  {iconMap[s.icon]}
-                </div>
+                <div className="-mb-2 text-5xl">{iconMap[s.icon]}</div>
                 <h3 className="text-center text-4xl sm:text-start sm:text-5xl">
                   {s.title}
                 </h3>
               </div>
               <p
-                className="block text-xl leading-8 text-white"
+                className="block leading-8 text-white sm:text-lg"
                 dangerouslySetInnerHTML={{ __html: s.content }}></p>
             </div>
           </article>
