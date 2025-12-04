@@ -72,13 +72,8 @@ export default async function Home() {
               title="Pronunciation: Leh-oh Peh-troh-vich">
               Leo Petrović
             </span>
-            . I am a{" "}
-            {Math.floor(
-              (Date.now() - new Date(2003, 6, 22).getTime()) /
-                (1000 * 60 * 60 * 24 * 365)
-            )}{" "}
-            year old computer science student, a software developer, and
-            technology enthusiast.
+            . I am a 22 year old computer science student, a software developer,
+            and technology enthusiast.
           </p>
         </section>
         <Link
