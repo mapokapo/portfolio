@@ -1,6 +1,7 @@
 import { Metadata, Viewport } from "next";
 
 import "./globals.css";
+import IconProvider from "@/components/icon-provider";
 import { ReportView } from "@/components/report-view";
 
 export const viewport: Viewport = {
@@ -76,8 +77,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
-      <ReportView />
+      <body>
+        <IconProvider>{children}</IconProvider>
+        <ReportView />
+      </body>
     </html>
   );
 }
