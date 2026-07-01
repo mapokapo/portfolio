@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import Link from "next/link";
+import { Suspense } from "react";
 import { MdArrowBack } from "react-icons/md";
 
 import iconMap from "@/lib/const/iconMap";
@@ -35,7 +36,15 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function Lore() {
+export default function Lore() {
+  return (
+    <Suspense fallback={<LoreSkeleton />}>
+      <LoreContent />
+    </Suspense>
+  );
+}
+
+async function LoreContent() {
   const textData = await getTextData();
 
   return (
@@ -68,6 +77,23 @@ export default async function Lore() {
                 dangerouslySetInnerHTML={{ __html: s.content }}></p>
             </div>
           </article>
+        ))}
+      </div>
+    </main>
+  );
+}
+
+function LoreSkeleton() {
+  return (
+    <main className="flex h-full min-h-screen w-full animate-pulse flex-col items-center gap-8 bg-slate-900 p-4 sm:px-48">
+      <div className="h-10 w-48 rounded-full bg-slate-800" />
+      <div className="h-12 w-full max-w-xl rounded-lg bg-slate-800" />
+      <div className="flex w-full flex-col gap-12">
+        {Array.from({ length: 3 }).map((_, index) => (
+          <div
+            className="h-48 w-full rounded-lg bg-slate-800"
+            key={index}
+          />
         ))}
       </div>
     </main>

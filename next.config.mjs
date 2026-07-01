@@ -4,6 +4,7 @@ import NextBundleAnalyzer from "@next/bundle-analyzer";
  * @type {import('next').NextConfig}
  */
 const nextConfig = {
+  cacheComponents: true,
   experimental: {
     scrollRestoration: true,
   },

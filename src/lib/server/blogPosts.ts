@@ -1,11 +1,76 @@
 import "server-only";
+import { cacheLife, cacheTag } from "next/cache";
 
 import { getFirebaseAdmin } from "@/lib/firebase.admin";
 import { BlogPost, blogPostSchema } from "@/lib/schemas/blogPost";
+import {
+  DYNAMIC_CONTENT_CACHE_TAGS,
+  DYNAMIC_CONTENT_REVALIDATE_SECONDS,
+} from "@/lib/server/revalidation";
+
+type CachedBlogPost = Omit<BlogPost, "published"> & { published: string };
 
 export async function getBlogPost(
   id: string
 ): Promise<"not_found" | "unavailable" | BlogPost> {
+  "use cache";
+  cacheLife({ revalidate: DYNAMIC_CONTENT_REVALIDATE_SECONDS });
+  cacheTag(DYNAMIC_CONTENT_CACHE_TAGS.blogPosts, `blog-post-${id}`);
+
+  const result = await fetchBlogPost(id);
+  if (result === "not_found" || result === "unavailable") {
+    return result;
+  }
+
+  return deserializeBlogPost(result);
+}
+
+export async function getBlogPostIds(): Promise<string[]> {
+  "use cache";
+  cacheLife({ revalidate: DYNAMIC_CONTENT_REVALIDATE_SECONDS });
+  cacheTag(DYNAMIC_CONTENT_CACHE_TAGS.blogPosts);
+
+  const admin = getFirebaseAdmin();
+  if (!admin) {
+    return [];
+  }
+
+  const docs = (
+    await admin
+      .firestore()
+      .collection("posts")
+      .orderBy("published", "desc")
+      .get()
+  ).docs;
+
+  return docs.map(doc => doc.id);
+}
+
+export async function getBlogPosts(
+  limit = 3
+): Promise<"unavailable" | BlogPost[]> {
+  "use cache";
+  cacheLife({ revalidate: DYNAMIC_CONTENT_REVALIDATE_SECONDS });
+  cacheTag(DYNAMIC_CONTENT_CACHE_TAGS.blogPosts);
+
+  const result = await fetchBlogPosts(limit);
+  if (result === "unavailable") {
+    return result;
+  }
+
+  return result.map(deserializeBlogPost);
+}
+
+function deserializeBlogPost(post: CachedBlogPost): BlogPost {
+  return {
+    ...post,
+    published: new Date(post.published),
+  };
+}
+
+async function fetchBlogPost(
+  id: string
+): Promise<"not_found" | "unavailable" | CachedBlogPost> {
   const admin = getFirebaseAdmin();
   if (!admin) {
     return "unavailable";
@@ -26,15 +91,15 @@ export async function getBlogPost(
     return "not_found";
   }
 
-  return {
+  return serializeBlogPost({
     ...blogPostResult.data,
     image: getPostImageUrl(admin, blogPostResult.data.image),
-  };
+  });
 }
 
-export async function getBlogPosts(
-  limit = 3
-): Promise<"unavailable" | BlogPost[]> {
+async function fetchBlogPosts(
+  limit: number
+): Promise<"unavailable" | CachedBlogPost[]> {
   const admin = getFirebaseAdmin();
   if (!admin) {
     return "unavailable";
@@ -49,7 +114,7 @@ export async function getBlogPosts(
       .get()
   ).docs;
 
-  const blogPosts: BlogPost[] = docs
+  const blogPosts: CachedBlogPost[] = docs
     .map(doc => {
       const blogPostResult = blogPostSchema.safeParse({
         ...doc.data(),
@@ -58,15 +123,15 @@ export async function getBlogPosts(
 
       if (!blogPostResult.success) {
         console.error("Invalid blog post data:", doc.id, blogPostResult.error);
-        return "not_found";
+        return null;
       }
 
-      return {
+      return serializeBlogPost({
         ...blogPostResult.data,
         image: getPostImageUrl(admin, blogPostResult.data.image),
-      };
+      });
     })
-    .filter((post): post is BlogPost => post !== null);
+    .filter((post): post is CachedBlogPost => post !== null);
 
   return blogPosts;
 }
@@ -82,4 +147,11 @@ function getPostImageUrl(
   }
 
   return "/assets/images/logo.png";
+}
+
+function serializeBlogPost(post: BlogPost): CachedBlogPost {
+  return {
+    ...post,
+    published: post.published.toISOString(),
+  };
 }

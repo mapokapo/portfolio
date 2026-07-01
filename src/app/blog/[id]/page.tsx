@@ -2,14 +2,80 @@ import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { connection } from "next/server";
+import { Suspense } from "react";
 import { MdArrowBack, MdSchedule } from "react-icons/md";
 
 import BlogPostView from "@/components/blog-post-view";
-import { getBlogPost, getBlogPosts } from "@/lib/server/blogPosts";
+import {
+  getBlogPost,
+  getBlogPostIds,
+  getBlogPosts,
+} from "@/lib/server/blogPosts";
 import { getReadTimeMinutes, getRelativeTime } from "@/lib/utils";
 
 export default async function Blog({ params }: PageProps<"/blog/[id]">) {
   const postId = (await params).id;
+
+  return (
+    <Suspense fallback={<BlogPostSkeleton />}>
+      <BlogPostContent postId={postId} />
+    </Suspense>
+  );
+}
+
+export async function generateMetadata({ params }: PageProps<"/blog/[id]">) {
+  const postId = (await params).id;
+  const postResult = await getBlogPost(postId);
+
+  if (postResult === "unavailable") {
+    return {
+      description: "Blog posts are currently unavailable.",
+      title: "Blog Unavailable",
+    };
+  }
+
+  if (postResult === "not_found") {
+    return {
+      description: "The requested post does not exist.",
+      title: "Post Not Found",
+    };
+  }
+
+  return {
+    description: postResult.content.slice(0, 160),
+    keywords: postResult.title
+      .split(" ")
+      .concat(["blog", "devlog", "leo petrovic", "portfolio"]),
+    openGraph: {
+      description: postResult.content.slice(0, 160),
+      images: [
+        {
+          alt: postResult.title,
+          height: 384,
+          url: postResult.image,
+          width: 384,
+        },
+      ],
+      title: postResult.title,
+    },
+    title: postResult.title,
+    twitter: {
+      card: "summary_large_image",
+      description: postResult.content.slice(0, 160),
+      images: [postResult.image],
+      title: postResult.title,
+    },
+  } satisfies Metadata;
+}
+
+export async function generateStaticParams() {
+  const ids = await getBlogPostIds();
+  return ids.map(id => ({ id }));
+}
+
+async function BlogPostContent({ postId }: Readonly<{ postId: string }>) {
+  await connection();
   const postResult = await getBlogPost(postId);
 
   if (postResult === "unavailable") {
@@ -124,47 +190,13 @@ export default async function Blog({ params }: PageProps<"/blog/[id]">) {
   );
 }
 
-export async function generateMetadata({ params }: PageProps<"/blog/[id]">) {
-  const postId = (await params).id;
-  const postResult = await getBlogPost(postId);
-
-  if (postResult === "unavailable") {
-    return {
-      description: "Blog posts are currently unavailable.",
-      title: "Blog Unavailable",
-    };
-  }
-
-  if (postResult === "not_found") {
-    return {
-      description: "The requested post does not exist.",
-      title: "Post Not Found",
-    };
-  }
-
-  return {
-    description: postResult.content.slice(0, 160),
-    keywords: postResult.title
-      .split(" ")
-      .concat(["blog", "devlog", "leo petrovic", "portfolio"]),
-    openGraph: {
-      description: postResult.content.slice(0, 160),
-      images: [
-        {
-          alt: postResult.title,
-          height: 384,
-          url: postResult.image,
-          width: 384,
-        },
-      ],
-      title: postResult.title,
-    },
-    title: postResult.title,
-    twitter: {
-      card: "summary_large_image",
-      description: postResult.content.slice(0, 160),
-      images: [postResult.image],
-      title: postResult.title,
-    },
-  } satisfies Metadata;
+function BlogPostSkeleton() {
+  return (
+    <main className="flex h-full min-h-screen w-full animate-pulse flex-col items-center gap-4 bg-slate-900 text-white">
+      <header className="h-[10vw] min-h-[320px] w-full bg-slate-800 sm:h-[20vw]" />
+      <section className="mx-auto w-full max-w-5xl px-4 sm:px-8 lg:px-10">
+        <article className="min-h-[24rem] rounded-xl bg-slate-800/60" />
+      </section>
+    </main>
+  );
 }

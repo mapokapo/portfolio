@@ -2,14 +2,31 @@ import "server-only";
 
 import type admin from "firebase-admin";
 
+import { cacheLife, cacheTag } from "next/cache";
+
 import { getFirebaseAdmin } from "@/lib/firebase.admin";
 import { PageView, pageViewSchema } from "@/lib/schemas/pageView";
+import {
+  DYNAMIC_CONTENT_CACHE_TAGS,
+  DYNAMIC_CONTENT_REVALIDATE_SECONDS,
+} from "@/lib/server/revalidation";
 
 // 2 weeks
 const ENTRY_MAX_AGE = 2 * 7 * 24 * 60 * 60 * 1000;
 // 1 hour
 const UPDATE_INTERVAL = 60 * 60 * 1000;
 const DEFAULT_PAGE_VIEW_HOURS = 24;
+
+type CachedPageView = Omit<PageView, "recordStartTimestamp"> & {
+  recordStartTimestamp: string;
+};
+
+function deserializePageView(entry: CachedPageView): PageView {
+  return {
+    ...entry,
+    recordStartTimestamp: new Date(entry.recordStartTimestamp),
+  };
+}
 
 function getDefaultPageViews(): PageView[] {
   const now = Date.now();
@@ -21,6 +38,13 @@ function getDefaultPageViews(): PageView[] {
     ),
     totalViews: 0,
   }));
+}
+
+function serializePageView(entry: PageView): CachedPageView {
+  return {
+    ...entry,
+    recordStartTimestamp: entry.recordStartTimestamp.toISOString(),
+  };
 }
 
 const deleteOldEntries = async (
@@ -71,6 +95,10 @@ const getMostRecentEntry = async (
 };
 
 export async function getPageViews(): Promise<PageView[]> {
+  "use cache";
+  cacheLife({ revalidate: DYNAMIC_CONTENT_REVALIDATE_SECONDS });
+  cacheTag(DYNAMIC_CONTENT_CACHE_TAGS.pageViews);
+
   const admin = getFirebaseAdmin();
   if (!admin) {
     return getDefaultPageViews();
@@ -89,19 +117,19 @@ export async function getPageViews(): Promise<PageView[]> {
         );
         return null;
       }
-      return pageViewResult.data;
+      return serializePageView(pageViewResult.data);
     })
-    .filter((entry): entry is PageView => entry !== null);
+    .filter((entry): entry is CachedPageView => entry !== null);
 
-  // Sort by ascending time
   if (pageViews.length > 1) {
     pageViews.sort(
       (a, b) =>
-        a.recordStartTimestamp.getTime() - b.recordStartTimestamp.getTime()
+        new Date(a.recordStartTimestamp).getTime() -
+        new Date(b.recordStartTimestamp).getTime()
     );
   }
 
-  return pageViews;
+  return pageViews.map(deserializePageView);
 }
 
 export async function updatePageViews() {
@@ -112,19 +140,15 @@ export async function updatePageViews() {
 
   const col = admin.firestore().collection("pageViews");
 
-  // Remove entries older than 2 weeks
   await deleteOldEntries(col);
 
-  // Get most recent entry from db or null if there are no entries
   const currentEntry = await getMostRecentEntry(col);
 
-  // If it happened more than one hour ago or if there are no entries, add new entry within the last hour
   if (
     currentEntry === null ||
     Date.now() - currentEntry.data.recordStartTimestamp.getTime() >
       UPDATE_INTERVAL
   ) {
-    // Add new entry (round timestamp down to hours)
     const newEntry: PageView = {
       recordStartTimestamp:
         currentEntry === null
@@ -142,7 +166,6 @@ export async function updatePageViews() {
     };
     await col.add(newEntry);
   } else {
-    // Otherwise just increase total views of existing entry
     await currentEntry.doc.ref.update({
       totalViews: admin.firestore.FieldValue.increment(1),
     });
