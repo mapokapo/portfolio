@@ -66,14 +66,47 @@
       }
     },
     {
+      "title": "FSRE App",
+      "description": "The official FSRE student app for timetables, news, and campus help",
+      "content": "Led development of the official mobile app for the Faculty of Electrical Engineering and Computing (FSRE). Built with Expo and React Native, integrating my own university timetable API via an OpenAPI-typed client, using Firebase Cloud Messaging for schedule notifications, and implementing a Gemini-powered chatbot with cached responses and Markdown rendering. Includes i18n (HR/EN and automated EAS deployments for the Google Play Store.",
+      "meta": {
+        "links": [
+          {
+            "label": "Google Play Store",
+            "url": "https://play.google.com/store/apps/details?id=com.fsre.mobileapp"
+          }
+        ],
+        "imageUrl": "/assets/images/fsre_app_logo.png",
+        "madeWith": [
+          "Expo",
+          "React Native",
+          "Firebase",
+          "Typescript",
+          "Tailwind"
+        ]
+      }
+    },
+    {
       "title": "FSRE Notifier",
-      "description": "An experiment to track my school schedule which turned into a full project",
-      "content": "Developed a timetable notification system using Java and Spring Boot, with MariaDB serving as the database to manage subscriptions. Modernized existing university API to be used by the newly introduced FSRE app while ensuring no disruption to existing services. Integrated Firebase Cloud Messaging to deliver real-time notifications to users about their classes and various news. Created a cross-platform mobile application using Flutter with a focus on resilience. Designed a simple web application with React and Tailwind CSS, allowing users to view the timetable through an alternative frontend. Deployed the entire system using Docker for containerization, ensuring smooth deployment.",
+      "description": "A university timetable tracking and notification system",
+      "content": "Started as a personal experiment to track my university schedule and evolved into a full multi-component project under the FSRE-Timetable-Notify organization. Developed a timetable notification backend using Java and Spring Boot with MariaDB for subscription management. Modernized the existing university API for use by client apps while ensuring no disruption to existing services. Integrated Firebase Cloud Messaging for real-time class and news notifications. Built a React and Tailwind CSS web frontend as an alternative timetable viewer, and an early Flutter mobile client. Deployed the system with Docker for containerization.",
       "meta": {
         "links": [
           {
             "label": "Project",
             "url": "https://github.com/FSRE-Timetable-Notify/fsre-timetable-notify"
+          },
+          {
+            "label": "Backend",
+            "url": "https://github.com/FSRE-Timetable-Notify/fsre-timetable-notify-backend"
+          },
+          {
+            "label": "Web",
+            "url": "https://github.com/FSRE-Timetable-Notify/fsre-timetable-notify-frontend"
+          },
+          {
+            "label": "Live demo",
+            "url": "https://fsre-app.mapokapo.cc/?selectedTimetableStudyProgramId=-59"
           }
         ],
         "imageUrl": "/assets/images/fsre_timetable_notify.png",
@@ -102,7 +135,11 @@
           }
         ],
         "imageUrl": "/assets/images/sportsmart_logo.png",
-        "madeWith": ["React Native", "Firebase", "Algolia"]
+        "madeWith": [
+          "React Native",
+          "Firebase",
+          "Algolia"
+        ]
       }
     },
     {
@@ -117,7 +154,10 @@
           }
         ],
         "imageUrl": "/assets/images/riskfactor_logo.png",
-        "madeWith": ["Flutter", "Firebase"]
+        "madeWith": [
+          "Flutter",
+          "Firebase"
+        ]
       }
     },
     {
@@ -224,7 +264,10 @@
           }
         ],
         "imageUrl": "/assets/images/diaspora_logo.png",
-        "madeWith": ["Flutter", "Firebase"]
+        "madeWith": [
+          "Flutter",
+          "Firebase"
+        ]
       }
     },
     {
@@ -239,7 +282,12 @@
           }
         ],
         "imageUrl": "/assets/images/ramu_fitquest_app.png",
-        "madeWith": ["React Native", "Expo", "Supabase", "Typescript"]
+        "madeWith": [
+          "React Native",
+          "Expo",
+          "Supabase",
+          "Typescript"
+        ]
       }
     }
   ],
