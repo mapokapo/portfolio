@@ -6,6 +6,8 @@
     "dev": "next dev --turbopack",
     "build": "next build --turbopack",
     "build-analyze": "cross-env ANALYZE=true next build --turbopack",
+    "postbuild": "bun run sync-build-size",
+    "sync-build-size": "bun run scripts/sync-build-size.ts",
     "start": "next start",
     "lint": "eslint"
   },
