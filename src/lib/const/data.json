@@ -68,7 +68,7 @@
     {
       "title": "FSRE App",
       "description": "The official FSRE student app for timetables, news, and campus help",
-      "content": "Led development of the official mobile app for the Faculty of Electrical Engineering and Computing (FSRE). Built with Expo and React Native, integrating my own university timetable API via an OpenAPI-typed client, using Firebase Cloud Messaging for schedule notifications, and implementing a Gemini-powered chatbot with cached responses and Markdown rendering. Includes i18n (HR/EN and automated EAS deployments for the Google Play Store.",
+      "content": "Led development of the official mobile app for the Faculty of Electrical Engineering and Computing (FSRE). Built with Expo and React Native, integrating my own university timetable API via an OpenAPI-typed client, using Firebase Cloud Messaging for schedule notifications, and implementing a Gemini-powered chatbot with cached responses and Markdown rendering. Includes i18n (HR/EN) and automated EAS deployments for the Google Play Store.",
       "meta": {
         "links": [
           {
