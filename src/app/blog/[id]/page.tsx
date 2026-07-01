@@ -10,23 +10,45 @@ import { getReadTimeMinutes, getRelativeTime } from "@/lib/utils";
 
 export default async function Blog({ params }: PageProps<"/blog/[id]">) {
   const postId = (await params).id;
-  const post = await getBlogPost(postId);
+  const postResult = await getBlogPost(postId);
 
-  if (!post) notFound();
+  if (postResult === "unavailable") {
+    return (
+      <main className="flex h-full min-h-screen w-full flex-col items-center justify-center gap-4 bg-slate-900 px-4 text-white">
+        <p className="text-xl font-semibold sm:text-2xl">
+          Blog posts unavailable
+        </p>
+        <Link
+          className="flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-sm hover:bg-white/20"
+          href="/">
+          <MdArrowBack size={18} />
+          <span>Back to home</span>
+        </Link>
+      </main>
+    );
+  }
 
-  const recommendedPosts = (await getBlogPosts()).filter(p => p.id !== post.id);
+  if (postResult === "not_found") {
+    notFound();
+  }
+
+  const recommendedPostsResult = await getBlogPosts();
+  const recommendedPosts =
+    recommendedPostsResult === "unavailable"
+      ? []
+      : recommendedPostsResult.filter(p => p.id !== postResult.id);
   const now = new Date();
 
   return (
     <main className="flex h-full min-h-screen w-full flex-col items-center gap-4 bg-slate-900 text-white">
       <header className="relative h-[10vw] min-h-[320px] w-full overflow-hidden sm:h-[20vw]">
         <Image
-          alt={"Cover image for " + post.title}
+          alt={"Cover image for " + postResult.title}
           className="scale-125 object-cover blur-3xl brightness-60"
           fill
           priority
           sizes="100vw"
-          src={post.image}
+          src={postResult.image}
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-slate-900"></div>
 
@@ -42,15 +64,15 @@ export default async function Blog({ params }: PageProps<"/blog/[id]">) {
 
           <div className="mt-auto mb-6 sm:mb-10">
             <h1 className="max-w-4xl text-3xl font-extrabold text-balance sm:text-5xl md:text-6xl">
-              {post.title}
+              {postResult.title}
             </h1>
             <div className="mt-4 flex flex-wrap items-center gap-2 text-sm opacity-90 sm:text-base">
               <span className="rounded-full bg-white/10 px-3 py-1">
-                Published {getRelativeTime(post.published, now)}
+                Published {getRelativeTime(postResult.published, now)}
               </span>
               <span className="flex items-center gap-1 rounded-full bg-white/10 px-3 py-1">
-                <MdSchedule size={16} /> {getReadTimeMinutes(post.content)} min
-                read
+                <MdSchedule size={16} />{" "}
+                {getReadTimeMinutes(postResult.content)} min read
               </span>
             </div>
           </div>
@@ -62,19 +84,19 @@ export default async function Blog({ params }: PageProps<"/blog/[id]">) {
           <div className="mx-auto mb-6 w-full max-w-2xl">
             <div className="relative mx-auto aspect-video w-full">
               <Image
-                alt={"Cover image for " + post.title}
+                alt={"Cover image for " + postResult.title}
                 className="object-contain p-2"
                 fill
                 priority
                 sizes="(min-width: 1024px) 768px, (min-width: 640px) 600px, 100vw"
-                src={post.image}
+                src={postResult.image}
               />
             </div>
           </div>
 
           <div
             className="prose xl:prose-xl prose-slate dark:prose-invert mx-auto"
-            dangerouslySetInnerHTML={{ __html: post.content }}></div>
+            dangerouslySetInnerHTML={{ __html: postResult.content }}></div>
         </article>
       </section>
 
@@ -104,9 +126,16 @@ export default async function Blog({ params }: PageProps<"/blog/[id]">) {
 
 export async function generateMetadata({ params }: PageProps<"/blog/[id]">) {
   const postId = (await params).id;
-  const post = await getBlogPost(postId);
+  const postResult = await getBlogPost(postId);
 
-  if (!post) {
+  if (postResult === "unavailable") {
+    return {
+      description: "Blog posts are currently unavailable.",
+      title: "Blog Unavailable",
+    };
+  }
+
+  if (postResult === "not_found") {
     return {
       description: "The requested post does not exist.",
       title: "Post Not Found",
@@ -114,28 +143,28 @@ export async function generateMetadata({ params }: PageProps<"/blog/[id]">) {
   }
 
   return {
-    description: post.content.slice(0, 160),
-    keywords: post.title
+    description: postResult.content.slice(0, 160),
+    keywords: postResult.title
       .split(" ")
       .concat(["blog", "devlog", "leo petrovic", "portfolio"]),
     openGraph: {
-      description: post.content.slice(0, 160),
+      description: postResult.content.slice(0, 160),
       images: [
         {
-          alt: post.title,
+          alt: postResult.title,
           height: 384,
-          url: post.image,
+          url: postResult.image,
           width: 384,
         },
       ],
-      title: post.title,
+      title: postResult.title,
     },
-    title: post.title,
+    title: postResult.title,
     twitter: {
       card: "summary_large_image",
-      description: post.content.slice(0, 160),
-      images: [post.image],
-      title: post.title,
+      description: postResult.content.slice(0, 160),
+      images: [postResult.image],
+      title: postResult.title,
     },
   } satisfies Metadata;
 }

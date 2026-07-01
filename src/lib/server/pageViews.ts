@@ -1,16 +1,36 @@
 import "server-only";
 
-import admin from "@/lib/firebase.admin";
+import type admin from "firebase-admin";
+
+import { getFirebaseAdmin } from "@/lib/firebase.admin";
 import { PageView, pageViewSchema } from "@/lib/schemas/pageView";
 
 // 2 weeks
 const ENTRY_MAX_AGE = 2 * 7 * 24 * 60 * 60 * 1000;
 // 1 hour
 const UPDATE_INTERVAL = 60 * 60 * 1000;
+const DEFAULT_PAGE_VIEW_HOURS = 24;
+
+function getDefaultPageViews(): PageView[] {
+  const now = Date.now();
+  const alignedNow = now - (now % UPDATE_INTERVAL);
+
+  return Array.from({ length: DEFAULT_PAGE_VIEW_HOURS }, (_, index) => ({
+    recordStartTimestamp: new Date(
+      alignedNow - (DEFAULT_PAGE_VIEW_HOURS - 1 - index) * UPDATE_INTERVAL
+    ),
+    totalViews: 0,
+  }));
+}
 
 const deleteOldEntries = async (
   collection: admin.firestore.CollectionReference<admin.firestore.DocumentData>
 ) => {
+  const admin = getFirebaseAdmin();
+  if (!admin) {
+    return;
+  }
+
   const deleteOldEntriesBatch = admin.firestore().batch();
   (
     await collection
@@ -33,7 +53,7 @@ const getMostRecentEntry = async (
     await collection.orderBy("recordStartTimestamp", "asc").limitToLast(1).get()
   ).docs.at(0);
 
-  if (currentEntryDoc === undefined || !currentEntryDoc.exists) {
+  if (!currentEntryDoc?.exists) {
     return null;
   }
 
@@ -50,7 +70,12 @@ const getMostRecentEntry = async (
   return { data: currentEntryResult.data, doc: currentEntryDoc };
 };
 
-export async function getPageViews() {
+export async function getPageViews(): Promise<PageView[]> {
+  const admin = getFirebaseAdmin();
+  if (!admin) {
+    return getDefaultPageViews();
+  }
+
   const docs = (await admin.firestore().collection("pageViews").get()).docs;
 
   const pageViews = docs
@@ -69,16 +94,22 @@ export async function getPageViews() {
     .filter((entry): entry is PageView => entry !== null);
 
   // Sort by ascending time
-  if (pageViews.length > 1)
+  if (pageViews.length > 1) {
     pageViews.sort(
       (a, b) =>
         a.recordStartTimestamp.getTime() - b.recordStartTimestamp.getTime()
     );
+  }
 
   return pageViews;
 }
 
 export async function updatePageViews() {
+  const admin = getFirebaseAdmin();
+  if (!admin) {
+    return;
+  }
+
   const col = admin.firestore().collection("pageViews");
 
   // Remove entries older than 2 weeks

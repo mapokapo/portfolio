@@ -1,9 +1,14 @@
 import "server-only";
 
-import admin from "@/lib/firebase.admin";
-import { buildSizeSchema } from "@/lib/schemas/buildSize";
+import { getFirebaseAdmin } from "@/lib/firebase.admin";
+import { BuildSize, buildSizeSchema } from "@/lib/schemas/buildSize";
 
-export async function getBuildSize() {
+export async function getBuildSize(): Promise<"unavailable" | BuildSize> {
+  const admin = getFirebaseAdmin();
+  if (!admin) {
+    return "unavailable";
+  }
+
   const doc = await admin
     .firestore()
     .collection("buildSize")

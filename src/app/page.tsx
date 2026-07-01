@@ -27,8 +27,8 @@ import { getRelativeTime, humanFileSize, randomChoice } from "@/lib/utils";
 export default async function Home() {
   const textData = await getTextData();
   const pageViewEntries = await getPageViews();
-  const blogPosts = await getBlogPosts(5);
-  const buildSize = await getBuildSize();
+  const blogPostsResult = await getBlogPosts(5);
+  const buildSizeResult = await getBuildSize();
 
   return (
     <main className="relative flex h-full w-full flex-col bg-slate-900">
@@ -134,48 +134,86 @@ export default async function Home() {
           <article className="col-span-1 row-span-1 flex flex-col gap-8 rounded-lg bg-slate-800 px-6 py-6 text-white md:px-8 lg:px-12 lg:py-8">
             <h3 className="text-3xl sm:text-5xl">Build size</h3>
             <div className="flex flex-col justify-center gap-3 text-2xl">
-              <>
-                <div className="flex items-center justify-between gap-4">
-                  <span className="text-xl font-semibold">Javascript</span>
-                  <span className="text-xl">{humanFileSize(buildSize.js)}</span>
-                </div>
-                <hr className="mt-4 mb-2 h-px w-full opacity-50" />
-                <div className="flex justify-between">
-                  <span className="text-xl font-semibold">CSS</span>
-                  <span className="text-xl">
-                    {humanFileSize(buildSize.css)}
-                  </span>
-                </div>
-                <hr className="mt-4 mb-2 h-px w-full opacity-50" />
-                <div className="flex justify-between">
-                  <span className="text-xl font-semibold">Media</span>
-                  <span className="text-xl">
-                    {humanFileSize(buildSize.media)}
-                  </span>
-                </div>
-                <hr className="mt-4 mb-2 h-px w-full opacity-50" />
-                <div className="flex justify-between">
-                  <span className="text-2xl font-bold sm:text-4xl">Total</span>
-                  <span className="text-2xl font-bold sm:text-4xl">
-                    {humanFileSize(
-                      buildSize.js + buildSize.css + buildSize.media
-                    )}
-                  </span>
-                </div>
-              </>
+              {buildSizeResult === "unavailable" ? (
+                <>
+                  <div className="flex items-center justify-between gap-4">
+                    <span className="text-xl font-semibold">Javascript</span>
+                    <span className="text-xl">Unavailable</span>
+                  </div>
+                  <hr className="mt-4 mb-2 h-px w-full opacity-50" />
+                  <div className="flex justify-between">
+                    <span className="text-xl font-semibold">CSS</span>
+                    <span className="text-xl">Unavailable</span>
+                  </div>
+                  <hr className="mt-4 mb-2 h-px w-full opacity-50" />
+                  <div className="flex justify-between">
+                    <span className="text-xl font-semibold">Media</span>
+                    <span className="text-xl">Unavailable</span>
+                  </div>
+                  <hr className="mt-4 mb-2 h-px w-full opacity-50" />
+                  <div className="flex justify-between">
+                    <span className="text-2xl font-bold sm:text-4xl">
+                      Total
+                    </span>
+                    <span className="text-2xl font-bold sm:text-4xl">
+                      Unavailable
+                    </span>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div className="flex items-center justify-between gap-4">
+                    <span className="text-xl font-semibold">Javascript</span>
+                    <span className="text-xl">
+                      {humanFileSize(buildSizeResult.js)}
+                    </span>
+                  </div>
+                  <hr className="mt-4 mb-2 h-px w-full opacity-50" />
+                  <div className="flex justify-between">
+                    <span className="text-xl font-semibold">CSS</span>
+                    <span className="text-xl">
+                      {humanFileSize(buildSizeResult.css)}
+                    </span>
+                  </div>
+                  <hr className="mt-4 mb-2 h-px w-full opacity-50" />
+                  <div className="flex justify-between">
+                    <span className="text-xl font-semibold">Media</span>
+                    <span className="text-xl">
+                      {humanFileSize(buildSizeResult.media)}
+                    </span>
+                  </div>
+                  <hr className="mt-4 mb-2 h-px w-full opacity-50" />
+                  <div className="flex justify-between">
+                    <span className="text-2xl font-bold sm:text-4xl">
+                      Total
+                    </span>
+                    <span className="text-2xl font-bold sm:text-4xl">
+                      {humanFileSize(
+                        buildSizeResult.js +
+                          buildSizeResult.css +
+                          buildSizeResult.media
+                      )}
+                    </span>
+                  </div>
+                </>
+              )}
             </div>
           </article>
           <article className="col-span-1 row-span-3 flex h-full flex-col gap-8 rounded-lg bg-slate-800 px-6 py-6 text-white md:px-8 lg:px-12 lg:py-8">
             <h3 className="text-3xl sm:text-5xl md:mb-4 lg:mb-8">
               Latest devblog posts
             </h3>
-            {blogPosts.length === 0 ? (
+            {blogPostsResult === "unavailable" ? (
+              <span className="text-md ml-2 font-semibold sm:text-xl">
+                Blog posts unavailable
+              </span>
+            ) : blogPostsResult.length === 0 ? (
               <span className="text-md ml-2 font-semibold sm:text-xl">
                 Nothing here yet.
               </span>
             ) : (
               <ul className="mt-auto flex h-full max-h-[300px] flex-col gap-8 overflow-y-auto md:max-h-[500px] lg:max-h-[600px] xl:max-h-[800px]">
-                {blogPosts.map(p => (
+                {blogPostsResult.map(p => (
                   <BlogPostView
                     content={p.content}
                     id={p.id}

@@ -1,11 +1,20 @@
 import "server-only";
 
-import admin from "@/lib/firebase.admin";
+import { getFirebaseAdmin } from "@/lib/firebase.admin";
 import { BlogPost, blogPostSchema } from "@/lib/schemas/blogPost";
 
-export async function getBlogPost(id: string) {
+export async function getBlogPost(
+  id: string
+): Promise<"not_found" | "unavailable" | BlogPost> {
+  const admin = getFirebaseAdmin();
+  if (!admin) {
+    return "unavailable";
+  }
+
   const doc = await admin.firestore().collection("posts").doc(id).get();
-  if (!doc.exists) return null;
+  if (!doc.exists) {
+    return "not_found";
+  }
 
   const blogPostResult = blogPostSchema.safeParse({
     ...doc.data(),
@@ -14,20 +23,23 @@ export async function getBlogPost(id: string) {
 
   if (!blogPostResult.success) {
     console.error("Invalid blog post data:", doc.id, blogPostResult.error);
-    return null;
+    return "not_found";
   }
 
-  let imageUrl: string;
-  if (admin.storage().app.options.credential !== undefined)
-    imageUrl = `https://storage.googleapis.com/${
-      (admin.storage().app.options.credential as never)["projectId"]
-    }.appspot.com/posts/${blogPostResult.data.image}`;
-  else imageUrl = "/assets/images/logo.png";
-
-  return { ...blogPostResult.data, image: imageUrl };
+  return {
+    ...blogPostResult.data,
+    image: getPostImageUrl(admin, blogPostResult.data.image),
+  };
 }
 
-export async function getBlogPosts(limit = 3) {
+export async function getBlogPosts(
+  limit = 3
+): Promise<"unavailable" | BlogPost[]> {
+  const admin = getFirebaseAdmin();
+  if (!admin) {
+    return "unavailable";
+  }
+
   const docs = (
     await admin
       .firestore()
@@ -37,34 +49,37 @@ export async function getBlogPosts(limit = 3) {
       .get()
   ).docs;
 
-  const blogPosts: BlogPost[] = await Promise.all(
-    docs
-      .map(doc => {
-        const blogPostResult = blogPostSchema.safeParse({
-          ...doc.data(),
-          id: doc.id,
-        });
+  const blogPosts: BlogPost[] = docs
+    .map(doc => {
+      const blogPostResult = blogPostSchema.safeParse({
+        ...doc.data(),
+        id: doc.id,
+      });
 
-        if (!blogPostResult.success) {
-          console.error(
-            "Invalid blog post data:",
-            doc.id,
-            blogPostResult.error
-          );
-          return null;
-        }
+      if (!blogPostResult.success) {
+        console.error("Invalid blog post data:", doc.id, blogPostResult.error);
+        return "not_found";
+      }
 
-        let imageUrl: string;
-        if (admin.storage().app.options.credential !== undefined)
-          imageUrl = `https://storage.googleapis.com/${
-            (admin.storage().app.options.credential as never)["projectId"]
-          }.appspot.com/posts/${blogPostResult.data.image}`;
-        else imageUrl = "/assets/images/logo.png";
-
-        return { ...blogPostResult.data, image: imageUrl };
-      })
-      .filter((post): post is BlogPost => post !== null)
-  );
+      return {
+        ...blogPostResult.data,
+        image: getPostImageUrl(admin, blogPostResult.data.image),
+      };
+    })
+    .filter((post): post is BlogPost => post !== null);
 
   return blogPosts;
+}
+
+function getPostImageUrl(
+  admin: NonNullable<ReturnType<typeof getFirebaseAdmin>>,
+  image: string
+): string {
+  if (admin.storage().app.options.credential !== undefined) {
+    return `https://storage.googleapis.com/${
+      (admin.storage().app.options.credential as never)["projectId"]
+    }.appspot.com/posts/${image}`;
+  }
+
+  return "/assets/images/logo.png";
 }
