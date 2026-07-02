@@ -20,6 +20,8 @@
     "@tailwindcss/typography": "latest",
     "@tailwindcss/vite": "latest",
     "@upstash/redis": "latest",
+    "@vercel/analytics": "latest",
+    "@vercel/speed-insights": "latest",
     "astro": "latest",
     "html-to-text": "latest",
     "postcss": "latest",

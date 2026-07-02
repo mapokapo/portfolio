@@ -1,5 +1,8 @@
 ---
 import "@/styles/globals.css";
+import VercelAnalytics from "@vercel/analytics/astro";
+import SpeedInsights from "@vercel/speed-insights/astro";
+
 import { getDefaultOgImageUrl } from "@/assets/meta";
 
 type Props = {
@@ -73,6 +76,8 @@ const imageUrl = new URL(image, siteUrl).toString();
   </head>
   <body>
     <slot />
+    <VercelAnalytics />
+    <SpeedInsights />
     <script is:inline>
       const schedulePageView =
         window.requestIdleCallback ?? ((callback) => window.setTimeout(callback, 1));
