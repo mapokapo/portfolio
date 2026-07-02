@@ -323,13 +323,19 @@ function PageViewChart({ entries }: { entries: SerializedPageView[] }) {
 
   const gridStroke = "rgba(255,255,255,0.1)";
   const axisStroke = "rgba(255,255,255,0.25)";
+  const totalViews = values.reduce((sum, value) => sum + value, 0);
 
   return (
     <svg
-      aria-label="Hourly website visits"
+      aria-describedby="page-view-chart-desc"
+      aria-labelledby="page-view-chart-title"
       className="h-auto w-full overflow-visible"
       role="img"
       viewBox={`0 0 ${width.toString()} ${height.toString()}`}>
+      <title id="page-view-chart-title">Hourly website visits</title>
+      <desc id="page-view-chart-desc">
+        {`Line chart of ${totalViews.toString()} visits across ${entries.length.toString()} hourly buckets.`}
+      </desc>
       {Array.from({ length: yTicks + 1 }, (_, index) => {
         const y = paddingY + (chartHeight / yTicks) * index;
         return (
