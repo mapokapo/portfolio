@@ -2,9 +2,9 @@
 import { getCollection, render } from "astro:content";
 import { MdArrowBack, MdSchedule } from "react-icons/md";
 
-import { getBlogImageUrl } from "@/assets/blog";
+import { getBlogOgImage } from "@/assets/blog";
 import BlogPostImage from "@/assets/blog/BlogPostImage.astro";
-import { getDefaultOgImageUrl } from "@/assets/meta";
+import { getDefaultOgImage } from "@/assets/meta";
 import BlogPostCard from "@/components/BlogPostCard.astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import { getReadTimeMinutes, getRelativeTime } from "@/lib/utils";
@@ -31,15 +31,20 @@ const description = post.data.description ?? postBody.slice(0, 160);
 const publishedRelative = getRelativeTime(post.data.published);
 const readTimeMinutes = getReadTimeMinutes(postBody);
 const ogImage =
-  (await getBlogImageUrl(post.id, { width: 1200 })) ??
-  (await getDefaultOgImageUrl());
+  (await getBlogOgImage(post.id, { width: 1200 })) ?? (await getDefaultOgImage());
+const imageAlt = `Cover image for ${post.data.title}`;
+const tags = ["blog", "devlog", "leo petrovic", "portfolio"];
 ---
 
 <BaseLayout
   description={description}
   image={ogImage}
-  keywords={[...post.data.title.split(" "), "blog", "devlog", "leo petrovic", "portfolio"]}
-  title={post.data.title}>
+  imageAlt={imageAlt}
+  keywords={[...post.data.title.split(" "), ...tags]}
+  publishedTime={post.data.published}
+  tags={tags}
+  title={post.data.title}
+  type="article">
   <main class="flex h-full min-h-screen w-full flex-col items-center gap-4 bg-slate-900 text-white">
     <header class="relative h-[10vw] min-h-80 w-full overflow-hidden sm:h-[20vw]">
       <BlogPostImage

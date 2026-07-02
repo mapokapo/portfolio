@@ -3,26 +3,78 @@ import "@/styles/globals.css";
 import VercelAnalytics from "@vercel/analytics/astro";
 import SpeedInsights from "@vercel/speed-insights/astro";
 
-import { getDefaultOgImageUrl } from "@/assets/meta";
+import { getDefaultOgImage } from "@/assets/meta";
+import {
+  formatPageTitle,
+  type OgImage,
+  type OgType,
+  site,
+} from "@/lib/site";
 
 type Props = {
   description?: string;
-  image?: string;
+  image?: OgImage | string;
+  imageAlt?: string;
   keywords?: string[];
+  publishedTime?: Date;
+  tags?: string[];
   title?: string;
+  type?: OgType;
 };
 
-const siteUrl = "https://leopetrovic.vercel.app";
 const {
-  description = "Leo's personal portfolio website",
+  description = site.defaultDescription,
   image: imageProp,
+  imageAlt = site.name,
   keywords = [],
-  title = "Home",
+  publishedTime,
+  tags = [],
+  title,
+  type = "website",
 } = Astro.props;
-const image = imageProp ?? (await getDefaultOgImageUrl());
-const fullTitle = `${title} | Leo's Portfolio`;
-const canonicalUrl = new URL(Astro.url.pathname, siteUrl).toString();
-const imageUrl = new URL(image, siteUrl).toString();
+
+const defaultImage = await getDefaultOgImage();
+const image: OgImage =
+  typeof imageProp === "string"
+    ? { ...defaultImage, url: imageProp }
+    : (imageProp ?? defaultImage);
+const fullTitle = formatPageTitle(title);
+const canonicalUrl = new URL(Astro.url.pathname, site.url).toString();
+const imageUrl = new URL(image.url, site.url).toString();
+
+const structuredData =
+  type === "article" && publishedTime
+    ? {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        author: {
+          "@type": "Person",
+          name: site.author.name,
+          url: site.author.url,
+        },
+        datePublished: publishedTime.toISOString(),
+        description,
+        headline: title,
+        image: imageUrl,
+        mainEntityOfPage: {
+          "@id": canonicalUrl,
+          "@type": "WebPage",
+        },
+        url: canonicalUrl,
+      }
+    : {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        author: {
+          "@type": "Person",
+          name: site.author.name,
+          url: site.author.url,
+        },
+        description: site.defaultDescription,
+        name: site.name,
+        url: site.url,
+      };
+const structuredDataJson = JSON.stringify(structuredData);
 ---
 
 <!doctype html>
@@ -32,6 +84,7 @@ const imageUrl = new URL(image, siteUrl).toString();
     <meta content="width=device-width, initial-scale=1" name="viewport" />
     <meta content="#2563eb" name="theme-color" />
     <meta content={description} name="description" />
+    <meta content={site.author.name} name="author" />
     {keywords.length > 0 && <meta content={keywords.join(", ")} name="keywords" />}
     <meta
       content="9_qEiY98Q8uHDB5H293-c3ixYEp9bDIEwqcfjvEJbPU"
@@ -63,15 +116,36 @@ const imageUrl = new URL(image, siteUrl).toString();
     }
     <meta content={description} property="og:description" />
     <meta content={imageUrl} property="og:image" />
-    <meta content="Leo's Portfolio" property="og:image:alt" />
-    <meta content="Leo's Portfolio" property="og:site_name" />
+    <meta content={imageAlt} property="og:image:alt" />
+    <meta content={String(image.height)} property="og:image:height" />
+    <meta content="image/webp" property="og:image:type" />
+    <meta content={String(image.width)} property="og:image:width" />
+    <meta content={site.locale} property="og:locale" />
+    <meta content={site.name} property="og:site_name" />
     <meta content={fullTitle} property="og:title" />
-    <meta content="website" property="og:type" />
+    <meta content={type} property="og:type" />
     <meta content={canonicalUrl} property="og:url" />
+    {
+      type === "article" && publishedTime && (
+        <>
+          <meta
+            content={publishedTime.toISOString()}
+            property="article:published_time"
+          />
+          <meta content={site.author.name} property="article:author" />
+          {tags.map(tag => (
+            <meta content={tag} property="article:tag" />
+          ))}
+        </>
+      )
+    }
     <meta content="summary_large_image" name="twitter:card" />
     <meta content={description} name="twitter:description" />
     <meta content={imageUrl} name="twitter:image" />
+    <meta content={imageAlt} name="twitter:image:alt" />
     <meta content={fullTitle} name="twitter:title" />
+    {/* eslint-disable-next-line astro/no-set-html-directive -- server-controlled JSON-LD */}
+    <script is:inline set:html={structuredDataJson} type="application/ld+json"></script>
     <title>{fullTitle}</title>
   </head>
   <body>

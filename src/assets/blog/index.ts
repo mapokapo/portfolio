@@ -2,6 +2,8 @@ import type { ImageMetadata } from "astro";
 
 import { getImage } from "astro:assets";
 
+import type { OgImage } from "@/lib/site";
+
 import aNewSection from "./a-new-section.webp";
 import massiveOverhaulNextjs15 from "./massive-overhaul-nextjs-15.webp";
 import migrationToFirebase from "./migration-to-firebase.webp";
@@ -33,6 +35,14 @@ export async function getBlogImageUrl(
   id: string,
   { height, width = 768 }: BlogImageUrlOptions = {}
 ): Promise<string | undefined> {
+  const image = await getBlogOgImage(id, { height, width });
+  return image?.url;
+}
+
+export async function getBlogOgImage(
+  id: string,
+  { height, width = 1200 }: BlogImageUrlOptions = {}
+): Promise<OgImage | undefined> {
   const src = getBlogImage(id);
   if (!src) {
     return undefined;
@@ -45,7 +55,13 @@ export async function getBlogImageUrl(
     width,
   });
 
-  return optimized.src;
+  return {
+    height: Number(
+      optimized.attributes.height ?? height ?? Math.round((src.height / src.width) * width)
+    ),
+    url: optimized.src,
+    width: Number(optimized.attributes.width ?? width),
+  };
 }
 
 export function hasBlogImage(id: string): id is BlogPostId {

@@ -23,7 +23,17 @@ const initialQuote = randomChoice(textData.quotes);
 const siteInfo = await getSiteInfo();
 ---
 
-<BaseLayout title="Home">
+<BaseLayout
+  description="Personal portfolio of Leo Petrović - computer science student, software developer, and technology enthusiast. Explore projects, tech stack, and dev blog posts."
+  imageAlt="Leo Petrović's portfolio website"
+  keywords={[
+    "leo petrovic",
+    "portfolio",
+    "software developer",
+    "computer science",
+    "web development",
+  ]}
+  title="Home">
   <main class="relative flex h-full w-full flex-col bg-slate-900">
     <AnchorMenu
       anchors={[
