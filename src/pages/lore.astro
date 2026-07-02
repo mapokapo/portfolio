@@ -1,0 +1,55 @@
+---
+/* eslint-disable astro/no-set-html-directive */
+import { MdArrowBack } from "react-icons/md";
+
+import type TextData from "@/lib/types/TextData";
+
+import Icon from "@/components/Icon";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import textDataJson from "@/lib/const/data.json";
+
+export const prerender = true;
+
+const textData = textDataJson as TextData;
+---
+
+<BaseLayout
+  description="A brief overview of my journey and experiences."
+  keywords={["backstory", "journey", "experiences", "leo petrovic", "portfolio"]}
+  title="My backstory">
+  <main class="flex h-full min-h-screen w-full flex-col items-center gap-8 bg-slate-900 p-4 text-white sm:px-48">
+    <div class="flex w-full flex-col gap-4">
+      <a
+        class="mr-auto flex items-center gap-2 rounded-full bg-black/40 px-3 py-1.5 text-sm backdrop-blur-2xl hover:bg-black/60"
+        href="/">
+        <MdArrowBack aria-hidden="true" size={18} />
+        <span>Back</span>
+      </a>
+      <h1 class="text-center text-4xl font-bold text-white sm:text-6xl">
+        My story
+      </h1>
+    </div>
+    <div class="flex w-full flex-col gap-12">
+      {
+        textData.sections.map(section => (
+          <article class="w-full">
+            <div class="flex flex-col gap-2 bg-slate-800 p-4 px-8 py-8 text-start shadow-md shadow-slate-800 sm:gap-8 sm:p-16">
+              <div class="mb-3 flex w-full flex-col items-center gap-4 px-4 text-white sm:mb-0 sm:flex-row sm:px-0">
+                <div class="-mb-2 text-5xl">
+                  <Icon name={section.icon} />
+                </div>
+                <h3 class="text-center text-4xl sm:text-start sm:text-5xl">
+                  {section.title}
+                </h3>
+              </div>
+              <p
+                class="block leading-8 text-white sm:text-lg"
+                set:html={section.content}
+              />
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </main>
+</BaseLayout>

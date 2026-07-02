@@ -1,0 +1,53 @@
+---
+import { MdChevronRight } from "react-icons/md";
+
+import type TechStack from "@/lib/types/TechStack";
+
+type Props = {
+  item: TechStack;
+  root?: boolean;
+};
+
+const { item, root = false } = Astro.props;
+---
+
+<li class:list={[`flex flex-col overflow-hidden `,{"ml-8": !item.items}]}>
+  {
+    item.items ? (
+      <details class="details-expand tech-stack-details">
+        <summary class="mb-1 flex cursor-pointer list-none flex-col gap-x-4 gap-y-2 overflow-visible px-3 py-2 pb-3 hover:backdrop-brightness-200 md:flex-row md:items-center [&::-webkit-details-marker]:hidden">
+          <div class="flex sm:items-end">
+            <MdChevronRight
+              aria-hidden="true"
+              className="tech-stack-chevron text-2xl text-white sm:text-4xl"
+            />
+            <span class="text-xl whitespace-nowrap text-white sm:text-3xl">
+              {item.name}
+            </span>
+          </div>
+          <span class="text-md ml-4 select-none text-start wrap-break-word text-white/50 sm:ml-2 sm:text-xl">
+            {item.description}
+          </span>
+        </summary>
+        <ul class="ml-3 flex flex-col sm:ml-6 md:ml-12">
+          {item.items.map(child => (
+            <Astro.self item={child} />
+          ))}
+        </ul>
+      </details>
+    ) : (
+      <div
+        class="mb-1 flex flex-col gap-x-4 gap-y-2 overflow-visible px-3 py-2 pb-3 md:flex-row md:items-center"
+        tabindex={root ? undefined : -1}>
+        <div class="flex sm:items-end">
+          <span class="text-xl whitespace-nowrap text-white sm:text-3xl">
+            {item.name}
+          </span>
+        </div>
+        <span class="text-md select-none text-start wrap-break-word text-white/50 sm:text-xl">
+          {item.description}
+        </span>
+      </div>
+    )
+  }
+</li>

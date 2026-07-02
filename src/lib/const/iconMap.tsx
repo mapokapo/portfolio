@@ -1,7 +1,9 @@
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
+
 import { MdCode, MdHome, MdTrendingUp } from "react-icons/md";
 import {
   SiAlgolia,
+  SiAstro,
   SiBun,
   SiDocker,
   SiExpo,
@@ -11,7 +13,7 @@ import {
   SiLaravel,
   SiMariadb,
   SiNestjs,
-  SiNuxtdotjs,
+  SiNuxt,
   SiOpenjdk,
   SiPostgresql,
   SiReact,
@@ -30,6 +32,7 @@ import { TbWorld } from "react-icons/tb";
 
 const iconMap: Record<string, ReactNode> = {
   Algolia: <SiAlgolia color="#5468FF" />,
+  Astro: <SiAstro color="#FF5D01" />,
   Bun: <SiBun color="#FBF0DF" />,
   Code: <MdCode color="#2ecc71" />,
   Docker: <SiDocker color="#2496ED" />,
@@ -42,7 +45,7 @@ const iconMap: Record<string, ReactNode> = {
   Laravel: <SiLaravel color="#F05340" />,
   MariaDB: <SiMariadb color="#008bb2" />,
   Nest: <SiNestjs color="#E0234E" />,
-  Nuxt: <SiNuxtdotjs color="#00DC82" />,
+  Nuxt: <SiNuxt color="#00DC82" />,
   Postgres: <SiPostgresql color="#4169E1" />,
   React: <SiReact color="#58C4DC" />,
   "React Native": <SiReact color="#61DAFB" />,

@@ -1,0 +1,54 @@
+---
+import { convert as htmlToText } from "html-to-text";
+
+import BlogPostImage from "@/assets/blog/BlogPostImage.astro";
+
+type Props = {
+  class?: string;
+  content: string;
+  id: string;
+  publishedRelative: string;
+  readTimeMinutes: number;
+  title: string;
+};
+
+const {
+  class: className,
+  content,
+  id,
+  publishedRelative,
+  readTimeMinutes,
+  title,
+} = Astro.props;
+const excerpt = htmlToText(content).slice(0, 200);
+---
+
+<li class:list={className}>
+  <a
+    class="flex cursor-pointer flex-col items-center justify-center gap-2"
+    href={`/blog/${id}`}>
+    <div class="flex w-full gap-4">
+      <div class="relative hidden h-20 w-20 overflow-hidden lg:flex xl:h-24 xl:w-24">
+        <BlogPostImage
+          alt={`Devblog post titled ${title}`}
+          class="h-full w-full object-contain p-1"
+          loading="lazy"
+          postId={id}
+          sizes="(min-width: 1280px) 6rem, 5rem"
+          width={96}
+        />
+      </div>
+      <div class="flex flex-3 flex-col justify-center xl:flex-4">
+        <h4 class="text-2xl font-semibold break-normal xl:text-4xl">
+          {title}
+        </h4>
+        <span class="mt-1 ml-px text-xs opacity-50 sm:text-base">
+          Published {publishedRelative} • {readTimeMinutes} minute read
+        </span>
+      </div>
+    </div>
+    <div class="flex w-full flex-col gap-2">
+      <p class="line-clamp-3">{excerpt}</p>
+    </div>
+  </a>
+</li>

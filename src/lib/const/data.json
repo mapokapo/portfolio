@@ -53,7 +53,7 @@
       "description": "A realtime betting platform team project made during my internship",
       "content": "Implemented a full-featured betting platform with real-time updates. Developed a robust backend with Java and Spring Boot, utilizing PostgreSQL for data management and Redis for caching. Designed a themed frontend with Vue 3, ensuring brand consistency. Wrote tests, developer documentation, and collaborated with team members to ensure an error-free and efficient development process. Deployed the application using Docker and Kubernetes.",
       "meta": {
-        "imageUrl": "/assets/images/lucky_six_logo.png",
+        "imageKey": "lucky-six",
         "madeWith": [
           "Java",
           "Spring Boot",
@@ -76,7 +76,7 @@
             "url": "https://play.google.com/store/apps/details?id=com.fsre.mobileapp"
           }
         ],
-        "imageUrl": "/assets/images/fsre_app_logo.png",
+        "imageKey": "fsre-app",
         "madeWith": [
           "Expo",
           "React Native",
@@ -109,7 +109,7 @@
             "url": "https://fsre-app.mapokapo.cc/?selectedTimetableStudyProgramId=-59"
           }
         ],
-        "imageUrl": "/assets/images/fsre_timetable_notify.png",
+        "imageKey": "fsre-timetable-notify",
         "madeWith": [
           "Java",
           "Spring Boot",
@@ -134,7 +134,7 @@
             "url": "https://github.com/mapokapo/sportsmart-app"
           }
         ],
-        "imageUrl": "/assets/images/sportsmart_logo.png",
+        "imageKey": "sportsmart",
         "madeWith": [
           "React Native",
           "Firebase",
@@ -153,7 +153,7 @@
             "url": "https://github.com/mapokapo/riskfactor"
           }
         ],
-        "imageUrl": "/assets/images/riskfactor_logo.png",
+        "imageKey": "riskfactor",
         "madeWith": [
           "Flutter",
           "Firebase"
@@ -175,7 +175,7 @@
             "url": "https://github.com/mapokapo/nexora-backend"
           }
         ],
-        "imageUrl": "/assets/images/nexora_logo.png",
+        "imageKey": "nexora",
         "madeWith": [
           "Bun",
           "Hono",
@@ -197,7 +197,7 @@
             "url": "https://github.com/mapokapo/edulink-frontend"
           }
         ],
-        "imageUrl": "/assets/images/edulink_logo.png",
+        "imageKey": "edulink",
         "madeWith": [
           "Vue 3",
           "Nuxt",
@@ -219,7 +219,7 @@
             "url": "https://github.com/mapokapo/landmarksar"
           }
         ],
-        "imageUrl": "/assets/images/siroki_brijeg_coat_of_args.png",
+        "imageKey": "landmarks-ar",
         "madeWith": [
           "Unreal Engine",
           "Laravel",
@@ -240,7 +240,7 @@
             "url": "https://github.com/mapokapo/reddit-clone"
           }
         ],
-        "imageUrl": "/assets/images/reddit_clone_logo.png",
+        "imageKey": "reddit-clone",
         "madeWith": [
           "Nest",
           "SQLite",
@@ -263,7 +263,7 @@
             "url": "https://github.com/mapokapo/diaspora-app"
           }
         ],
-        "imageUrl": "/assets/images/diaspora_logo.png",
+        "imageKey": "diaspora",
         "madeWith": [
           "Flutter",
           "Firebase"
@@ -281,7 +281,7 @@
             "url": "https://github.com/mapokapo/ramu-fitquest-app"
           }
         ],
-        "imageUrl": "/assets/images/ramu_fitquest_app.png",
+        "imageKey": "fitquest",
         "madeWith": [
           "React Native",
           "Expo",

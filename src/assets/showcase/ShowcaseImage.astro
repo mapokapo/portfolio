@@ -1,0 +1,38 @@
+---
+import { Image } from "astro:assets";
+
+import { getShowcaseImage } from "./index";
+
+interface Props {
+  alt: string;
+  class?: string;
+  imageKey: string;
+  loading?: "eager" | "lazy";
+  width?: number;
+}
+
+const {
+  alt,
+  class: className,
+  imageKey,
+  loading = "lazy",
+  width = 64,
+} = Astro.props;
+
+const src = getShowcaseImage(imageKey);
+if (!src) {
+  throw new Error(`Missing showcase image for key "${imageKey}"`);
+}
+
+const height = Math.round((width / src.width) * src.height);
+---
+
+<Image
+  alt={alt}
+  class:list={className}
+  height={height}
+  loading={loading}
+  sizes={`${width}px`}
+  src={src}
+  width={width}
+/>
