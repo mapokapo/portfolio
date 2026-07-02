@@ -5,6 +5,7 @@ import { getImage } from "astro:assets";
 import type { OgImage } from "@/lib/site";
 
 import aNewSection from "./a-new-section.webp";
+import leavingNextJsForAstro from "./leaving-nextjs-for-astro.webp";
 import massiveOverhaulNextjs15 from "./massive-overhaul-nextjs-15.webp";
 import migrationToFirebase from "./migration-to-firebase.webp";
 import pleasantryFixes from "./pleasantry-fixes.webp";
@@ -13,6 +14,7 @@ import websiteFinished from "./website-finished.webp";
 
 export const blogImages = {
   "a-new-section": aNewSection,
+  "leaving-nextjs-for-astro": leavingNextJsForAstro,
   "massive-overhaul-nextjs-15": massiveOverhaulNextjs15,
   "migration-to-firebase": migrationToFirebase,
   "pleasantry-fixes": pleasantryFixes,
@@ -57,7 +59,9 @@ export async function getBlogOgImage(
 
   return {
     height: Number(
-      optimized.attributes.height ?? height ?? Math.round((src.height / src.width) * width)
+      optimized.attributes.height ??
+        height ??
+        Math.round((src.height / src.width) * width)
     ),
     url: optimized.src,
     width: Number(optimized.attributes.width ?? width),
