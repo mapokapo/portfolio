@@ -25,9 +25,23 @@ export default function AnchorMenu({ anchors }: AnchorMenuProps) {
 
     const observer = new IntersectionObserver(
       entries => {
-        const visible = entries
-          .filter(entry => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+        let visible: IntersectionObserverEntry | undefined;
+        for (const entry of entries) {
+          if (!entry.isIntersecting) {
+            continue;
+          }
+
+          if (
+            !visible ||
+            entry.intersectionRatio > visible.intersectionRatio
+          ) {
+            visible = entry;
+          }
+        }
+
+        if (!visible) {
+          return;
+        }
 
         if (visible.target.id) {
           setActiveId(visible.target.id);
