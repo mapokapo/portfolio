@@ -10,7 +10,7 @@ description:
 
 Big one again.
 
-### why 😐
+## why 😐
 
 Every time I make an update to this website, I get increasingly frustrated and
 disappointed by the bundle size produced by Next.js.
