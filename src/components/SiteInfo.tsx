@@ -197,6 +197,7 @@ function BuiltWithCard() {
         href="https://astro.build/"
         icon={
           <SiAstro
+            aria-hidden="true"
             color="#FF5D01"
             size={36}
           />
@@ -207,6 +208,7 @@ function BuiltWithCard() {
         href="https://www.typescriptlang.org/"
         icon={
           <SiTypescript
+            aria-hidden="true"
             color="#3178C6"
             size={32}
           />
@@ -217,6 +219,7 @@ function BuiltWithCard() {
         href="https://react.dev/"
         icon={
           <SiReact
+            aria-hidden="true"
             color="#61DAFB"
             size={34}
           />
@@ -227,6 +230,7 @@ function BuiltWithCard() {
         href="https://tailwindcss.com/"
         icon={
           <SiTailwindcss
+            aria-hidden="true"
             color="#06B6D4"
             size={36}
           />
