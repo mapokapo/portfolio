@@ -5,7 +5,7 @@ import { SiAstro, SiReact, SiTailwindcss, SiTypescript } from "react-icons/si";
 
 import type { BuildSize } from "@/lib/schemas/buildSize";
 
-import { getRelativeTime, humanFileSize } from "@/lib/utils";
+import { humanFileSize } from "@/lib/utils";
 
 export interface SiteInfoData {
   blogPosts: BlogPostSummary[];
@@ -18,6 +18,7 @@ interface BlogPostSummary {
   id: string;
   image: string;
   published: string;
+  publishedRelative: string;
   readTimeMinutes: number;
   title: string;
 }
@@ -112,7 +113,7 @@ function BlogPostsCard({ posts }: { posts: BlogPostSummary[] }) {
                       {post.title}
                     </h4>
                     <span className="mt-1 ml-px text-xs opacity-50 sm:text-base">
-                      Published {getRelativeTime(new Date(post.published))} •{" "}
+                      Published {post.publishedRelative} •{" "}
                       {post.readTimeMinutes} minute read
                     </span>
                   </div>
@@ -350,7 +351,7 @@ function PageViewChart({ entries }: { entries: SerializedPageView[] }) {
             textAnchor="middle"
             x={paddingX + index * xStep}
             y={height - 4}>
-            {new Date(entry.recordStartTimestamp).getHours()}:00
+            {new Date(entry.recordStartTimestamp).getUTCHours()}:00
           </text>
         ) : null
       )}

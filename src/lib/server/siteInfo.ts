@@ -1,6 +1,7 @@
 import { getBlogPosts } from "@/lib/server/blogPosts";
 import { getBuildSize } from "@/lib/server/buildSize";
 import { getPageViews } from "@/lib/server/pageViews";
+import { getRelativeTime } from "@/lib/utils";
 
 export type SiteInfo = Awaited<ReturnType<typeof getSiteInfo>>;
 
@@ -15,6 +16,7 @@ export async function getSiteInfo() {
     blogPosts: blogPosts.map(post => ({
       ...post,
       published: post.published.toISOString(),
+      publishedRelative: getRelativeTime(post.published),
     })),
     buildSize,
     pageViews: pageViews.map(entry => ({
