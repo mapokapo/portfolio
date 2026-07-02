@@ -1,10 +1,11 @@
 import { getCollection } from "astro:content";
+import { convert as htmlToText } from "html-to-text";
 
 import { getBlogImageUrl } from "@/assets/blog";
 import { getReadTimeMinutes } from "@/lib/utils";
 
 export interface BlogPostSummary {
-  content: string;
+  excerpt: string;
   id: string;
   image: string;
   published: Date;
@@ -22,11 +23,17 @@ export async function getBlogPosts(limit = 5): Promise<BlogPostSummary[]> {
       .map(async post => {
         const body = post.body ?? "";
         const content = post.data.description ?? body;
+        const excerpt = htmlToText(content, {
+          selectors: [{ format: "skip", selector: "img" }],
+          wordwrap: false,
+        })
+          .replaceAll("\n", " ")
+          .trim();
         const image =
           (await getBlogImageUrl(post.id, { width: 96 })) ?? "";
 
         return {
-          content,
+          excerpt,
           id: post.id,
           image,
           published: post.data.published,

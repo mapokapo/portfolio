@@ -14,7 +14,7 @@ export interface SiteInfoData {
 }
 
 interface BlogPostSummary {
-  content: string;
+  excerpt: string;
   id: string;
   image: string;
   published: string;
@@ -119,7 +119,7 @@ function BlogPostsCard({ posts }: { posts: BlogPostSummary[] }) {
                   </div>
                 </div>
                 <p className="line-clamp-3 w-full">
-                  {post.content.replaceAll(/<[^>]+>/g, "").slice(0, 200)}
+                  {post.excerpt.slice(0, 200)}
                 </p>
               </a>
             </li>
