@@ -260,6 +260,46 @@ function BuiltWithLink({
   );
 }
 
+function formatHourLabel(timestamp: string) {
+  return `${new Date(timestamp).getUTCHours().toString().padStart(2, "0")}:00`;
+}
+
+function getLabelIndices(
+  entryCount: number,
+  xStep: number,
+  maxLabels = 6
+): number[] {
+  if (entryCount === 0) {
+    return [];
+  }
+
+  if (entryCount === 1) {
+    return [0];
+  }
+
+  const step = Math.max(1, Math.ceil(entryCount / maxLabels));
+  const indices: number[] = [];
+
+  for (let index = 0; index < entryCount; index += step) {
+    indices.push(index);
+  }
+
+  const lastIndex = entryCount - 1;
+  const previousLabel = indices.at(-1);
+
+  if (previousLabel === undefined) {
+    return indices;
+  }
+
+  const minIndexGap = Math.max(2, Math.ceil(36 / xStep));
+
+  if (lastIndex !== previousLabel && lastIndex - previousLabel >= minIndexGap) {
+    indices.push(lastIndex);
+  }
+
+  return indices;
+}
+
 function PageViewChart({ entries }: { entries: SerializedPageView[] }) {
   const width = 640;
   const height = 280;
@@ -270,14 +310,13 @@ function PageViewChart({ entries }: { entries: SerializedPageView[] }) {
   const chartWidth = width - paddingX * 2;
   const chartHeight = height - paddingY * 2;
   const xStep = entries.length > 1 ? chartWidth / (entries.length - 1) : 0;
-  const labelStep = Math.max(1, Math.ceil(entries.length / 6));
+  const labelIndices = new Set(getLabelIndices(entries.length, xStep));
   const yTicks = 4;
 
   const points = entries
     .map((entry, index) => {
       const x = paddingX + index * xStep;
-      const y =
-        height - paddingY - (entry.totalViews / maxValue) * chartHeight;
+      const y = height - paddingY - (entry.totalViews / maxValue) * chartHeight;
       return `${x.toString()},${y.toString()}`;
     })
     .join(" ");
@@ -307,7 +346,7 @@ function PageViewChart({ entries }: { entries: SerializedPageView[] }) {
         );
       })}
       {entries.map((entry, index) =>
-        index % labelStep === 0 || index === entries.length - 1 ? (
+        labelIndices.has(index) ? (
           <line
             key={`grid-x-${entry.recordStartTimestamp}`}
             stroke={gridStroke}
@@ -343,7 +382,7 @@ function PageViewChart({ entries }: { entries: SerializedPageView[] }) {
         strokeWidth="3"
       />
       {entries.map((entry, index) =>
-        index % labelStep === 0 || index === entries.length - 1 ? (
+        labelIndices.has(index) ? (
           <text
             fill="#ddd"
             fontSize="14"
@@ -351,7 +390,7 @@ function PageViewChart({ entries }: { entries: SerializedPageView[] }) {
             textAnchor="middle"
             x={paddingX + index * xStep}
             y={height - 4}>
-            {new Date(entry.recordStartTimestamp).getUTCHours()}:00
+            {formatHourLabel(entry.recordStartTimestamp)}
           </text>
         ) : null
       )}
