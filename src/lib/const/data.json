@@ -74,6 +74,10 @@
           {
             "label": "Google Play Store",
             "url": "https://play.google.com/store/apps/details?id=com.fsre.mobileapp"
+          },
+          {
+            "label": "Project",
+            "url": "https://github.com/mapokapo/fsre-app"
           }
         ],
         "imageKey": "fsre-app",
