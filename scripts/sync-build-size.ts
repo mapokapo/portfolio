@@ -3,7 +3,7 @@ import { access } from "node:fs/promises";
 import path from "node:path";
 
 import { buildSizeSchema } from "../src/lib/schemas/buildSize";
-import { redis } from "../src/lib/server/redis";
+import { createRedis } from "../src/lib/server/create-redis";
 import { formatBuildSize, measureBuildSize } from "./lib/measure-build-size";
 
 const BUILD_OUTPUT_DIR = "dist";
@@ -35,7 +35,10 @@ async function main() {
     return;
   }
 
-  const client = redis();
+  const client = createRedis(
+    process.env.KV_REST_API_URL,
+    process.env.KV_REST_API_TOKEN
+  );
   if (!client) {
     console.log(
       "Skipping upload: KV_REST_API_URL / KV_REST_API_TOKEN are not set."
