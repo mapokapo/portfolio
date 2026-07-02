@@ -1,3 +1,4 @@
+import { Analytics } from "@vercel/analytics/next";
 import { Metadata, Viewport } from "next";
 
 import "./globals.css";
@@ -80,6 +81,7 @@ export default function RootLayout({
       <body>
         <IconProvider>{children}</IconProvider>
         <ReportView />
+        <Analytics />
       </body>
     </html>
   );
