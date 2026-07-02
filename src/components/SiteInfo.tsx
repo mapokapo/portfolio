@@ -266,20 +266,23 @@ function PageViewChart({ entries }: { entries: SerializedPageView[] }) {
   const paddingY = 28;
   const values = entries.map(entry => entry.totalViews);
   const maxValue = Math.max(1, ...values);
-  const xStep =
-    entries.length > 1 ? (width - paddingX * 2) / (entries.length - 1) : 0;
+  const chartWidth = width - paddingX * 2;
+  const chartHeight = height - paddingY * 2;
+  const xStep = entries.length > 1 ? chartWidth / (entries.length - 1) : 0;
+  const labelStep = Math.max(1, Math.ceil(entries.length / 6));
+  const yTicks = 4;
 
   const points = entries
     .map((entry, index) => {
       const x = paddingX + index * xStep;
       const y =
-        height -
-        paddingY -
-        (entry.totalViews / maxValue) * (height - paddingY * 2);
+        height - paddingY - (entry.totalViews / maxValue) * chartHeight;
       return `${x.toString()},${y.toString()}`;
     })
     .join(" ");
-  const labelStep = Math.max(1, Math.ceil(entries.length / 6));
+
+  const gridStroke = "rgba(255,255,255,0.1)";
+  const axisStroke = "rgba(255,255,255,0.25)";
 
   return (
     <svg
@@ -287,15 +290,44 @@ function PageViewChart({ entries }: { entries: SerializedPageView[] }) {
       className="h-auto w-full overflow-visible"
       role="img"
       viewBox={`0 0 ${width.toString()} ${height.toString()}`}>
+      {Array.from({ length: yTicks + 1 }, (_, index) => {
+        const y = paddingY + (chartHeight / yTicks) * index;
+        return (
+          <line
+            key={`grid-y-${index.toString()}`}
+            stroke={gridStroke}
+            strokeDasharray="1.5 7"
+            strokeLinecap="round"
+            x1={paddingX}
+            x2={width - paddingX}
+            y1={y}
+            y2={y}
+          />
+        );
+      })}
+      {entries.map((entry, index) =>
+        index % labelStep === 0 || index === entries.length - 1 ? (
+          <line
+            key={`grid-x-${entry.recordStartTimestamp}`}
+            stroke={gridStroke}
+            strokeDasharray="1.5 7"
+            strokeLinecap="round"
+            x1={paddingX + index * xStep}
+            x2={paddingX + index * xStep}
+            y1={paddingY}
+            y2={height - paddingY}
+          />
+        ) : null
+      )}
       <line
-        stroke="rgba(255,255,255,0.2)"
+        stroke={axisStroke}
         x1={paddingX}
         x2={width - paddingX}
         y1={height - paddingY}
         y2={height - paddingY}
       />
       <line
-        stroke="rgba(255,255,255,0.2)"
+        stroke={axisStroke}
         x1={paddingX}
         x2={paddingX}
         y1={paddingY}
@@ -322,22 +354,21 @@ function PageViewChart({ entries }: { entries: SerializedPageView[] }) {
           </text>
         ) : null
       )}
-      <text
-        fill="#ddd"
-        fontSize="14"
-        textAnchor="end"
-        x={paddingX - 8}
-        y={paddingY + 4}>
-        {maxValue}
-      </text>
-      <text
-        fill="#ddd"
-        fontSize="14"
-        textAnchor="end"
-        x={paddingX - 8}
-        y={height - paddingY + 4}>
-        0
-      </text>
+      {Array.from({ length: yTicks + 1 }, (_, index) => {
+        const value = Math.round(maxValue - (maxValue / yTicks) * index);
+        const y = paddingY + (chartHeight / yTicks) * index;
+        return (
+          <text
+            fill="#ddd"
+            fontSize="14"
+            key={`y-label-${index.toString()}`}
+            textAnchor="end"
+            x={paddingX - 8}
+            y={y + 4}>
+            {value}
+          </text>
+        );
+      })}
     </svg>
   );
 }
