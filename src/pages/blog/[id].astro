@@ -1,0 +1,134 @@
+---
+import { getCollection, render } from "astro:content";
+import { MdArrowBack, MdSchedule } from "react-icons/md";
+
+import { getBlogOgImage } from "@/assets/blog";
+import BlogPostImage from "@/assets/blog/BlogPostImage.astro";
+import { getDefaultOgImage } from "@/assets/meta";
+import BlogPostCard from "@/components/BlogPostCard.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { getReadTimeMinutes, getRelativeTime } from "@/lib/utils";
+
+export const prerender = true;
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog");
+
+  return posts.map(post => ({
+    params: { id: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const posts = await getCollection("blog");
+const recommendedPosts = posts
+  .filter(entry => entry.id !== post.id)
+  .toSorted((a, b) => b.data.published.getTime() - a.data.published.getTime());
+const postBody = post.body ?? "";
+const description = post.data.description ?? postBody.slice(0, 160);
+const publishedRelative = getRelativeTime(post.data.published);
+const readTimeMinutes = getReadTimeMinutes(postBody);
+const ogImage =
+  (await getBlogOgImage(post.id, { width: 1200 })) ?? (await getDefaultOgImage());
+const imageAlt = `Cover image for ${post.data.title}`;
+const tags = ["blog", "devlog", "leo petrovic", "portfolio"];
+---
+
+<BaseLayout
+  description={description}
+  image={ogImage}
+  imageAlt={imageAlt}
+  keywords={[...post.data.title.split(" "), ...tags]}
+  publishedTime={post.data.published}
+  tags={tags}
+  title={post.data.title}
+  type="article">
+  <main class="flex h-full min-h-screen w-full flex-col items-center gap-4 bg-slate-900 text-white">
+    <header class="relative h-[10vw] min-h-80 w-full overflow-hidden sm:h-[20vw]">
+      <BlogPostImage
+        alt={`Cover image for ${post.data.title}`}
+        class="absolute inset-0 h-full w-full scale-125 object-cover blur-3xl brightness-60"
+        fetchpriority="high"
+        loading="eager"
+        postId={post.id}
+        sizes="100vw"
+        width={1200}
+      />
+      <div class="absolute inset-0 bg-linear-to-b from-black/40 via-transparent to-slate-900">
+      </div>
+
+      <div class="relative z-10 mx-auto flex h-full w-full max-w-5xl flex-col px-4 sm:px-8 lg:px-10">
+        <div class="mt-4 flex items-center gap-3 sm:mt-6">
+          <a
+            class="flex items-center gap-2 rounded-full bg-black/40 px-3 py-1.5 text-sm backdrop-blur-2xl hover:bg-black/60"
+            href="/">
+            <MdArrowBack aria-hidden="true" size={18} />
+            <span>Back</span>
+          </a>
+        </div>
+
+        <div class="mt-auto mb-6 sm:mb-10">
+          <h1 class="max-w-4xl text-3xl font-extrabold text-balance sm:text-5xl md:text-6xl">
+            {post.data.title}
+          </h1>
+          <div class="mt-4 flex flex-wrap items-center gap-2 text-sm opacity-90 sm:text-base">
+            <span class="rounded-full bg-white/10 px-3 py-1">
+              Published {publishedRelative}
+            </span>
+            <span class="flex items-center gap-1 rounded-full bg-white/10 px-3 py-1">
+              <MdSchedule aria-hidden="true" size={16} /> {readTimeMinutes} min read
+            </span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section class="relative z-10 mx-auto w-full max-w-5xl px-4 sm:px-8 lg:px-10">
+      <article class="rounded-xl border border-white/10 bg-slate-800/60 px-5 py-6 shadow-xl backdrop-blur md:px-8 md:py-8">
+        <div class="mx-auto mb-6 w-full max-w-2xl">
+          <div class="relative mx-auto aspect-video w-full">
+            <BlogPostImage
+              alt={`Cover image for ${post.data.title}`}
+              class="h-full w-full object-contain p-2"
+              fetchpriority="high"
+              loading="eager"
+              postId={post.id}
+              sizes="(min-width: 1024px) 768px, (min-width: 640px) 600px, 100vw"
+              width={768}
+            />
+          </div>
+        </div>
+
+        <div class="prose xl:prose-xl prose-slate dark:prose-invert mx-auto">
+          <Content />
+        </div>
+      </article>
+    </section>
+
+    {
+      recommendedPosts.length > 0 && (
+        <section class="mx-auto mt-4 mb-12 w-full max-w-5xl px-4 sm:mt-8 sm:px-8 lg:px-10">
+          <h3 class="mb-4 text-2xl font-semibold sm:mb-6 sm:text-3xl">
+            Recommended Posts
+          </h3>
+          <ul class="flex flex-col gap-8 md:gap-10">
+            {recommendedPosts.map(recommendedPost => (
+              <BlogPostCard
+                class="rounded-lg border border-white/10 bg-slate-800/60 p-4 shadow-lg backdrop-blur transition-all hover:brightness-125"
+                content={recommendedPost.data.description ?? recommendedPost.body ?? ""}
+                id={recommendedPost.id}
+                publishedRelative={getRelativeTime(
+                  recommendedPost.data.published
+                )}
+                readTimeMinutes={getReadTimeMinutes(recommendedPost.body ?? "")}
+                title={recommendedPost.data.title}
+              />
+            ))}
+          </ul>
+        </section>
+      )
+    }
+  </main>
+</BaseLayout>

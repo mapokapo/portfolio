@@ -34,8 +34,7 @@ export async function measureBuildSize(
 ): Promise<BuildSize> {
   const totals: BuildSize = { css: 0, js: 0, media: 0 };
 
-  await walkDirectory(path.join(projectRoot, ".next"), ".next", totals);
-  await walkDirectory(path.join(projectRoot, "public"), "public", totals);
+  await walkDirectory(path.join(projectRoot, "dist"), "dist", totals);
 
   return totals;
 }
@@ -50,27 +49,24 @@ function getCategory(
     return null;
   }
 
-  if (normalized.startsWith(".next/server/")) {
+  if (normalized.startsWith("dist/server/")) {
     return null;
   }
 
-  if (normalized.startsWith(".next/static/")) {
-    if (extension === ".js") {
-      return "js";
-    }
-
-    if (extension === ".css") {
-      return "css";
-    }
-
-    if (MEDIA_EXTENSIONS.has(extension)) {
-      return "media";
-    }
-
-    return null;
+  if (extension === ".js" || extension === ".mjs") {
+    return "js";
   }
 
-  if (normalized.startsWith("public/") && MEDIA_EXTENSIONS.has(extension)) {
+  if (extension === ".css") {
+    return "css";
+  }
+
+  if (
+    MEDIA_EXTENSIONS.has(extension) &&
+    (normalized.startsWith("dist/client/") ||
+      normalized.startsWith("dist/public/") ||
+      normalized.startsWith("dist/_astro/"))
+  ) {
     return "media";
   }
 

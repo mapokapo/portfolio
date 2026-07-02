@@ -1,7 +1,7 @@
 export function getReadTimeMinutes(content: string): number {
   const wordsPerMinute = 200;
   const words = content.trim().split(/\s+/).length;
-  return Math.ceil(words / wordsPerMinute);
+  return Math.max(1, Math.ceil(words / wordsPerMinute));
 }
 
 export function getRelativeTime(d1: Date, d2 = new Date()) {
@@ -16,24 +16,23 @@ export function getRelativeTime(d1: Date, d2 = new Date()) {
   };
   const elapsed = d1.getTime() - d2.getTime();
 
-  for (const u in units)
-    if (Math.abs(elapsed) > units[u] || u === "second") {
+  for (const unit in units) {
+    if (Math.abs(elapsed) > units[unit] || unit === "second") {
       return rtf.format(
-        Math.round(elapsed / units[u]),
-        u as Intl.RelativeTimeFormatUnit
+        Math.round(elapsed / units[unit]),
+        unit as Intl.RelativeTimeFormatUnit
       );
     }
+  }
 
   return "";
 }
 
 export function humanFileSize(bytes: number) {
-  const i = bytes === 0 ? 0 : Math.floor(Math.log(bytes) / Math.log(1024));
-  return (
-    parseFloat((bytes / Math.pow(1024, i)).toFixed(2)) +
-    " " +
-    ["B", "kB", "MB", "GB", "TB"][i]
-  );
+  const index = bytes === 0 ? 0 : Math.floor(Math.log(bytes) / Math.log(1024));
+  return `${parseFloat((bytes / Math.pow(1024, index)).toFixed(2)).toString()} ${
+    ["B", "kB", "MB", "GB", "TB"][index]
+  }`;
 }
 
 export function mapRange(

@@ -1,4 +1,4 @@
-import z from "zod";
+import { z } from "zod";
 
 export const buildSizeSchema = z.object({
   css: z.number().min(0),

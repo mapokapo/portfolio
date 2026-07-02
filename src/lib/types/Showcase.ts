@@ -2,7 +2,7 @@ export default interface Showcase {
   content: string;
   description: string;
   meta: {
-    imageUrl: string;
+    imageKey: string;
     links?: {
       label: string;
       url: string;

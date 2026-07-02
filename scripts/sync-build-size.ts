@@ -1,13 +1,13 @@
-import admin from "firebase-admin";
+/* eslint-disable no-console */
 import { access } from "node:fs/promises";
 import path from "node:path";
 
 import { buildSizeSchema } from "../src/lib/schemas/buildSize";
+import { createRedis } from "../src/lib/server/create-redis";
 import { formatBuildSize, measureBuildSize } from "./lib/measure-build-size";
 
-const BUILD_OUTPUT_DIR = ".next";
-const FIRESTORE_COLLECTION = "buildSize";
-const FIRESTORE_DOCUMENT = "sizeBytes";
+const BUILD_OUTPUT_DIR = "dist";
+const KEY = "buildSize";
 
 async function ensureBuildOutputExists(projectRoot: string) {
   try {
@@ -19,71 +19,38 @@ async function ensureBuildOutputExists(projectRoot: string) {
   }
 }
 
-function initializeFirebase(): admin.app.App | null {
-  if (admin.apps.length > 0) {
-    return admin.app();
-  }
-
-  const key = process.env.FIREBASE_SERVICE_ACCOUNT_KEY;
-  if (typeof key !== "string" || key.trim().length === 0) {
-    return null;
-  }
-
-  try {
-    const serviceAccount = JSON.parse(key) as admin.ServiceAccount;
-    return admin.initializeApp({
-      credential: admin.credential.cert(serviceAccount),
-    });
-  } catch (error) {
-    console.error("Firebase admin initialization error:", error);
-    return null;
-  }
-}
-
 async function main() {
   const projectRoot = process.cwd();
   const dryRun = process.argv.includes("--dry-run");
 
   await ensureBuildOutputExists(projectRoot);
 
-  const buildSize = await measureBuildSize(projectRoot);
-  const parsed = buildSizeSchema.parse(buildSize);
+  const parsed = buildSizeSchema.parse(await measureBuildSize(projectRoot));
 
   console.log("Measured build size:");
   console.log(formatBuildSize(parsed));
 
   if (dryRun) {
-    console.log("Dry run: not uploading to Firestore.");
+    console.log("Dry run: not uploading to Upstash.");
     return;
   }
 
-  const uploaded = await uploadBuildSize(parsed);
-  if (uploaded) {
+  const client = createRedis(
+    process.env.KV_REST_API_URL,
+    process.env.KV_REST_API_TOKEN
+  );
+  if (!client) {
     console.log(
-      `Uploaded to Firestore: ${FIRESTORE_COLLECTION}/${FIRESTORE_DOCUMENT}`
+      "Skipping upload: KV_REST_API_URL / KV_REST_API_TOKEN are not set."
     );
-  }
-}
-
-async function uploadBuildSize(buildSize: admin.firestore.DocumentData) {
-  const app = initializeFirebase();
-  if (!app) {
-    console.log(
-      "Skipping Firestore upload: FIREBASE_SERVICE_ACCOUNT_KEY is not set."
-    );
-    return false;
+    return;
   }
 
-  await app
-    .firestore()
-    .collection(FIRESTORE_COLLECTION)
-    .doc(FIRESTORE_DOCUMENT)
-    .set(buildSize, { merge: true });
-
-  return true;
+  await client.set(KEY, parsed);
+  console.log(`Uploaded to Upstash key "${KEY}"`);
 }
 
-main().catch(error => {
+main().catch((error: unknown) => {
   console.error(error instanceof Error ? error.message : error);
   process.exit(1);
 });

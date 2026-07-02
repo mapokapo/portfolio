@@ -1,0 +1,45 @@
+---
+import { Image } from "astro:assets";
+
+import { getBlogImage } from "./index";
+
+interface Props {
+  alt: string;
+  class?: string;
+  fetchpriority?: "auto" | "high" | "low";
+  height?: number;
+  loading?: "eager" | "lazy";
+  postId: string;
+  sizes?: string;
+  width: number;
+}
+
+const {
+  alt,
+  class: className,
+  fetchpriority,
+  height,
+  loading = "lazy",
+  postId,
+  sizes,
+  width,
+} = Astro.props;
+
+const src = getBlogImage(postId);
+if (!src) {
+  throw new Error(`Missing blog image for post "${postId}"`);
+}
+
+const resolvedHeight = height ?? Math.round((width / src.width) * src.height);
+---
+
+<Image
+  alt={alt}
+  class:list={className}
+  fetchpriority={fetchpriority}
+  height={resolvedHeight}
+  loading={loading}
+  sizes={sizes}
+  src={src}
+  width={width}
+/>

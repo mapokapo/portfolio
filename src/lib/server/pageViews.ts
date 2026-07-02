@@ -1,173 +1,92 @@
-import "server-only";
+import { redis } from "@/lib/server/redis";
 
-import type admin from "firebase-admin";
+const HOUR_MS = 60 * 60 * 1000;
+const MAX_AGE_MS = 14 * 24 * HOUR_MS;
+const CHART_HOURS = 24;
+const KEY = "pageViews";
 
-import { cacheLife, cacheTag } from "next/cache";
-
-import { getFirebaseAdmin } from "@/lib/firebase.admin";
-import { PageView, pageViewSchema } from "@/lib/schemas/pageView";
-import {
-  DYNAMIC_CONTENT_CACHE_TAGS,
-  DYNAMIC_CONTENT_REVALIDATE_SECONDS,
-} from "@/lib/server/revalidation";
-
-// 2 weeks
-const ENTRY_MAX_AGE = 2 * 7 * 24 * 60 * 60 * 1000;
-// 1 hour
-const UPDATE_INTERVAL = 60 * 60 * 1000;
-const DEFAULT_PAGE_VIEW_HOURS = 24;
-
-type CachedPageView = Omit<PageView, "recordStartTimestamp"> & {
-  recordStartTimestamp: string;
-};
-
-function deserializePageView(entry: CachedPageView): PageView {
-  return {
-    ...entry,
-    recordStartTimestamp: new Date(entry.recordStartTimestamp),
-  };
+export interface PageView {
+  recordStartTimestamp: Date;
+  totalViews: number;
 }
 
-function getDefaultPageViews(): PageView[] {
-  const now = Date.now();
-  const alignedNow = now - (now % UPDATE_INTERVAL);
+interface StoredEntry { recordStartTimestamp: string; totalViews: number }
 
-  return Array.from({ length: DEFAULT_PAGE_VIEW_HOURS }, (_, index) => ({
+export async function getPageViews(): Promise<PageView[]> {
+  const entries = await load();
+  return entries.length > 0 ? entries : emptyChart();
+}
+
+export async function recordPageView() {
+  const entries = await load();
+  const latest = entries.at(-1);
+  const now = Date.now();
+
+  if (!latest || now - latest.recordStartTimestamp.getTime() > HOUR_MS) {
+    const bucketStart = latest
+      ? latest.recordStartTimestamp.getTime() +
+        Math.floor((now - latest.recordStartTimestamp.getTime()) / HOUR_MS) *
+          HOUR_MS
+      : now - (now % HOUR_MS);
+
+    entries.push({
+      recordStartTimestamp: new Date(bucketStart),
+      totalViews: 1,
+    });
+  } else {
+    latest.totalViews += 1;
+  }
+
+  await save(entries);
+}
+
+function emptyChart(): PageView[] {
+  const aligned = Date.now() - (Date.now() % HOUR_MS);
+
+  return Array.from({ length: CHART_HOURS }, (_, index) => ({
     recordStartTimestamp: new Date(
-      alignedNow - (DEFAULT_PAGE_VIEW_HOURS - 1 - index) * UPDATE_INTERVAL
+      aligned - (CHART_HOURS - 1 - index) * HOUR_MS
     ),
     totalViews: 0,
   }));
 }
 
-function serializePageView(entry: PageView): CachedPageView {
-  return {
-    ...entry,
-    recordStartTimestamp: entry.recordStartTimestamp.toISOString(),
-  };
-}
-
-const deleteOldEntries = async (
-  collection: admin.firestore.CollectionReference<admin.firestore.DocumentData>
-) => {
-  const admin = getFirebaseAdmin();
-  if (!admin) {
-    return;
+async function load(): Promise<PageView[]> {
+  const client = redis();
+  if (!client) {
+    return [];
   }
 
-  const deleteOldEntriesBatch = admin.firestore().batch();
-  (
-    await collection
-      .where(
-        "recordStartTimestamp",
-        "<",
-        admin.firestore.Timestamp.fromMillis(Date.now() - ENTRY_MAX_AGE)
-      )
-      .get()
-  ).docs.forEach(doc => {
-    deleteOldEntriesBatch.delete(doc.ref);
-  });
-  await deleteOldEntriesBatch.commit();
-};
-
-const getMostRecentEntry = async (
-  collection: admin.firestore.CollectionReference<admin.firestore.DocumentData>
-) => {
-  const currentEntryDoc = (
-    await collection.orderBy("recordStartTimestamp", "asc").limitToLast(1).get()
-  ).docs.at(0);
-
-  if (!currentEntryDoc?.exists) {
-    return null;
+  const raw = await client.get<StoredEntry[]>(KEY);
+  if (!raw?.length) {
+    return [];
   }
 
-  const currentEntryResult = pageViewSchema.safeParse(currentEntryDoc.data());
-  if (!currentEntryResult.success) {
-    console.error(
-      "Invalid page view entry in database:",
-      currentEntryDoc.id,
-      currentEntryResult.error
-    );
-    return null;
-  }
+  const cutoff = Date.now() - MAX_AGE_MS;
 
-  return { data: currentEntryResult.data, doc: currentEntryDoc };
-};
-
-export async function getPageViews(): Promise<PageView[]> {
-  "use cache";
-  cacheLife({ revalidate: DYNAMIC_CONTENT_REVALIDATE_SECONDS });
-  cacheTag(DYNAMIC_CONTENT_CACHE_TAGS.pageViews);
-
-  const admin = getFirebaseAdmin();
-  if (!admin) {
-    return getDefaultPageViews();
-  }
-
-  const docs = (await admin.firestore().collection("pageViews").get()).docs;
-
-  const pageViews = docs
-    .map(doc => {
-      const pageViewResult = pageViewSchema.safeParse(doc.data());
-      if (!pageViewResult.success) {
-        console.error(
-          "Invalid page view entry in database:",
-          doc.id,
-          pageViewResult.error
-        );
-        return null;
-      }
-      return serializePageView(pageViewResult.data);
-    })
-    .filter((entry): entry is CachedPageView => entry !== null);
-
-  if (pageViews.length > 1) {
-    pageViews.sort(
+  return raw
+    .map(entry => ({
+      recordStartTimestamp: new Date(entry.recordStartTimestamp),
+      totalViews: entry.totalViews,
+    }))
+    .filter(entry => entry.recordStartTimestamp.getTime() >= cutoff)
+    .sort(
       (a, b) =>
-        new Date(a.recordStartTimestamp).getTime() -
-        new Date(b.recordStartTimestamp).getTime()
+        a.recordStartTimestamp.getTime() - b.recordStartTimestamp.getTime()
     );
-  }
-
-  return pageViews.map(deserializePageView);
 }
 
-export async function updatePageViews() {
-  const admin = getFirebaseAdmin();
-  if (!admin) {
+async function save(entries: PageView[]) {
+  const client = redis();
+  if (!client) {
     return;
   }
 
-  const col = admin.firestore().collection("pageViews");
-
-  await deleteOldEntries(col);
-
-  const currentEntry = await getMostRecentEntry(col);
-
-  if (
-    currentEntry === null ||
-    Date.now() - currentEntry.data.recordStartTimestamp.getTime() >
-      UPDATE_INTERVAL
-  ) {
-    const newEntry: PageView = {
-      recordStartTimestamp:
-        currentEntry === null
-          ? new Date(Date.now() - (Date.now() % UPDATE_INTERVAL))
-          : new Date(
-              currentEntry.data.recordStartTimestamp.getTime() +
-                Math.floor(
-                  (Date.now() -
-                    currentEntry.data.recordStartTimestamp.getTime()) /
-                    UPDATE_INTERVAL
-                ) *
-                  UPDATE_INTERVAL
-            ),
-      totalViews: 1,
-    };
-    await col.add(newEntry);
-  } else {
-    await currentEntry.doc.ref.update({
-      totalViews: admin.firestore.FieldValue.increment(1),
-    });
-  }
+  await client.set(
+    KEY,
+    entries.map(entry => ({
+      recordStartTimestamp: entry.recordStartTimestamp.toISOString(),
+      totalViews: entry.totalViews,
+    }))
+  );
 }
