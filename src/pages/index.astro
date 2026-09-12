@@ -84,12 +84,19 @@ const siteInfo = await getSiteInfo();
           </span>
           . I am a {(() => {
             const today = new Date();
-            const birthDate = new Date(2003, 6, 22);
-            
-            let age = today.getFullYear() - birthDate.getFullYear();
-            const hasBirthdayPassed = today >= new Date(today.getFullYear(), birthDate.getMonth(), birthDate.getDate());
-            
-            return hasBirthdayPassed ? age : age - 1;
+            const birthYear = 2003;
+            const birthMonth = 6;
+            const birthDay = 22;
+
+            let age = today.getFullYear() - birthYear;
+            const month = today.getMonth();
+            const day = today.getDate();
+            const birthdayPassed =
+              month > birthMonth || (month === birthMonth && day >= birthDay);
+
+            if (!birthdayPassed) age -= 1;
+
+            return age;
           })()} year old computer science student, a software developer,
           and technology enthusiast.
         </p>
