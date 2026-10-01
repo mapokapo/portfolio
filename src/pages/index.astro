@@ -82,15 +82,10 @@ const siteInfo = await getSiteInfo();
             title="Pronunciation: Leh-oh Peh-troh-vich">
             Leo Petrović
           </span>
-          . I am a {(() => {
-            const today = new Date();
-            const birthDate = new Date(2003, 6, 22);
-            
-            let age = today.getFullYear() - birthDate.getFullYear();
-            const hasBirthdayPassed = today >= new Date(today.getFullYear(), birthDate.getMonth(), birthDate.getDate());
-            
-            return hasBirthdayPassed ? age : age - 1;
-          })()} year old computer science student, a software developer,
+          . I am a <span data-birth-day="22" data-birth-month="6" data-birth-year="2003" id="intro-age">
+            ...
+          </span>{" "}
+          year old computer science student, a software developer,
           and technology enthusiast.
         </p>
       </section>
@@ -154,5 +149,32 @@ const siteInfo = await getSiteInfo();
     <footer class="my-8 flex items-center justify-center text-white sm:text-base">
       <p>Leo Petrovic • {new Date().getFullYear()}</p>
     </footer>
+    <script is:inline>
+      (() => {
+        const ageElement = document.getElementById("intro-age");
+        if (!ageElement) return;
+
+        const birthYear = Number(ageElement.dataset.birthYear);
+        const birthMonth = Number(ageElement.dataset.birthMonth);
+        const birthDay = Number(ageElement.dataset.birthDay);
+        if (
+          Number.isNaN(birthYear) ||
+          Number.isNaN(birthMonth) ||
+          Number.isNaN(birthDay)
+        ) {
+          return;
+        }
+
+        const today = new Date();
+        let age = today.getFullYear() - birthYear;
+        const month = today.getMonth();
+        const day = today.getDate();
+        const birthdayPassed =
+          month > birthMonth || (month === birthMonth && day >= birthDay);
+
+        if (!birthdayPassed) age -= 1;
+        ageElement.textContent = String(age);
+      })();
+    </script>
   </main>
 </BaseLayout>
