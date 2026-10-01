@@ -70,12 +70,12 @@ This website still relies on Vercel for hosting (as evident by the
 [leopetrovic.vercel.app](https://leopetrovic.vercel.app) domain name).
 
 However, I do own a Cloudflare domain (feel free to visit my
-[FSRE Timetable Notify project](https://fsre-app.mapokapo.cc)).
+[FSRE Sync project](https://fsre-sync.mapokapo.cc)).
 
-...and I do own an Oracle VPS (which is running my
-[FSRE Timetable Notify backend](https://github.com/FSRE-Timetable-Notify/fsre-timetable-notify-backend),
-used by my newly released [FSRE App](https://github.com/mapokapo/fsre-app) which
-is available on
+...and I do own a self-hosted server (which is running my
+[FSRE Sync backend](https://github.com/FSRE-Sync/fsre-sync-backend), used by my
+newly released [FSRE App](https://github.com/mapokapo/fsre-app) which is
+available on
 [Google Play](https://play.google.com/store/apps/details?id=com.fsre.mobileapp)).
 
 ...so I could technically roll my entire infrastructure. It would also mean I

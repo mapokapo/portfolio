@@ -4,7 +4,7 @@ import diaspora from "./diaspora.webp";
 import edulink from "./edulink.webp";
 import fitquest from "./fitquest.webp";
 import fsreApp from "./fsre-app.webp";
-import fsreTimetableNotify from "./fsre-timetable-notify.webp";
+import fsreSync from "./fsre-sync.webp";
 import landmarksAr from "./landmarks-ar.webp";
 import luckySix from "./lucky-six.webp";
 import nexora from "./nexora.webp";
@@ -17,7 +17,7 @@ export const showcaseImages = {
   edulink,
   fitquest,
   "fsre-app": fsreApp,
-  "fsre-timetable-notify": fsreTimetableNotify,
+  "fsre-sync": fsreSync,
   "landmarks-ar": landmarksAr,
   "lucky-six": luckySix,
   nexora,

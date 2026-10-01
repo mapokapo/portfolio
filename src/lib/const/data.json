@@ -68,7 +68,7 @@
     {
       "title": "FSRE App",
       "description": "The official FSRE student app for timetables, news, and campus help",
-      "content": "Led development of the official mobile app for the Faculty of Electrical Engineering and Computing (FSRE). Built with Expo and React Native, integrating my own university timetable API via an OpenAPI-typed client, using Firebase Cloud Messaging for schedule notifications, and implementing a Gemini-powered chatbot with cached responses and Markdown rendering. Includes i18n (HR/EN) and automated EAS deployments for the Google Play Store.",
+      "content": "Led development of the official mobile app for the Faculty of Electrical Engineering and Computing (FSRE). Built with Expo and React Native, integrating my own university timetable API (FSRE Sync) via an OpenAPI-typed client, using Firebase Cloud Messaging for schedule notifications, and implementing a Gemini-powered chatbot with cached responses and Markdown rendering. Includes i18n (HR/EN) and automated EAS deployments for the Google Play Store.",
       "meta": {
         "links": [
           {
@@ -91,35 +91,34 @@
       }
     },
     {
-      "title": "FSRE Notifier",
+      "title": "FSRE Sync",
       "description": "A university timetable tracking and notification system",
-      "content": "Started as a personal experiment to track my university schedule and evolved into a full multi-component project under the FSRE-Timetable-Notify organization. Developed a timetable notification backend using Java and Spring Boot with MariaDB for subscription management. Modernized the existing university API for use by client apps while ensuring no disruption to existing services. Integrated Firebase Cloud Messaging for real-time class and news notifications. Built a React and Tailwind CSS web frontend as an alternative timetable viewer, and an early Flutter mobile client. Deployed the system with Docker for containerization.",
+      "content": "Started as a personal experiment to track my university schedule and evolved into a full multi-component project under the FSRE-Sync organization. Developed a timetable notification backend using Java and Spring Boot with MariaDB for subscription management, later migrated to TS/Bun/SQLite. Modernized the existing university API for use by client apps while ensuring no disruption to existing services. Integrated Firebase Cloud Messaging for real-time class and news notifications. Built a React and Tailwind CSS web frontend as an alternative timetable viewer, and an early Flutter mobile client. Deployed the system with Docker for containerization.",
       "meta": {
         "links": [
           {
             "label": "Project",
-            "url": "https://github.com/FSRE-Timetable-Notify/fsre-timetable-notify"
+            "url": "https://github.com/FSRE-Sync"
           },
           {
             "label": "Backend",
-            "url": "https://github.com/FSRE-Timetable-Notify/fsre-timetable-notify-backend"
+            "url": "https://github.com/FSRE-Sync/fsre-sync-backend"
           },
           {
             "label": "Web",
-            "url": "https://github.com/FSRE-Timetable-Notify/fsre-timetable-notify-frontend"
+            "url": "https://github.com/FSRE-Sync/fsre-sync-frontend"
           },
           {
             "label": "Live demo",
-            "url": "https://fsre-app.mapokapo.cc/?selectedTimetableStudyProgramId=-59"
+            "url": "https://fsre-sync.mapokapo.cc/?selectedTimetableStudyProgramId=-59"
           }
         ],
-        "imageKey": "fsre-timetable-notify",
+        "imageKey": "fsre-sync",
         "madeWith": [
-          "Java",
-          "Spring Boot",
-          "MariaDB",
+          "Typescript",
+          "Bun",
+          "SQLite",
           "Firebase",
-          "Flutter",
           "React",
           "Typescript",
           "Tailwind",
@@ -139,11 +138,7 @@
           }
         ],
         "imageKey": "sportsmart",
-        "madeWith": [
-          "React Native",
-          "Firebase",
-          "Algolia"
-        ]
+        "madeWith": ["React Native", "Firebase", "Algolia"]
       }
     },
     {
@@ -158,10 +153,7 @@
           }
         ],
         "imageKey": "riskfactor",
-        "madeWith": [
-          "Flutter",
-          "Firebase"
-        ]
+        "madeWith": ["Flutter", "Firebase"]
       }
     },
     {
@@ -268,10 +260,7 @@
           }
         ],
         "imageKey": "diaspora",
-        "madeWith": [
-          "Flutter",
-          "Firebase"
-        ]
+        "madeWith": ["Flutter", "Firebase"]
       }
     },
     {
@@ -286,12 +275,7 @@
           }
         ],
         "imageKey": "fitquest",
-        "madeWith": [
-          "React Native",
-          "Expo",
-          "Supabase",
-          "Typescript"
-        ]
+        "madeWith": ["React Native", "Expo", "Supabase", "Typescript"]
       }
     }
   ],
